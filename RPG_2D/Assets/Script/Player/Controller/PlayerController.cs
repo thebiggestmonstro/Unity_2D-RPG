@@ -7,10 +7,9 @@ using Unity.Burst;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : BaseCharacterController
 {
     // Animtion StateMachine
-    public Animator _animtor { get; private set; }
     public PlayerStateMachine _stateMachine { get; private set; }
 
     #region States
@@ -51,23 +50,9 @@ public class PlayerController : MonoBehaviour
     public float _dashDir { get; private set; }
 
     public bool _doingSomething { get; private set; }
-    public Rigidbody2D _rigidbody2D { get; private set; }
-
-    [Header("Collision Info")]
-    [SerializeField]
-    private Transform _groundCheck;
-    [SerializeField]
-    private float _groundCheckDistance;
-    [SerializeField]
-    private Transform _wallCheck;
-    [SerializeField]
-    private float _wallCheckDistance;
 
     [Header("Attack Details")]
     public Vector2[] _attackMovement;
-
-    public int _facingDir { get; private set; } = 1;
-    private bool _facingRight = true;
 
     private void OnEnable()
     {
@@ -105,8 +90,10 @@ public class PlayerController : MonoBehaviour
         _attackAction.Disable();
     }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         _stateMachine = new PlayerStateMachine();
 
         _idleState = new PlayerStateIdle(this, _stateMachine, "Idle");
@@ -119,16 +106,17 @@ public class PlayerController : MonoBehaviour
         _priamaryAttackState = new PlayerStatePrimaryAttack(this, _stateMachine, "Attack");
     }
 
-    private void Start()
+    protected override void Start()
     {
-        _animtor = GetComponentInChildren<Animator>();
-        _rigidbody2D = GetComponent<Rigidbody2D>();
+        base.Start();
 
         _stateMachine.Init(_idleState);
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
         _stateMachine._currentState.Update();
 
         _dashUsageTimer -= Time.deltaTime;
@@ -142,14 +130,6 @@ public class PlayerController : MonoBehaviour
 
         _doingSomething = false;
     }
-
-    public void SetVelocity(float xVelocity, float yVelcoity)
-    {
-        _rigidbody2D.velocity = new Vector2(xVelocity, yVelcoity);
-        DoFlip(xVelocity);
-    }
-
-    public void SetZeroVelocity() => _rigidbody2D.velocity = Vector2.zero; 
 
     void DoMove(InputAction.CallbackContext value)
     {
@@ -171,21 +151,6 @@ public class PlayerController : MonoBehaviour
     void DoStopJump(InputAction.CallbackContext value)
     { 
         _isJumpPressed = value.ReadValueAsButton();
-    }
-
-    public void Flip()
-    {
-        _facingDir *= -1;
-        _facingRight = !_facingRight;
-        gameObject.transform.Rotate(0, 180, 0);
-    }
-
-    void DoFlip(float xParam)
-    {
-        if (xParam > 0 && !_facingRight)
-            Flip();
-        else if (xParam < 0 && _facingRight)
-            Flip();
     }
 
     void DoDash(InputAction.CallbackContext value)
@@ -216,20 +181,4 @@ public class PlayerController : MonoBehaviour
     }
 
     public void AnimationTrigger() => _stateMachine._currentState.AnimationFinishTrigger();
-
-    public bool DoDetectIsGrounded() => Physics2D.Raycast(_groundCheck.position, Vector2.down, _groundCheckDistance, LayerMask.GetMask("Ground"));
-    public bool DoDetectIsFacingWall() => Physics2D.Raycast(_wallCheck.position, Vector2.right * _facingDir, _wallCheckDistance, LayerMask.GetMask("Ground"));
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawLine(
-            _groundCheck.position,
-            new Vector3(_groundCheck.position.x, _groundCheck.position.y - _groundCheckDistance)
-        );
-
-        Gizmos.DrawLine(
-            _wallCheck.position,
-            new Vector3(_wallCheck.position.x + _wallCheckDistance, _wallCheck.position.y)
-        );
-    }
 }

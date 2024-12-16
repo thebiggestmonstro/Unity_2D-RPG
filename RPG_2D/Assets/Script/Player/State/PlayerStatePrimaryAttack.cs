@@ -22,7 +22,7 @@ public class PlayerStatePrimaryAttack : PlayerState
         if (_comboCounter > 2 || Time.time >= _lastTimeAttacked + _comboWindow)
             _comboCounter = 0;
 
-        _controller._animtor.SetInteger("ComboCounter", _comboCounter);
+        _controller._animator.SetInteger("ComboCounter", _comboCounter);
 
         float _attackDir = _controller._facingDir;
         if (_xInput != 0)
