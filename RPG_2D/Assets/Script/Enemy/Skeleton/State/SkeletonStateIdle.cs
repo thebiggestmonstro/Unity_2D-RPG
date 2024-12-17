@@ -2,14 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkeletonStateIdle : EnemyState
+public class SkeletonStateIdle : SkeletonStateGrounded
 {
-    SkeletonController _skeletonController;
-
-    public SkeletonStateIdle(EnemyController enemyBaseController, EnemyStateMachine enemyStateMachine, string animatorBoolParamName, SkeletonController enemyController)
-        : base(enemyBaseController, enemyStateMachine, animatorBoolParamName)
+    public SkeletonStateIdle(EnemyController enemyBaseController, EnemyStateMachine enemyStateMachine, string animatorBoolParamName, SkeletonController enemyController) 
+        : base(enemyBaseController, enemyStateMachine, animatorBoolParamName, enemyController)
     {
-        _skeletonController = enemyController;
+
     }
 
     public override void Enter()
