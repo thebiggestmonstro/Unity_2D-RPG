@@ -24,7 +24,8 @@ public class BaseCharacterController : MonoBehaviour
     { 
     
     }
-
+    
+    // Animator와 RigidBody2D를 설정
     protected virtual void Start()
     {
         _animator = GetComponentInChildren<Animator>();
@@ -36,14 +37,17 @@ public class BaseCharacterController : MonoBehaviour
     
     }
 
+    // 속력을 설정하고 설정한 속력에 따라 방향 회전 수행
     public virtual void SetVelocity(float xVelocity, float yVelcoity)
     {
         _rigidbody2D.velocity = new Vector2(xVelocity, yVelcoity);
         DoFlip(xVelocity);
     }
 
+    // 속력을 0으로 설정
     public virtual void SetZeroVelocity() => _rigidbody2D.velocity = Vector2.zero;
 
+    // 방향 회전
     public virtual void Flip()
     {
         _facingDir *= -1;
@@ -51,6 +55,7 @@ public class BaseCharacterController : MonoBehaviour
         gameObject.transform.Rotate(0, 180, 0);
     }
 
+    // 방향 회전을 수행
     public virtual void DoFlip(float xParam)
     {
         if (xParam > 0 && !_facingRight)
@@ -59,9 +64,12 @@ public class BaseCharacterController : MonoBehaviour
             Flip();
     }
 
+    // 땅을 딛고 있는지 확인
     public virtual bool DoDetectIsGrounded() => Physics2D.Raycast(_groundCheck.position, Vector2.down, _groundCheckDistance, LayerMask.GetMask("Ground"));
+    // 벽을 마주하고 있는지 확인
     public virtual bool DoDetectIsFacingWall() => Physics2D.Raycast(_wallCheck.position, Vector2.right * _facingDir, _wallCheckDistance, LayerMask.GetMask("Ground"));
 
+    // 땅을 딛고 있는지와 벽을 마주하고 있는지를 Debug Line을 그려 확인
     protected virtual void OnDrawGizmos()
     {
         Gizmos.DrawLine(

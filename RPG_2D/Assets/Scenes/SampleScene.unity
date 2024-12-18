@@ -1404,8 +1404,8 @@ MonoBehaviour:
   _wallCheck: {fileID: 483259007}
   _wallCheckDistance: 0.8
   _moveSpeed: 1.5
-  _idleTime: 2
-  _battleTime: 4
+  _idleTime: 1
+  _engageTime: 0
   _attackDistance: 1.5
   _attackCooldown: 0.4
   _lastTimeAttacked: 0

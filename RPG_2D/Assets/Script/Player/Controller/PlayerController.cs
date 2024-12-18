@@ -54,6 +54,7 @@ public class PlayerController : BaseCharacterController
     [Header("Attack Details")]
     public Vector2[] _attackMovement;
 
+    // InputSystem 활성화
     private void OnEnable()
     {
         _moveAction.performed += DoMove;
@@ -72,6 +73,7 @@ public class PlayerController : BaseCharacterController
         _attackAction.Enable();
     }
 
+    // InputSystem 비활성화
     private void OnDisable()
     {
         _moveAction.performed -= DoMove;
@@ -90,6 +92,7 @@ public class PlayerController : BaseCharacterController
         _attackAction.Disable();
     }
 
+    // Controller의 Awake에서는 StateMachine과 StateMachine에서 사용할 State를 설정
     protected override void Awake()
     {
         base.Awake();
@@ -106,6 +109,7 @@ public class PlayerController : BaseCharacterController
         _priamaryAttackState = new PlayerStatePrimaryAttack(this, _stateMachine, "Attack");
     }
 
+    //  Controller의 Start에서는 처음의 State를 IdleState로 설정
     protected override void Start()
     {
         base.Start();
@@ -113,6 +117,7 @@ public class PlayerController : BaseCharacterController
         _stateMachine.Init(_idleState);
     }
 
+    // Controller의 Update에서는 현재 State를 Update를 수행하고, PlayerController는 Dash를 위한 시간을 설정
     protected override void Update()
     {
         base.Update();
@@ -122,6 +127,7 @@ public class PlayerController : BaseCharacterController
         _dashUsageTimer -= Time.deltaTime;
     }
 
+    // 무언가 하고 있는 경우를 설정하기 위한 DoSomething 함수, 코루틴을 통해 하고 있는 경우를 treue/false로 전환
     public IEnumerator DoSomething(float _seconds)
     {
         _doingSomething = true;
@@ -180,5 +186,6 @@ public class PlayerController : BaseCharacterController
         _isAttackClicked = value.ReadValueAsButton();
     }
 
+    // 현재 State의 AnimationFinishTrigger 함수를 호출
     public void AnimationTrigger() => _stateMachine._currentState.AnimationFinishTrigger();
 }
