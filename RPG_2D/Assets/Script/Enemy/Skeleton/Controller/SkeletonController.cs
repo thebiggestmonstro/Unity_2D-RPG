@@ -9,7 +9,7 @@ public class SkeletonController : EnemyController
     public SkeletonStateMove _moveState { get; private set; }
     public SkeletonStateEngage _engageState { get; private set; }
     public SkeletonStateAttack _attackState { get; private set; }
-
+    public SkeletonStateStunnded _stunnedState { get; private set; }
 
     // Awake에서는 Skeleton이 가질 State들을 설정함
     protected override void Awake()
@@ -20,6 +20,7 @@ public class SkeletonController : EnemyController
         _moveState = new SkeletonStateMove(this, _stateMachine, "Move", this);
         _engageState = new SkeletonStateEngage(this, _stateMachine, "Move", this);
         _attackState = new SkeletonStateAttack(this, _stateMachine, "Attack", this);
+        _stunnedState = new SkeletonStateStunnded(this, _stateMachine, "Stunned", this);
     }
 
     // 초기 Skeleton은 IdleState에서 시작함
@@ -34,4 +35,14 @@ public class SkeletonController : EnemyController
         base.Update();
     }
 
+    public override bool DoDefineCanBeStunned()
+    {
+        if (base.DoDefineCanBeStunned())
+        {
+            _stateMachine.ChangeState(_stunnedState);
+            return true;
+        }
+
+        return false;
+    }
 }

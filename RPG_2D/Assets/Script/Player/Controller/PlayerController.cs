@@ -21,6 +21,7 @@ public class PlayerController : BaseCharacterController
     public PlayerStateWallSlide _wallSlideState { get; private set; }
     public PlayerStateWallJump _wallJumpState { get; private set; }
     public PlayerStatePrimaryAttack _priamaryAttackState { get; private set; }
+    public PlayerStateCounterAttack _counterAttackState { get; private set; }
     #endregion
 
     // Player Input
@@ -32,6 +33,8 @@ public class PlayerController : BaseCharacterController
     InputAction _dashAction;
     [SerializeField]
     InputAction _attackAction;
+    [SerializeField]
+    InputAction _counterAttackAction;
 
     // Player Move Info
     public float _moveSpeed = 12f;
@@ -49,10 +52,13 @@ public class PlayerController : BaseCharacterController
     public float _dashDuration;
     public float _dashDir { get; private set; }
 
-    public bool _doingSomething { get; private set; }
-
+    // Attack Info
     [Header("Attack Details")]
     public Vector2[] _attackMovement;
+    public float _counterAttackDuration;
+    public bool _isCounterAttackClicked;
+
+    public bool _doingSomething { get; private set; }
 
     // InputSystem 활성화
     private void OnEnable()
@@ -71,6 +77,10 @@ public class PlayerController : BaseCharacterController
         _attackAction.performed += DoAttack;
         _attackAction.canceled += DoStopAttack;
         _attackAction.Enable();
+
+        _counterAttackAction.performed += DoCounterAttack;
+        _counterAttackAction.canceled += DoStopCounterAttack;
+        _counterAttackAction.Enable();
     }
 
     // InputSystem 비활성화
@@ -90,6 +100,10 @@ public class PlayerController : BaseCharacterController
         _attackAction.performed -= DoAttack;
         _attackAction.canceled -= DoStopAttack;
         _attackAction.Disable();
+
+        _counterAttackAction.performed -= DoCounterAttack;
+        _counterAttackAction.canceled -= DoStopCounterAttack;
+        _counterAttackAction.Disable();
     }
 
     // Controller의 Awake에서는 StateMachine과 StateMachine에서 사용할 State를 설정
@@ -107,6 +121,7 @@ public class PlayerController : BaseCharacterController
         _wallSlideState = new PlayerStateWallSlide(this, _stateMachine, "WallSlide");
         _wallJumpState = new PlayerStateWallJump(this, _stateMachine, "WallJump");
         _priamaryAttackState = new PlayerStatePrimaryAttack(this, _stateMachine, "Attack");
+        _counterAttackState = new PlayerStateCounterAttack(this, _stateMachine, "CounterAttack");
     }
 
     //  Controller의 Start에서는 처음의 State를 IdleState로 설정
@@ -128,11 +143,11 @@ public class PlayerController : BaseCharacterController
     }
 
     // 무언가 하고 있는 경우를 설정하기 위한 DoSomething 함수, 코루틴을 통해 하고 있는 경우를 treue/false로 전환
-    public IEnumerator DoSomething(float _seconds)
+    public IEnumerator DoSomething(float seconds)
     {
         _doingSomething = true;
 
-        yield return new WaitForSeconds(_seconds);
+        yield return new WaitForSeconds(seconds);
 
         _doingSomething = false;
     }
@@ -184,6 +199,16 @@ public class PlayerController : BaseCharacterController
     void DoStopAttack(InputAction.CallbackContext value)
     {
         _isAttackClicked = value.ReadValueAsButton();
+    }
+
+    void DoCounterAttack(InputAction.CallbackContext value)
+    {
+        _isCounterAttackClicked = value.ReadValueAsButton();
+    }
+
+    void DoStopCounterAttack(InputAction.CallbackContext value)
+    {
+        _isCounterAttackClicked = value.ReadValueAsButton();
     }
 
     // 현재 State의 AnimationFinishTrigger 함수를 호출

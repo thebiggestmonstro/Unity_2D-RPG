@@ -17,6 +17,14 @@ public class EnemyController : BaseCharacterController
     [HideInInspector]
     public float _lastTimeAttacked;
 
+    // 적 스턴 정보
+    [Header("Stunned Info")]
+    public float _stunDuration;
+    public Vector2 _stunDirection;
+    protected bool _canBeStunned;
+    [SerializeField]
+    protected GameObject _counterImage; // 카운터 어택을 당할 수 있는지 조건을 판별하는 오브젝트, 빨간 사각형에 해당함
+
     public EnemyStateMachine _stateMachine { get; private set; }
 
     // 제일 초기에 적을 위한 EnemyStateMachine을 설정
@@ -47,4 +55,30 @@ public class EnemyController : BaseCharacterController
 
     // 현재 State의 AnimationFinishTrigger 함수를 호출
     public void AnimationTrigger() => _stateMachine._currentState.AnimationFinishTrigger();
+
+    // 카운터 어택을 당하기 위한 조건을 설정하는 함수
+    public virtual void DoOpenCounterAttackWindow()
+    {
+        _canBeStunned = true;
+        _counterImage.SetActive(true);
+    }
+
+    // 카운터 어택을 당하기 위한 조건을 회수하는 함수
+    public virtual void DoCloseCounterAttackWindow()
+    {
+        _canBeStunned = false;
+        _counterImage.SetActive(false); 
+    }
+
+    // 스턴 상태로 전환될 수 있는지 판단하는 함수
+    public virtual bool DoDefineCanBeStunned()
+    {
+        if (_canBeStunned)
+        {
+            DoCloseCounterAttackWindow();
+            return true;
+        }
+
+        return false;
+    }
 }

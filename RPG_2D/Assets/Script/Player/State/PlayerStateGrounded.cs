@@ -24,6 +24,9 @@ public class PlayerStateGrounded : PlayerState
     {
         base.Update();
 
+        if (_isCounterAttacking)
+            _stateMachine.ChangeState(_controller._counterAttackState);
+
         if (_isAttacking)
             _stateMachine.ChangeState(_controller._priamaryAttackState);
 

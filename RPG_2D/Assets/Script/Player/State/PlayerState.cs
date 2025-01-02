@@ -14,6 +14,7 @@ public class PlayerState
     protected float _yInput;
     protected bool _isJumping;
     protected bool _isAttacking;
+    protected bool _isCounterAttacking;
     protected Rigidbody2D _rigidbody2D;
 
     // Animation Event
@@ -52,6 +53,7 @@ public class PlayerState
         _yInput = _controller._verticalValue;
         _isJumping = _controller._isJumpPressed;
         _isAttacking = _controller._isAttackClicked;
+        _isCounterAttacking = _controller._isCounterAttackClicked;
         _controller._animator.SetFloat("yVelocity", _rigidbody2D.velocity.y);
     }
 
