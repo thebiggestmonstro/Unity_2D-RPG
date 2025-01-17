@@ -15,12 +15,12 @@ public class SkeletonStateEngage : EnemyState
         this._skeletonController = enemyController;
     }
 
-    // 처음 EngageState에 들어오면 Player를 탐색함, 마찬가지로 비효율적인 동작이므로 수정할 예정
     public override void Enter()
     {
         base.Enter();
 
-        _player = GameObject.Find("Player").transform;
+        // 존재하는 PlayerManager를 가져와서 해당 PlayerManager에 설정된 PlayerController를 가져옴
+        _player = PlayerManager._playerManagerInstance._playerController.transform;
     }
 
     public override void Exit()

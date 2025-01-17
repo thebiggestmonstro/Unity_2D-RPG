@@ -45,9 +45,6 @@ public class PlayerController : BaseCharacterController
     public float _verticalValue { get; private set; }
 
     // Dash Info
-    [SerializeField]
-    private float _dashCooldown;
-    private float _dashUsageTimer;
     public float _dashSpeed;
     public float _dashDuration;
     public float _dashDir { get; private set; }
@@ -58,9 +55,11 @@ public class PlayerController : BaseCharacterController
     public float _counterAttackDuration;
     public bool _isCounterAttackClicked;
 
+    // Skill Info
+    public SkillManager _skillManager { get; private set; }
+
     public bool _doingSomething { get; private set; }
 
-    // InputSystem 활성화
     private void OnEnable()
     {
         _moveAction.performed += DoMove;
@@ -83,7 +82,6 @@ public class PlayerController : BaseCharacterController
         _counterAttackAction.Enable();
     }
 
-    // InputSystem 비활성화
     private void OnDisable()
     {
         _moveAction.performed -= DoMove;
@@ -106,7 +104,6 @@ public class PlayerController : BaseCharacterController
         _counterAttackAction.Disable();
     }
 
-    // Controller의 Awake에서는 StateMachine과 StateMachine에서 사용할 State를 설정
     protected override void Awake()
     {
         base.Awake();
@@ -124,25 +121,22 @@ public class PlayerController : BaseCharacterController
         _counterAttackState = new PlayerStateCounterAttack(this, _stateMachine, "CounterAttack");
     }
 
-    //  Controller의 Start에서는 처음의 State를 IdleState로 설정
     protected override void Start()
     {
         base.Start();
 
+        _skillManager = SkillManager._skillManagerInstance;
+
         _stateMachine.Init(_idleState);
     }
 
-    // Controller의 Update에서는 현재 State를 Update를 수행하고, PlayerController는 Dash를 위한 시간을 설정
     protected override void Update()
     {
         base.Update();
 
         _stateMachine._currentState.Update();
-
-        _dashUsageTimer -= Time.deltaTime;
     }
 
-    // 무언가 하고 있는 경우를 설정하기 위한 DoSomething 함수, 코루틴을 통해 하고 있는 경우를 treue/false로 전환
     public IEnumerator DoSomething(float seconds)
     {
         _doingSomething = true;
@@ -179,9 +173,8 @@ public class PlayerController : BaseCharacterController
         if (DoDetectIsFacingWall())
             return;
 
-        if (value.ReadValueAsButton() && _dashUsageTimer < 0)
+        if (value.ReadValueAsButton() && SkillManager._skillManagerInstance._skillDash.DoDefineCanUseSkill())
         {
-            _dashUsageTimer = _dashCooldown;
             _dashDir = _moveAction.ReadValue<Vector2>().x;
 
             if (_dashDir == 0)
@@ -211,6 +204,5 @@ public class PlayerController : BaseCharacterController
         _isCounterAttackClicked = value.ReadValueAsButton();
     }
 
-    // 현재 State의 AnimationFinishTrigger 함수를 호출
     public void AnimationTrigger() => _stateMachine._currentState.AnimationFinishTrigger();
 }

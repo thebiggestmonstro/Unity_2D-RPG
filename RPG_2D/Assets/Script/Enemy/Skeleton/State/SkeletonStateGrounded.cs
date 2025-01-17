@@ -16,12 +16,12 @@ public class SkeletonStateGrounded : EnemyState
         this._skeletonController = enemyController;
     }
 
-    // StateGrouned에 들어가면 Player를 탐색하여 변수를 설정
-    // 그러나 GameObject.Find는 좋은 연산이 아니므로 후에 수정할 예정
     public override void Enter()
     {
         base.Enter();
-        _player = GameObject.Find("Player").transform;
+
+        // 마찬가지로, PlayerManager로부터 PlayerController를 가져옴
+        _player = PlayerManager._playerManagerInstance._playerController.transform;
     }
 
     public override void Exit()
