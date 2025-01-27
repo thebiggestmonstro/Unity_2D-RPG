@@ -22,6 +22,8 @@ public class PlayerController : BaseCharacterController
     public PlayerStateWallJump _wallJumpState { get; private set; }
     public PlayerStatePrimaryAttack _priamaryAttackState { get; private set; }
     public PlayerStateCounterAttack _counterAttackState { get; private set; }
+    public PlayerStateAimSword _aimSwordState { get; private set; }
+    public PlayerStateCatchSword _catchSwordState { get; private set; }
     #endregion
 
     // Player Input
@@ -35,6 +37,8 @@ public class PlayerController : BaseCharacterController
     InputAction _attackAction;
     [SerializeField]
     InputAction _counterAttackAction;
+    [SerializeField]
+    InputAction _throwSwordAction;
 
     // Player Move Info
     public float _moveSpeed = 12f;
@@ -57,6 +61,7 @@ public class PlayerController : BaseCharacterController
 
     // Skill Info
     public SkillManager _skillManager { get; private set; }
+    public bool _isThrowSwordClicked;
 
     public bool _doingSomething { get; private set; }
 
@@ -80,6 +85,10 @@ public class PlayerController : BaseCharacterController
         _counterAttackAction.performed += DoCounterAttack;
         _counterAttackAction.canceled += DoStopCounterAttack;
         _counterAttackAction.Enable();
+
+        _throwSwordAction.performed += DoThrowSword;
+        _throwSwordAction.canceled += DoThrowSword;
+        _throwSwordAction.Enable();
     }
 
     private void OnDisable()
@@ -102,6 +111,10 @@ public class PlayerController : BaseCharacterController
         _counterAttackAction.performed -= DoCounterAttack;
         _counterAttackAction.canceled -= DoStopCounterAttack;
         _counterAttackAction.Disable();
+
+        _throwSwordAction.performed -= DoThrowSword;
+        _throwSwordAction.canceled -= DoThrowSword;
+        _throwSwordAction.Disable();
     }
 
     protected override void Awake()
@@ -119,6 +132,8 @@ public class PlayerController : BaseCharacterController
         _wallJumpState = new PlayerStateWallJump(this, _stateMachine, "WallJump");
         _priamaryAttackState = new PlayerStatePrimaryAttack(this, _stateMachine, "Attack");
         _counterAttackState = new PlayerStateCounterAttack(this, _stateMachine, "CounterAttack");
+        _aimSwordState = new PlayerStateAimSword(this, _stateMachine, "AimSword");
+        _catchSwordState = new PlayerStateCatchSword(this, _stateMachine, "CatchSword");
     }
 
     protected override void Start()
@@ -202,6 +217,16 @@ public class PlayerController : BaseCharacterController
     void DoStopCounterAttack(InputAction.CallbackContext value)
     {
         _isCounterAttackClicked = value.ReadValueAsButton();
+    }
+
+    void DoThrowSword(InputAction.CallbackContext value)
+    {
+        _isThrowSwordClicked = value.ReadValueAsButton();   
+    }
+
+    void DoStopThrowSword(InputAction.CallbackContext value)
+    {
+        _isThrowSwordClicked = value.ReadValueAsButton();
     }
 
     public void AnimationTrigger() => _stateMachine._currentState.AnimationFinishTrigger();

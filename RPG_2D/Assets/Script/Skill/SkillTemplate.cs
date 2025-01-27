@@ -9,6 +9,13 @@ public class SkillTemplate : MonoBehaviour
     protected float _cooldown;
     protected float _cooldownTimer;
 
+    protected PlayerController _playerController;
+
+    protected virtual void Start()
+    {
+        _playerController = PlayerManager._playerManagerInstance._playerController;
+    }
+
     // 주기적으로 _cooldownTimer를 감소
     protected virtual void Update()
     { 

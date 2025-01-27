@@ -9,6 +9,7 @@ public class SkillManager : MonoBehaviour
     // SkillManager는 스킬을 수행하는 주체이므로, 각 스킬에 대해 알고 있어야 함
     public SkillDash _skillDash { get; private set; }
     public SkillCloning _skillCloning { get; private set; }
+    public SkillThrowingSword _skillThrowingSword { get; private set; }
 
     private void Awake()
     {
@@ -24,5 +25,6 @@ public class SkillManager : MonoBehaviour
     {
         _skillDash = GetComponent<SkillDash>();
         _skillCloning = GetComponent<SkillCloning>();
+        _skillThrowingSword = GetComponent<SkillThrowingSword>();
     }
 }

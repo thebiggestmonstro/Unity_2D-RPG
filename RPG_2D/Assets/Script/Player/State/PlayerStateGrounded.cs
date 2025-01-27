@@ -24,6 +24,9 @@ public class PlayerStateGrounded : PlayerState
     {
         base.Update();
 
+        if (_isThrowingSword)
+            _stateMachine.ChangeState(_controller._aimSwordState);
+
         if (_isCounterAttacking)
             _stateMachine.ChangeState(_controller._counterAttackState);
 

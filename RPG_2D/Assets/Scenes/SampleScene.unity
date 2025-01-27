@@ -995,6 +995,7 @@ Transform:
   - {fileID: 1995197508}
   - {fileID: 1212811832}
   - {fileID: 2042923541}
+  - {fileID: 2066376872}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &718177685
@@ -1134,6 +1135,23 @@ MonoBehaviour:
       m_Action: Counter Attack
       m_Flags: 0
     m_Flags: 0
+  _throwSwordAction:
+    m_Name: Throw Sword
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 0d308aad-b1f6-4eb9-9782-b283bb85e52a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: b0014291-2dbc-4e40-ad5a-af9710c2cd67
+      m_Path: <Mouse>/rightButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Throw Sword
+      m_Flags: 0
+    m_Flags: 0
   _moveSpeed: 12
   _jumpForce: 12
   _isJumpPressed: 0
@@ -1146,6 +1164,7 @@ MonoBehaviour:
   - {x: 4, y: 1.5}
   _counterAttackDuration: 0.2
   _isCounterAttackClicked: 0
+  _isThrowSwordClicked: 0
 --- !u!50 &718177686
 Rigidbody2D:
   serializedVersion: 4
@@ -1334,6 +1353,7 @@ GameObject:
   - component: {fileID: 938091701}
   - component: {fileID: 938091699}
   - component: {fileID: 938091702}
+  - component: {fileID: 938091703}
   m_Layer: 0
   m_Name: SkillManager
   m_TagString: Untagged
@@ -1396,6 +1416,26 @@ MonoBehaviour:
   _cooldown: 0
   _clonePrefab: {fileID: 2750646712227197543, guid: e7bf25823f9e348469768b6c8ea2da1e, type: 3}
   _cloneDuration: 1.5
+--- !u!114 &938091703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 938091698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c93f0994f6f975b429647929c8971366, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cooldown: 0
+  _swordPrefab: {fileID: 6861290250484057520, guid: 9b046b69513ae264ba882a41516aa23c, type: 3}
+  _launchForce: {x: 15, y: 20}
+  _swordGravity: 4
+  _numberOfDots: 20
+  _spaceBetweenDots: 0.07
+  _dotPrefab: {fileID: 7269989036971402604, guid: 4769913d2661188479637473ed4599ef, type: 3}
+  _dotsParent: {fileID: 2066376872}
 --- !u!1 &1041512380
 GameObject:
   m_ObjectHideFlags: 0
@@ -14722,6 +14762,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.1, y: -0.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 718177684}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2066376871
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2066376872}
+  m_Layer: 6
+  m_Name: AimDotParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2066376872
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2066376871}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
