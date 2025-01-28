@@ -24,7 +24,7 @@ public class PlayerStateGrounded : PlayerState
     {
         base.Update();
 
-        if (_isThrowingSword)
+        if (_isThrowingSword && HasNoSword())
             _stateMachine.ChangeState(_controller._aimSwordState);
 
         if (_isCounterAttacking)
@@ -38,5 +38,14 @@ public class PlayerStateGrounded : PlayerState
 
         if (_isJumping && _controller.DoDetectIsGrounded())
             _stateMachine.ChangeState(_controller._jumpState);
+    }
+
+    private bool HasNoSword()
+    { 
+        if(!_controller._sword)
+            return true;
+
+        _controller._sword.GetComponent<SkillThrowingSwordController>().ReturnSword();
+        return false;
     }
 }

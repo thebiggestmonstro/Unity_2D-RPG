@@ -62,6 +62,7 @@ public class PlayerController : BaseCharacterController
     // Skill Info
     public SkillManager _skillManager { get; private set; }
     public bool _isThrowSwordClicked;
+    public GameObject _sword;
 
     public bool _doingSomething { get; private set; }
 
@@ -227,6 +228,16 @@ public class PlayerController : BaseCharacterController
     void DoStopThrowSword(InputAction.CallbackContext value)
     {
         _isThrowSwordClicked = value.ReadValueAsButton();
+    }
+
+    public void AssignNewSword(GameObject newSword)
+    {
+        _sword = newSword;
+    }
+
+    public void ClearTheSword()
+    {
+        Destroy(_sword);
     }
 
     public void AnimationTrigger() => _stateMachine._currentState.AnimationFinishTrigger();

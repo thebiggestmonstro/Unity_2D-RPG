@@ -62,7 +62,9 @@ public class SkillThrowingSword : SkillTemplate
 
         SkillThrowingSwordController _throwingSwordController = newSword.GetComponent<SkillThrowingSwordController>();
 
-        _throwingSwordController.SetUpSword(_finalDirection, _swordGravity);
+        _throwingSwordController.SetUpSword(_finalDirection, _swordGravity, _playerController);
+
+        _playerController.AssignNewSword(newSword);
 
         DotsActive(false);
     }
