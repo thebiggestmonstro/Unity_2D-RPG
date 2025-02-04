@@ -62,7 +62,9 @@ public class PlayerController : BaseCharacterController
     // Skill Info
     public SkillManager _skillManager { get; private set; }
     public bool _isThrowSwordClicked;
-    public GameObject _sword;
+    public GameObject _sword { get; private set; }
+    [SerializeField]
+    public float _swordReturnImpact;
 
     public bool _doingSomething { get; private set; }
 
@@ -235,8 +237,9 @@ public class PlayerController : BaseCharacterController
         _sword = newSword;
     }
 
-    public void ClearTheSword()
+    public void CatchTheSword()
     {
+        _stateMachine.ChangeState(_catchSwordState);
         Destroy(_sword);
     }
 
