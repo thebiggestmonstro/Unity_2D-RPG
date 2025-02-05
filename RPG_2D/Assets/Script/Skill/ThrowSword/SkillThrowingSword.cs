@@ -1,9 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum SwordType
+{ 
+    Regular,
+    Bounce,
+    Pierce,
+    Spin
+}
+
 public class SkillThrowingSword : SkillTemplate
 {
+    public SwordType _swordType = SwordType.Regular;
+
     [Header("Skill Info")]
     [SerializeField]
     private GameObject _swordPrefab;
@@ -11,6 +22,10 @@ public class SkillThrowingSword : SkillTemplate
     private Vector2 _launchForce;
     [SerializeField]
     private float _swordGravity;
+    [SerializeField]
+    private float _freezeTimeDuration;
+    [SerializeField]
+    private float _returnSpeed;
 
     private Vector2 _finalDirection;
 
@@ -26,11 +41,47 @@ public class SkillThrowingSword : SkillTemplate
 
     private GameObject[] _dots;
 
+    [Header("Bounce Info")]
+    [SerializeField]
+    private int _bounceAmount;
+    [SerializeField]
+    private float _bounceGravity;
+    [SerializeField]
+    private float _bounceSpeed;
+
+    [Header("Pierce Info")]
+    [SerializeField]
+    private int _pierceAmount;
+    [SerializeField]
+    private float _pierceGravity;
+
+    [Header("Spin Info")]
+    [SerializeField]
+    private int _maxTravelDistance;
+    [SerializeField]
+    private float _spinDuration;
+    [SerializeField]
+    private float _spinGravity;
+    [SerializeField]
+    private float _hitCooldown = 0.35f;
+
     protected override void Start()
     {
         base.Start();
 
         GenerateDots();
+
+        SetupSwordGravity();
+    }
+
+    private void SetupSwordGravity()
+    {
+        if (_swordType == SwordType.Bounce)
+            _swordGravity = _bounceGravity;
+        else if(_swordType == SwordType.Pierce)
+            _swordGravity = _pierceGravity;
+        else if(_swordType == SwordType.Spin)
+            _swordGravity = _spinGravity;
     }
 
     protected override void Update()
@@ -60,9 +111,17 @@ public class SkillThrowingSword : SkillTemplate
             transform.rotation
             );
 
-        SkillThrowingSwordController _throwingSwordController = newSword.GetComponent<SkillThrowingSwordController>();
+        SkillThrowingSwordController throwingSwordController = newSword.GetComponent<SkillThrowingSwordController>();
 
-        _throwingSwordController.SetUpSword(_finalDirection, _swordGravity, _playerController);
+        if (_swordType == SwordType.Bounce)
+            throwingSwordController.SetupBounceSword(true, _bounceAmount, _bounceSpeed);
+        else if (_swordType == SwordType.Pierce)
+            throwingSwordController.SetupPierceSword(_pierceAmount);
+        else if (_swordType == SwordType.Spin)
+            throwingSwordController.SetupSpinSword(true, _maxTravelDistance, _spinDuration, _hitCooldown);
+        
+
+        throwingSwordController.SetUpSword(_finalDirection, _swordGravity, _playerController, _freezeTimeDuration, _returnSpeed);
 
         _playerController.AssignNewSword(newSword);
 
