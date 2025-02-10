@@ -13,14 +13,12 @@ public class SkillManager : MonoBehaviour
 
     private void Awake()
     {
-        // 기존에 SkillManager가 존재한다면, SkillManager를 컴포넌트로 가진 게임 오브젝트 파괴
         if(_skillManagerInstance != null)
             Destroy(_skillManagerInstance.gameObject);
 
         _skillManagerInstance = this;
     }
 
-    // 스킬을 가져와서 설정
     private void Start()
     {
         _skillDash = GetComponent<SkillDash>();
