@@ -24,6 +24,8 @@ public class PlayerController : BaseCharacterController
     public PlayerStateCounterAttack _counterAttackState { get; private set; }
     public PlayerStateAimSword _aimSwordState { get; private set; }
     public PlayerStateCatchSword _catchSwordState { get; private set; }
+
+    public PlayerStateBlackHole _blackHoleState { get; private set; }
     #endregion
 
     // Player Input
@@ -39,6 +41,8 @@ public class PlayerController : BaseCharacterController
     InputAction _counterAttackAction;
     [SerializeField]
     InputAction _throwSwordAction;
+    [SerializeField]
+    InputAction _castBlackHoleAction;
 
     // Player Move Info
     public float _moveSpeed = 12f;
@@ -65,6 +69,7 @@ public class PlayerController : BaseCharacterController
     public GameObject _sword { get; private set; }
     [SerializeField]
     public float _swordReturnImpact;
+    public bool _isCastingBlackHole;
 
     public bool _doingSomething { get; private set; }
 
@@ -90,8 +95,12 @@ public class PlayerController : BaseCharacterController
         _counterAttackAction.Enable();
 
         _throwSwordAction.performed += DoThrowSword;
-        _throwSwordAction.canceled += DoThrowSword;
+        _throwSwordAction.canceled += DoStopThrowSword;
         _throwSwordAction.Enable();
+
+        _castBlackHoleAction.performed += DoCastBlackHole;
+        _castBlackHoleAction.canceled += DoStopCastBlackHole;
+        _castBlackHoleAction.Enable();
     }
 
     private void OnDisable()
@@ -116,8 +125,12 @@ public class PlayerController : BaseCharacterController
         _counterAttackAction.Disable();
 
         _throwSwordAction.performed -= DoThrowSword;
-        _throwSwordAction.canceled -= DoThrowSword;
+        _throwSwordAction.canceled -= DoStopThrowSword;
         _throwSwordAction.Disable();
+
+        _castBlackHoleAction.performed -= DoCastBlackHole;
+        _castBlackHoleAction.canceled -= DoStopCastBlackHole;
+        _castBlackHoleAction.Disable();
     }
 
     protected override void Awake()
@@ -137,6 +150,7 @@ public class PlayerController : BaseCharacterController
         _counterAttackState = new PlayerStateCounterAttack(this, _stateMachine, "CounterAttack");
         _aimSwordState = new PlayerStateAimSword(this, _stateMachine, "AimSword");
         _catchSwordState = new PlayerStateCatchSword(this, _stateMachine, "CatchSword");
+        _blackHoleState = new PlayerStateBlackHole(this, _stateMachine, "Jump");
     }
 
     protected override void Start()
@@ -230,6 +244,16 @@ public class PlayerController : BaseCharacterController
     void DoStopThrowSword(InputAction.CallbackContext value)
     {
         _isThrowSwordClicked = value.ReadValueAsButton();
+    }
+
+    void DoCastBlackHole(InputAction.CallbackContext value)
+    {
+        _isCastingBlackHole = value.ReadValueAsButton();
+    }
+
+    void DoStopCastBlackHole(InputAction.CallbackContext value)
+    {
+        _isCastingBlackHole = value.ReadValueAsButton();
     }
 
     public void AssignNewSword(GameObject newSword)

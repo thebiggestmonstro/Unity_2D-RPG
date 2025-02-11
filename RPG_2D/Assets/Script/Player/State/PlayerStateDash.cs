@@ -15,7 +15,7 @@ public class PlayerStateDash : PlayerState
     {
         base.Enter();
 
-        _controller._skillManager._skillCloning.DoCreateClone(_controller.transform, _controller.DoDetectIsGrounded());
+        // _controller._skillManager._skillCloning.DoCreateClone(_controller.transform, _controller.DoDetectIsGrounded());
 
         _stateTimer = _controller._dashDuration;
     }

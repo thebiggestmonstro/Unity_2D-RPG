@@ -24,6 +24,9 @@ public class PlayerStateGrounded : PlayerState
     {
         base.Update();
 
+        if (_isCastingBlackHole)
+            _stateMachine.ChangeState(_controller._blackHoleState);
+
         if (_isThrowingSword && HasNoSword())
             _stateMachine.ChangeState(_controller._aimSwordState);
 

@@ -27,6 +27,7 @@ public class BaseCharacterController : MonoBehaviour
 
     public Animator _animator { get; private set; }
     public Rigidbody2D _rigidbody2D { get; private set; }
+    public SpriteRenderer _spriteRenderer { get; private set; }
 
     public BaseEffectController _baseEffectController { get;  private set; }
 
@@ -38,11 +39,11 @@ public class BaseCharacterController : MonoBehaviour
     
     }
     
-    // 필요한 컴포넌트를 가져옴
     protected virtual void Start()
     {
         _animator = GetComponentInChildren<Animator>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _baseEffectController = GetComponent<BaseEffectController>();
     }
 
@@ -51,7 +52,6 @@ public class BaseCharacterController : MonoBehaviour
     
     }
 
-    // 속력을 설정하고 설정한 속력에 따라 방향 회전 수행
     public virtual void SetVelocity(float xVelocity, float yVelcoity)
     {
         // 피격당해 넉백되고 있는 동안 이동을 막음
@@ -62,7 +62,6 @@ public class BaseCharacterController : MonoBehaviour
         DoFlip(xVelocity);
     }
 
-    // 속력을 0으로 설정
     public virtual void SetZeroVelocity()
     {
         // 피격당해 넉백당하고 있는 동안에는 이동을 고정시키는 것도 막음
@@ -72,7 +71,6 @@ public class BaseCharacterController : MonoBehaviour
         _rigidbody2D.velocity = Vector2.zero;
     }
 
-    // 방향 회전
     public virtual void Flip()
     {
         _facingDir *= -1;
@@ -80,7 +78,6 @@ public class BaseCharacterController : MonoBehaviour
         gameObject.transform.Rotate(0, 180, 0);
     }
 
-    // 방향 회전을 수행
     public virtual void DoFlip(float xParam)
     {
         if (xParam > 0 && !_facingRight)
@@ -89,9 +86,8 @@ public class BaseCharacterController : MonoBehaviour
             Flip();
     }
 
-    // 땅을 딛고 있는지 확인
     public virtual bool DoDetectIsGrounded() => Physics2D.Raycast(_groundCheck.position, Vector2.down, _groundCheckDistance, LayerMask.GetMask("Ground"));
-    // 벽을 마주하고 있는지 확인
+
     public virtual bool DoDetectIsFacingWall() => Physics2D.Raycast(_wallCheck.position, Vector2.right * _facingDir, _wallCheckDistance, LayerMask.GetMask("Ground"));
 
     public virtual void DoGetDamage()
@@ -111,7 +107,6 @@ public class BaseCharacterController : MonoBehaviour
         _isKnocked = false;
     }
 
-    // Coliision 영역을 Debug Line을 그려 확인
     protected virtual void OnDrawGizmos()
     {
         Gizmos.DrawLine(
@@ -128,5 +123,13 @@ public class BaseCharacterController : MonoBehaviour
             _attackCheck.position,
             _attackCheckRadius
         );    
+    }
+
+    public void MakeTransparent(bool _isTransparent)
+    { 
+        if(_isTransparent)
+            _spriteRenderer.color = Color.clear;
+        else
+            _spriteRenderer.color = Color.white;
     }
 }

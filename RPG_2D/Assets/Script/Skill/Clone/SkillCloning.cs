@@ -11,11 +11,10 @@ public class SkillCloning : SkillTemplate
     [SerializeField]
     private float _cloneDuration;
 
-    // SkillManager에 의해 분신술을 수행
-    public void DoCreateClone(Transform clonePosition, bool canAttack)
+    public void DoCreateClone(Transform clonePosition, bool canAttack, Vector3 offset)
     {
         GameObject newClone = Instantiate(_clonePrefab);
 
-        newClone.GetComponent<SkillCloningController>().DoSetupClone(clonePosition, _cloneDuration, canAttack);
+        newClone.GetComponent<SkillCloningController>().DoSetupClone(clonePosition, _cloneDuration, canAttack, offset);
     }
 }
