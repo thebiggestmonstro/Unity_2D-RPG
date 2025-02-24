@@ -1168,8 +1168,8 @@ MonoBehaviour:
     m_Flags: 0
   _throwSwordAction:
     m_Name: Throw Sword
-    m_Type: 0
-    m_ExpectedControlType: 
+    m_Type: 1
+    m_ExpectedControlType: Button
     m_Id: 0d308aad-b1f6-4eb9-9782-b283bb85e52a
     m_Processors: 
     m_Interactions: 
@@ -1185,8 +1185,8 @@ MonoBehaviour:
     m_Flags: 0
   _castBlackHoleAction:
     m_Name: Cast Black Hole
-    m_Type: 0
-    m_ExpectedControlType: 
+    m_Type: 1
+    m_ExpectedControlType: Button
     m_Id: d26fd720-b927-4186-8cc7-e760e4af9143
     m_Processors: 
     m_Interactions: 
@@ -1198,6 +1198,23 @@ MonoBehaviour:
       m_Processors: 
       m_Groups: 
       m_Action: Cast Black Hole
+      m_Flags: 0
+    m_Flags: 0
+  _makeCrystalAction:
+    m_Name: Make Crystal
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: b1d1f101-1ac3-4e59-b66d-dc833cfd551b
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 49b41d13-8e64-4aef-9a85-b2f2609e9441
+      m_Path: <Keyboard>/f
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Make Crystal
       m_Flags: 0
     m_Flags: 0
   _moveSpeed: 12
@@ -1215,6 +1232,7 @@ MonoBehaviour:
   _isThrowSwordClicked: 0
   _swordReturnImpact: 7
   _isCastingBlackHole: 0
+  _isMakingCrystal: 0
 --- !u!50 &718177686
 Rigidbody2D:
   serializedVersion: 4
@@ -1405,6 +1423,7 @@ GameObject:
   - component: {fileID: 938091702}
   - component: {fileID: 938091703}
   - component: {fileID: 938091704}
+  - component: {fileID: 938091705}
   m_Layer: 0
   m_Name: SkillManager
   m_TagString: Untagged
@@ -1467,6 +1486,14 @@ MonoBehaviour:
   _cooldown: 0
   _clonePrefab: {fileID: 2750646712227197543, guid: e7bf25823f9e348469768b6c8ea2da1e, type: 3}
   _cloneDuration: 1.5
+  _canAttack: 1
+  _canCreateCloneOnDashStart: 1
+  _canCreateCloneOnDashOver: 1
+  _canCreateCloneOnCounterAttack: 1
+  _CreateDelay: 0.4
+  _canDuplicateClone: 1
+  _chanceToDuplicate: 35
+  _canCreateCrystalInsteadOfClone: 0
 --- !u!114 &938091703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1519,6 +1546,33 @@ MonoBehaviour:
   _blackHoleDuration: 4
   _amountOfAttack: 5
   _cloneAttackCooldown: 0.35
+--- !u!114 &938091705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 938091698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f93bfd4a42d10447ad10587b4363d3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cooldown: 0
+  _crsytalPrefab: {fileID: 2427295283396586195, guid: dfad305bd758d4c4b8aa7de4bfcd494f, type: 3}
+  _crystalExistTime: 1.5
+  _createCloneInsteadOfCrystal: 0
+  _canExplode: 1
+  _canMoveToEnemy: 1
+  _moveSpeed: 5
+  _canMakeMultiCrystal: 0
+  _amountToAddCrystal: 3
+  _multiStackCooldown: 4
+  _useTimeWindow: 2.5
+  _crystalList:
+  - {fileID: 2427295283396586195, guid: dfad305bd758d4c4b8aa7de4bfcd494f, type: 3}
+  - {fileID: 2427295283396586195, guid: dfad305bd758d4c4b8aa7de4bfcd494f, type: 3}
+  - {fileID: 2427295283396586195, guid: dfad305bd758d4c4b8aa7de4bfcd494f, type: 3}
 --- !u!1 &1011101340
 GameObject:
   m_ObjectHideFlags: 0
@@ -15244,6 +15298,63 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &1553459552
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2427295283396586195, guid: dfad305bd758d4c4b8aa7de4bfcd494f, type: 3}
+      propertyPath: m_Name
+      value: Crystal
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293925849324428035, guid: dfad305bd758d4c4b8aa7de4bfcd494f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293925849324428035, guid: dfad305bd758d4c4b8aa7de4bfcd494f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293925849324428035, guid: dfad305bd758d4c4b8aa7de4bfcd494f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293925849324428035, guid: dfad305bd758d4c4b8aa7de4bfcd494f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293925849324428035, guid: dfad305bd758d4c4b8aa7de4bfcd494f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293925849324428035, guid: dfad305bd758d4c4b8aa7de4bfcd494f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293925849324428035, guid: dfad305bd758d4c4b8aa7de4bfcd494f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293925849324428035, guid: dfad305bd758d4c4b8aa7de4bfcd494f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293925849324428035, guid: dfad305bd758d4c4b8aa7de4bfcd494f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293925849324428035, guid: dfad305bd758d4c4b8aa7de4bfcd494f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dfad305bd758d4c4b8aa7de4bfcd494f, type: 3}
 --- !u!1 &1647062510
 GameObject:
   m_ObjectHideFlags: 0
@@ -15648,3 +15759,4 @@ SceneRoots:
   - {fileID: 1286907573}
   - {fileID: 938091700}
   - {fileID: 1072546857}
+  - {fileID: 1553459552}

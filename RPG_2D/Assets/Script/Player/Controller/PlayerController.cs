@@ -6,6 +6,7 @@ using System.Threading;
 using Unity.Burst;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 
 public class PlayerController : BaseCharacterController
 {
@@ -24,7 +25,6 @@ public class PlayerController : BaseCharacterController
     public PlayerStateCounterAttack _counterAttackState { get; private set; }
     public PlayerStateAimSword _aimSwordState { get; private set; }
     public PlayerStateCatchSword _catchSwordState { get; private set; }
-
     public PlayerStateBlackHole _blackHoleState { get; private set; }
     #endregion
 
@@ -43,6 +43,8 @@ public class PlayerController : BaseCharacterController
     InputAction _throwSwordAction;
     [SerializeField]
     InputAction _castBlackHoleAction;
+    [SerializeField]
+    InputAction _makeCrystalAction;
 
     // Player Move Info
     public float _moveSpeed = 12f;
@@ -70,6 +72,7 @@ public class PlayerController : BaseCharacterController
     [SerializeField]
     public float _swordReturnImpact;
     public bool _isCastingBlackHole;
+    public bool _isMakingCrystal;
 
     public bool _doingSomething { get; private set; }
 
@@ -101,6 +104,10 @@ public class PlayerController : BaseCharacterController
         _castBlackHoleAction.performed += DoCastBlackHole;
         _castBlackHoleAction.canceled += DoStopCastBlackHole;
         _castBlackHoleAction.Enable();
+
+        _makeCrystalAction.performed += DoMakeCrystal;
+        _makeCrystalAction.canceled += DoStopMakeCrystal;
+        _makeCrystalAction.Enable();
     }
 
     private void OnDisable()
@@ -131,6 +138,10 @@ public class PlayerController : BaseCharacterController
         _castBlackHoleAction.performed -= DoCastBlackHole;
         _castBlackHoleAction.canceled -= DoStopCastBlackHole;
         _castBlackHoleAction.Disable();
+
+        _makeCrystalAction.performed -= DoMakeCrystal;
+        _makeCrystalAction.canceled -= DoStopMakeCrystal;
+        _makeCrystalAction.Disable();
     }
 
     protected override void Awake()
@@ -205,7 +216,7 @@ public class PlayerController : BaseCharacterController
         if (DoDetectIsFacingWall())
             return;
 
-        if (value.ReadValueAsButton() && SkillManager._skillManagerInstance._skillDash.DoDefineCanUseSkill())
+        if (value.ReadValueAsButton() && SkillManager._skillManagerInstance._skillDash.DoUseSkill())
         {
             _dashDir = _moveAction.ReadValue<Vector2>().x;
 
@@ -254,6 +265,19 @@ public class PlayerController : BaseCharacterController
     void DoStopCastBlackHole(InputAction.CallbackContext value)
     {
         _isCastingBlackHole = value.ReadValueAsButton();
+    }
+
+    void DoMakeCrystal(InputAction.CallbackContext value)
+    {
+        _isMakingCrystal = value.ReadValueAsButton();
+
+        if (_isMakingCrystal)
+            _skillManager._skillCrystal.DoUseSkill();
+    }
+
+    void DoStopMakeCrystal(InputAction.CallbackContext value)
+    {
+        _isMakingCrystal = value.ReadValueAsButton();
     }
 
     public void AssignNewSword(GameObject newSword)

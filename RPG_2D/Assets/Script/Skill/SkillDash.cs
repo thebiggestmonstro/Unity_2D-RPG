@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class SkillDash : SkillTemplate
 {
-    public override void DoUseSkill()
+    public override void UseSkill()
     {
-        base.DoUseSkill();
-
-        Debug.Log("Use Skill");
+        base.UseSkill();
     }
 }

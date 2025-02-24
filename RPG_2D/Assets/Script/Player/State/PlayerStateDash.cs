@@ -15,7 +15,7 @@ public class PlayerStateDash : PlayerState
     {
         base.Enter();
 
-        // _controller._skillManager._skillCloning.DoCreateClone(_controller.transform, _controller.DoDetectIsGrounded());
+        _controller._skillManager._skillCloning.CreateCloneOnDashStart();
 
         _stateTimer = _controller._dashDuration;
     }
@@ -24,6 +24,8 @@ public class PlayerStateDash : PlayerState
     public override void Exit()
     {
         base.Exit();
+
+        _controller._skillManager._skillCloning.CreateCloneOnDashOver();
 
         _controller.SetVelocity(0, _rigidbody2D.velocity.y);
     }

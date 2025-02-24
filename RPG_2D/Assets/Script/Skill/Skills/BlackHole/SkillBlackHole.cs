@@ -22,24 +22,24 @@ public class SkillBlackHole : SkillTemplate
 
     SkillBlackHoleController _currentBlackHoleController;
 
-    protected virtual void Start()
+    protected override void Start()
     {
         base.Start();
     }
 
-    protected virtual void Update()
+    protected override void Update()
     {
         base.Update();
     }
 
     public virtual bool DoDefineCanUseSkill()
     {
-       return base.DoDefineCanUseSkill();
+       return base.DoUseSkill();
     }
 
-    public virtual void DoUseSkill()
+    public override void UseSkill()
     {
-        base.DoUseSkill();
+        base.UseSkill();
 
         GameObject newBlackHole = Instantiate(_blackHolePrefab, _playerController.transform.position, Quaternion.identity);
         _currentBlackHoleController = newBlackHole.GetComponent<SkillBlackHoleController>();
@@ -58,5 +58,10 @@ public class SkillBlackHole : SkillTemplate
         }
 
         return false;
+    }
+
+    public float GetBlackholeRadius()
+    {
+        return _maxSize / 2;
     }
 }

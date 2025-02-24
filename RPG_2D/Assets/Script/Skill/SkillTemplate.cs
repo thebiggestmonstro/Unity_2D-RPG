@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SkillTemplate : MonoBehaviour
 {
-    // 모든 스킬들의 원형인 SkillTemplate에서는 스킬들의 공통적인 프로퍼티를 갖고 있음 - 쿨타임
     [SerializeField]
     protected float _cooldown;
     protected float _cooldownTimer;
@@ -16,19 +15,16 @@ public class SkillTemplate : MonoBehaviour
         _playerController = PlayerManager._playerManagerInstance._playerController;
     }
 
-    // 주기적으로 _cooldownTimer를 감소
     protected virtual void Update()
     { 
         _cooldownTimer -= Time.deltaTime;
     }
 
-    // 스킬 사용 가능 여부를 판단하는 함수
-    public virtual bool DoDefineCanUseSkill()
+    public virtual bool DoUseSkill()
     {
-        // _cooldownTimer가 0보다 작으면 스킬 사용 가능
         if (_cooldownTimer < 0)
         {
-            DoUseSkill();
+            UseSkill();
             _cooldownTimer = _cooldown;
             return true;
         }
@@ -37,9 +33,31 @@ public class SkillTemplate : MonoBehaviour
         return false;
     }
 
-    // 오버라이드한 자손 스킬들이 자신의 로직을 수행할 때 사용하는 함수
-    public virtual void DoUseSkill()
+    public virtual void UseSkill()
     { 
-        // 스킬 함수의 로직 수행 
+
+    }
+
+    protected virtual Transform FindClosestEnemy(Transform checkTransform)
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(checkTransform.position, 25f);
+
+        float closestDistance = Mathf.Infinity;
+        Transform closestEnemy = null;
+
+        foreach (var hit in colliders)
+        {
+            if (hit.GetComponent<EnemyController>() != null)
+            {
+                float distanceToEnemy = Vector2.Distance(checkTransform.position, hit.transform.position);
+                if (distanceToEnemy < closestDistance)
+                {
+                    closestDistance = distanceToEnemy;
+                    closestEnemy = hit.transform;
+                }
+            }
+        }
+
+        return closestEnemy;
     }
 }
