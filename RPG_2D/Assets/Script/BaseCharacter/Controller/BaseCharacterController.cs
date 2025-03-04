@@ -28,6 +28,7 @@ public class BaseCharacterController : MonoBehaviour
     public Animator _animator { get; private set; }
     public Rigidbody2D _rigidbody2D { get; private set; }
     public SpriteRenderer _spriteRenderer { get; private set; }
+    public BaseCharacterStats _characterStats { get; private set; }
 
     public BaseEffectController _baseEffectController { get;  private set; }
 
@@ -45,6 +46,7 @@ public class BaseCharacterController : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _baseEffectController = GetComponent<BaseEffectController>();
+        _characterStats = GetComponent<BaseCharacterStats>();
     }
 
     protected virtual void Update()
