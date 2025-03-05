@@ -26,6 +26,7 @@ public class PlayerController : BaseCharacterController
     public PlayerStateAimSword _aimSwordState { get; private set; }
     public PlayerStateCatchSword _catchSwordState { get; private set; }
     public PlayerStateBlackHole _blackHoleState { get; private set; }
+    public PlayerStateDead _deadState { get; private set; }
     #endregion
 
     // Player Input
@@ -162,6 +163,7 @@ public class PlayerController : BaseCharacterController
         _aimSwordState = new PlayerStateAimSword(this, _stateMachine, "AimSword");
         _catchSwordState = new PlayerStateCatchSword(this, _stateMachine, "CatchSword");
         _blackHoleState = new PlayerStateBlackHole(this, _stateMachine, "Jump");
+        _deadState = new PlayerStateDead(this, _stateMachine, "Dead");
     }
 
     protected override void Start()
@@ -292,4 +294,9 @@ public class PlayerController : BaseCharacterController
     }
 
     public void AnimationTrigger() => _stateMachine._currentState.AnimationFinishTrigger();
+
+    public override void Die()
+    {
+        _stateMachine.ChangeState(_deadState);
+    }
 }

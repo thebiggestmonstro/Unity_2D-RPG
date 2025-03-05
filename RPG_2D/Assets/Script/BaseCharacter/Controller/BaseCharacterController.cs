@@ -29,8 +29,8 @@ public class BaseCharacterController : MonoBehaviour
     public Rigidbody2D _rigidbody2D { get; private set; }
     public SpriteRenderer _spriteRenderer { get; private set; }
     public BaseCharacterStats _characterStats { get; private set; }
-
     public BaseEffectController _baseEffectController { get;  private set; }
+    public CapsuleCollider2D _capsuleCollider { get; private set; }
 
     public int _facingDir { get; set; } = 1;
     protected bool _facingRight = true;
@@ -47,6 +47,7 @@ public class BaseCharacterController : MonoBehaviour
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _baseEffectController = GetComponent<BaseEffectController>();
         _characterStats = GetComponent<BaseCharacterStats>();
+        _capsuleCollider = GetComponent<CapsuleCollider2D>();
     }
 
     protected virtual void Update()
@@ -133,5 +134,10 @@ public class BaseCharacterController : MonoBehaviour
             _spriteRenderer.color = Color.clear;
         else
             _spriteRenderer.color = Color.white;
+    }
+
+    public virtual void Die()
+    { 
+    
     }
 }

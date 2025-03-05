@@ -19,4 +19,10 @@ public class EnemyStats : BaseCharacterStats
 
         _enemyController.DoGetDamage();
     }
+
+    protected override void Die()
+    {
+        base.Die();
+        _enemyController.Die();
+    }
 }

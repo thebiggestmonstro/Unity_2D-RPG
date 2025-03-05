@@ -24,6 +24,7 @@ public class EnemyController : BaseCharacterController
     protected GameObject _counterImage; 
 
     public EnemyStateMachine _stateMachine { get; private set; }
+    public string _lastAnimBoolName { get; private set; }
 
     protected override void Awake()
     {
@@ -94,5 +95,10 @@ public class EnemyController : BaseCharacterController
         yield return new WaitForSeconds(seconds);
 
         DoFreezeEnemy(false);
+    }
+
+    public virtual void AssginLastAnimName(string lastAnimBoolName)
+    {
+        _lastAnimBoolName = lastAnimBoolName;
     }
 }

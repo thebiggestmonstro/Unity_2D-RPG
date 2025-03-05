@@ -31,4 +31,9 @@ public class CharacterStats
     { 
         _statModifierList.Remove(modifier);
     }
+
+    public void SetDefaultValue(int value)
+    { 
+        _baseValue = value;
+    }
 }

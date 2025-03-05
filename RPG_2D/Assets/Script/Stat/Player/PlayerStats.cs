@@ -20,4 +20,10 @@ public class PlayerStats : BaseCharacterStats
 
         _playerController.DoGetDamage();
     }
+
+    protected override void Die()
+    {
+        base.Die();
+        _playerController.Die();
+    }
 }
