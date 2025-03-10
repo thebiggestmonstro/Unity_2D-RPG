@@ -7,6 +7,12 @@ public class PlayerStats : BaseCharacterStats
 {
     PlayerController _playerController;
 
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
+
     protected override void Start()
     {
         base.Start();

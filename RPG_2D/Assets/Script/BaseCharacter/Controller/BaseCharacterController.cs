@@ -35,6 +35,8 @@ public class BaseCharacterController : MonoBehaviour
     public int _facingDir { get; set; } = 1;
     protected bool _facingRight = true;
 
+    public System.Action onFlipped;
+
     protected virtual void Awake()
     { 
     
@@ -79,6 +81,8 @@ public class BaseCharacterController : MonoBehaviour
         _facingDir *= -1;
         _facingRight = !_facingRight;
         gameObject.transform.Rotate(0, 180, 0);
+
+        onFlipped();
     }
 
     public virtual void DoFlip(float xParam)
