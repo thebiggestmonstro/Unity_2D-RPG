@@ -208,7 +208,7 @@ public class SkillThrowingSwordController : MonoBehaviour
 
     private void SwordSkillEffect(EnemyController enemy)
     {
-        enemy.DoGetDamage();
+        _playerController._characterStats.GiveDamage(enemy.GetComponent<BaseCharacterStats>());
         enemy.StartCoroutine("FreezeEnemyTimer", _freezeTimeDuration);
     }
 

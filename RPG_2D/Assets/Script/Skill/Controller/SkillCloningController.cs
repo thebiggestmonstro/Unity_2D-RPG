@@ -19,7 +19,8 @@ public class SkillCloningController : MonoBehaviour
 
     private bool _canDuplicateClone;
     private float _chanceToDuplicate;
-    private int _facingDir = 1; 
+    private int _facingDir = 1;
+    private PlayerController _playerController;
 
     private void Awake()
     {
@@ -40,11 +41,12 @@ public class SkillCloningController : MonoBehaviour
         }
     }
 
-    public void DoSetupClone(Transform newTransform, float cloneDuration, bool canAttack, Vector3 offset, Transform closestEnemy, bool canDuplicateClone, float chanceToDuplicate)
+    public void DoSetupClone(Transform newTransform, float cloneDuration, bool canAttack, Vector3 offset, Transform closestEnemy, bool canDuplicateClone, float chanceToDuplicate, PlayerController playerController)
     {
         if (canAttack)
             _animator.SetInteger("AttackNumber", Random.Range(1, 3));
 
+        _playerController = playerController;
         gameObject.transform.position = newTransform.position + offset;
         _cloneTimer = cloneDuration;
 
@@ -67,7 +69,7 @@ public class SkillCloningController : MonoBehaviour
         {
             if (hit.GetComponent<EnemyController>() != null)
             {
-                hit.GetComponent<EnemyController>().DoGetDamage();
+                _playerController._characterStats.GiveDamage(hit.GetComponent<BaseCharacterStats>());
 
                 if (_canDuplicateClone)
                 {

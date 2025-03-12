@@ -52,11 +52,14 @@ public class PlayerController : BaseCharacterController
     public float _jumpForce = 12f;
     public bool _isJumpPressed;
     public bool _isAttackClicked;
+    private float _defaultMoveSpeed;
+    private float _defaultJumpForce;
     public float _horizontalValue { get; private set; }
     public float _verticalValue { get; private set; }
 
     // Dash Info
     public float _dashSpeed;
+    private float _defaultDashSpeed;
     public float _dashDuration;
     public float _dashDir { get; private set; }
 
@@ -173,6 +176,10 @@ public class PlayerController : BaseCharacterController
         _skillManager = SkillManager._skillManagerInstance;
 
         _stateMachine.Init(_idleState);
+
+        _defaultMoveSpeed = _moveSpeed;
+        _defaultJumpForce = _jumpForce;
+        _defaultDashSpeed = _dashSpeed;
     }
 
     protected override void Update()
@@ -298,5 +305,24 @@ public class PlayerController : BaseCharacterController
     public override void Die()
     {
         _stateMachine.ChangeState(_deadState);
+    }
+
+    protected override void RollbackDefaultSpeed()
+    {
+        base.RollbackDefaultSpeed();
+
+        _moveSpeed = _defaultMoveSpeed;
+        _jumpForce = _defaultJumpForce;
+        _dashSpeed = _defaultDashSpeed;
+    }
+
+    public override void MakeCharacterSlow(float slowPercentage, float slowDuration)
+    {
+        _moveSpeed = _moveSpeed * (1 - slowPercentage);
+        _jumpForce = _jumpForce * (1 - slowPercentage);
+        _dashSpeed = _dashSpeed * (1 - slowPercentage);
+        _animator.speed = _animator.speed * (1 - slowPercentage);
+
+        Invoke("RollbackDefaultSpeed", slowDuration);
     }
 }

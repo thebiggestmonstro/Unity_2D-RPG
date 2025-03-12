@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class BaseCharacterStats : MonoBehaviour
 {
+    private BaseEffectController _effectController;
+
     [Header("Primary Stats")]
     public CharacterStats _strength;
     public CharacterStats _agility;
@@ -31,6 +34,8 @@ public class BaseCharacterStats : MonoBehaviour
     public bool _isFreezed;
     public bool _isShocked;
 
+    [SerializeField]
+    private float _alimentDuration = 4.0f;
     private float _ignitedTimer;
     private float _freezedTimer;
     private float _shockedTimer;
@@ -39,8 +44,13 @@ public class BaseCharacterStats : MonoBehaviour
     private float _igniteDamageTimer;
     private int _ignitedDamage;
 
+    [SerializeField]
+    private GameObject _thunderLightningPrefab;
+    private int _thunderDamage;
+
     public int _currentHealth;
     public System.Action onHealthChanged;
+    protected bool _isDead = false;
 
     protected virtual void Awake()
     {
@@ -49,6 +59,8 @@ public class BaseCharacterStats : MonoBehaviour
 
     protected virtual void Start()
     {
+        _effectController = GetComponent<BaseEffectController>();
+
         _critPower.SetDefaultValue(150);
     }
 
@@ -62,21 +74,13 @@ public class BaseCharacterStats : MonoBehaviour
         if (_ignitedTimer < 0)
             _isIgnited = false;
 
-        if(_freezedTimer < 0)
+        if (_freezedTimer < 0)
             _isFreezed = false;
 
         if (_shockedTimer < 0)
             _isShocked = false;
 
-        if (_igniteDamageTimer < 0 && _isIgnited)
-        {
-            DecreaseHealth(_ignitedDamage);
-
-            if (_currentHealth <= 0.0f)
-                Die();
-
-            _igniteDamageTimer = _igniteDamageCooldown;
-        }
+        GiveIgniteDamage();
     }
 
     public virtual void GiveDamage(BaseCharacterStats targetStats)
@@ -91,8 +95,7 @@ public class BaseCharacterStats : MonoBehaviour
 
         totalDamage = CheckTargetArmor(targetStats, totalDamage);
 
-        // targetStats.TakeDamage(totalDamage);
-        GiveMagicalDamage(targetStats);
+        targetStats.TakeDamage(totalDamage);
     }
 
     private bool CheckTargetCanEvadeAttack(BaseCharacterStats targetStats)
@@ -117,13 +120,13 @@ public class BaseCharacterStats : MonoBehaviour
             totalDamage -= Mathf.RoundToInt(targetStats._armor.GetValue() * 0.8f);
         else
             totalDamage -= targetStats._armor.GetValue();
-        
+
         totalDamage = Mathf.Clamp(totalDamage, 0, int.MaxValue);
         return totalDamage;
     }
 
     private bool CheckCanGiveCriticalDamage()
-    { 
+    {
         int totalCritChance = _critChance.GetValue() + _agility.GetValue();
 
         if (Random.Range(0, 100) <= totalCritChance)
@@ -145,7 +148,10 @@ public class BaseCharacterStats : MonoBehaviour
     {
         DecreaseHealth(opponentAttackPoint);
 
-        if (_currentHealth <= 0)
+        GetComponent<BaseCharacterController>().DoGetDamage();
+        _effectController.StartCoroutine("DoMakeFlashFX");
+
+        if (_currentHealth <= 0 && !_isDead)
             Die();
     }
 
@@ -163,6 +169,11 @@ public class BaseCharacterStats : MonoBehaviour
         if (Mathf.Max(fireDamage, iceDamage, lightningDamage) <= 0)
             return;
 
+        AttemptToApplyAliments(targetStats, fireDamage, iceDamage, lightningDamage);
+    }
+
+    private void AttemptToApplyAliments(BaseCharacterStats targetStats, int fireDamage, int iceDamage, int lightningDamage)
+    {
         bool canApplyIgnite = fireDamage > iceDamage && fireDamage > lightningDamage;
         bool canApplyFreeze = iceDamage > fireDamage && iceDamage > lightningDamage;
         bool canApplyShock = lightningDamage > iceDamage && lightningDamage > fireDamage;
@@ -192,10 +203,13 @@ public class BaseCharacterStats : MonoBehaviour
         if (canApplyIgnite)
             targetStats.SetIgniteDamage(Mathf.RoundToInt(fireDamage * 0.2f));
 
+        if (canApplyShock)
+            targetStats.SetupShockStrikeDamage(Mathf.RoundToInt(lightningDamage * .1f));
+
         targetStats.ApplyAliments(canApplyIgnite, canApplyFreeze, canApplyShock);
     }
 
-    private static int CheckTargetMagicResistance(BaseCharacterStats targetStats, int totalMagicalDamage)
+    private int CheckTargetMagicResistance(BaseCharacterStats targetStats, int totalMagicalDamage)
     {
         totalMagicalDamage -= targetStats._magicResistance.GetValue() + (targetStats._intelligence.GetValue() * 3);
         totalMagicalDamage = Mathf.Clamp(totalMagicalDamage, 0, int.MaxValue);
@@ -204,31 +218,102 @@ public class BaseCharacterStats : MonoBehaviour
 
     public void ApplyAliments(bool isIgnited, bool isFreezed, bool isShocked)
     {
-        if (isIgnited || isFreezed || isShocked)
-            return;
+        bool canApplyIgnite = !_isIgnited && !_isFreezed && !_isShocked;
+        bool canApplyFreeze = !_isIgnited && !_isFreezed && !_isShocked;
+        bool canApplyShock = !_isIgnited && !_isFreezed;
 
-        if (isIgnited)
+        if (isIgnited && canApplyIgnite)
         {
             _isIgnited = isIgnited;
-            _ignitedTimer = 4.0f;
+            _ignitedTimer = _alimentDuration;
+
+            _effectController.PaintIgnitedColorFX(_ignitedTimer);
         }
 
-        if (isFreezed)
-        { 
-            _isFreezed = isFreezed;
-            _freezedTimer = 2.0f;
-        }
-
-        if (isShocked)
+        if (isFreezed && canApplyFreeze)
         {
-            _isShocked = isShocked;
-            _shockedTimer = 2.0f;
+            _isFreezed = isFreezed;
+            _freezedTimer = _alimentDuration;
+
+            float slowPercentage = 0.2f;
+            GetComponent<BaseCharacterController>().MakeCharacterSlow(slowPercentage, _freezedTimer);
+            _effectController.PaintFreezedColorFX(_freezedTimer);
+        }
+
+        if (isShocked && canApplyShock)
+        {
+            // 적이 전기속성 상태이상에 걸리지 않은 경우
+            if (!_isShocked)
+            {
+                ApplyShock(isShocked);
+            }
+            // 적이 이미 전기속성 상태이상에 걸린 경우
+            else
+            {
+                if (GetComponent<PlayerController>() != null)
+                    return;
+
+                HitNearestTargetWithThunderStrike();
+            }
         }
     }
 
-    public void SetIgniteDamage(int damage)
+    private void GiveIgniteDamage()
     {
-        _ignitedDamage = damage;
+        if (_igniteDamageTimer < 0 && _isIgnited)
+        {
+            DecreaseHealth(_ignitedDamage);
+
+            if (_currentHealth <= 0.0f && !_isDead)
+                Die();
+
+            _igniteDamageTimer = _igniteDamageCooldown;
+        }
+    }
+
+    public void SetIgniteDamage(int damage) =>  _ignitedDamage = damage;
+    public void SetupShockStrikeDamage(int damage) => _thunderDamage = damage;
+
+    public void ApplyShock(bool isShocked)
+    {
+        if (_isShocked)
+            return;
+
+        _shockedTimer = _alimentDuration;
+        _isShocked = isShocked;
+
+        _effectController.PaintShockedColorFX(_alimentDuration);
+    }
+
+    private void HitNearestTargetWithThunderStrike()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 25);
+
+        float closestDistance = Mathf.Infinity;
+        Transform closestEnemy = null;
+
+        foreach (var hit in colliders)
+        {
+            if (hit.GetComponent<EnemyController>() != null && Vector2.Distance(transform.position, hit.transform.position) > 1)
+            {
+                float distanceToEnemy = Vector2.Distance(transform.position, hit.transform.position);
+
+                if (distanceToEnemy < closestDistance)
+                {
+                    closestDistance = distanceToEnemy;
+                    closestEnemy = hit.transform;
+                }
+            }
+
+            if (closestEnemy == null)           
+                closestEnemy = transform;
+        }
+
+        if (closestEnemy != null)
+        {
+            GameObject newThunder = Instantiate(_thunderLightningPrefab, transform.position, Quaternion.identity);
+            newThunder.GetComponent<ThunderController>().SetupThunder(_thunderDamage, closestEnemy.GetComponent<BaseCharacterStats>());
+        }
     }
 
     public int GetMaxHealthValue()
@@ -246,6 +331,6 @@ public class BaseCharacterStats : MonoBehaviour
 
     protected virtual void Die() 
     {
-
+        _isDead = true;
     }
 }

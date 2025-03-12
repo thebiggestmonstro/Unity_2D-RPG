@@ -74,7 +74,7 @@ public class SkillCrystal : SkillTemplate
         _currentCrsytal = Instantiate(_crsytalPrefab, _playerController.transform.position, Quaternion.identity);
         SkillCrystalController currentCrystalController = _currentCrsytal.GetComponent<SkillCrystalController>();
         
-        currentCrystalController.SetupCrystal(_crystalExistTime, _canExplode, _canMoveToEnemy, _moveSpeed, FindClosestEnemy(_currentCrsytal.transform));
+        currentCrystalController.SetupCrystal(_crystalExistTime, _canExplode, _canMoveToEnemy, _moveSpeed, FindClosestEnemy(_currentCrsytal.transform), _playerController);
         currentCrystalController.ChooseRandomEnemy();
     }
 
@@ -97,7 +97,7 @@ public class SkillCrystal : SkillTemplate
                 GameObject newCrystal = Instantiate(crystalToSpawn, _playerController.transform.position, Quaternion.identity);
                 _crystalList.Remove(crystalToSpawn);
 
-                newCrystal.GetComponent<SkillCrystalController>()?.SetupCrystal(_crystalExistTime, _canExplode, _canMoveToEnemy, _moveSpeed, FindClosestEnemy(newCrystal.transform));
+                newCrystal.GetComponent<SkillCrystalController>()?.SetupCrystal(_crystalExistTime, _canExplode, _canMoveToEnemy, _moveSpeed, FindClosestEnemy(newCrystal.transform), _playerController);
 
                 if (_crystalList.Count <= 0)
                 {

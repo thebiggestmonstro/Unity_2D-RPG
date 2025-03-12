@@ -90,7 +90,7 @@ public class SkillBlackHoleController : MonoBehaviour
         if (_playerCanDisapear)
         {
             _canCreateHotKey = false;
-            PlayerManager._playerManagerInstance._playerController.MakeTransparent(true);
+            PlayerManager._playerManagerInstance._playerController._baseEffectController.MakeTransparent(true);
         }
     }
 

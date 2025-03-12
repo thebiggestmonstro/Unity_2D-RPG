@@ -97,11 +97,7 @@ public class BaseCharacterController : MonoBehaviour
 
     public virtual bool DoDetectIsFacingWall() => Physics2D.Raycast(_wallCheck.position, Vector2.right * _facingDir, _wallCheckDistance, LayerMask.GetMask("Ground"));
 
-    public virtual void DoGetDamage()
-    {
-        _baseEffectController.StartCoroutine("DoMakeFlashFX");
-        StartCoroutine("DoGetKnockbacked");
-    }
+    public virtual void DoGetDamage() => StartCoroutine("DoGetKnockbacked");
 
     protected virtual IEnumerator DoGetKnockbacked()
     {
@@ -132,16 +128,18 @@ public class BaseCharacterController : MonoBehaviour
         );    
     }
 
-    public void MakeTransparent(bool _isTransparent)
-    { 
-        if(_isTransparent)
-            _spriteRenderer.color = Color.clear;
-        else
-            _spriteRenderer.color = Color.white;
-    }
-
     public virtual void Die()
     { 
     
+    }
+
+    public virtual void MakeCharacterSlow(float slowPercentage, float slowDuration)
+    { 
+        
+    }
+
+    protected virtual void RollbackDefaultSpeed()
+    {
+        _animator.speed = 1;
     }
 }

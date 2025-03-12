@@ -21,8 +21,6 @@ public class EnemyStats : BaseCharacterStats
     public override void TakeDamage(int opponentAttackPoint)
     {
         base.TakeDamage(opponentAttackPoint);
-
-        _enemyController.DoGetDamage();
     }
 
     protected override void Die()

@@ -51,7 +51,8 @@ public class SkillCloning : SkillTemplate
             offset, 
             FindClosestEnemy(newClone.transform),
             _canDuplicateClone,
-            _chanceToDuplicate
+            _chanceToDuplicate,
+            _playerController
         );
     }
 

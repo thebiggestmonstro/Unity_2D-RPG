@@ -12,6 +12,7 @@ public class SkillCrystalController : MonoBehaviour
     private bool _canMoveToEnemy;
     private float _moveSpeed;
     private Transform _closestEnemy;
+    private PlayerController _playerController;
 
     private bool _canGrow;
     [SerializeField]
@@ -19,8 +20,9 @@ public class SkillCrystalController : MonoBehaviour
     [SerializeField]
     private LayerMask _enemyLayer;
 
-    public void SetupCrystal(float crystalDuration, bool canExplode, bool canMoveToEnemy, float movespeed, Transform closestEnemy)
+    public void SetupCrystal(float crystalDuration, bool canExplode, bool canMoveToEnemy, float movespeed, Transform closestEnemy, PlayerController playerController)
     {
+        _playerController = playerController;
         _crystalExistTimer = crystalDuration;
         _canExplode = canExplode;
         _canMoveToEnemy = canMoveToEnemy;
@@ -78,7 +80,7 @@ public class SkillCrystalController : MonoBehaviour
         foreach (Collider2D hit in colliders)
         {
             if (hit.GetComponent<EnemyController>() != null)
-                hit.GetComponent<EnemyController>().DoGetDamage();
+                _playerController._characterStats.GiveMagicalDamage(hit.GetComponent<BaseCharacterStats>());
         }
     }
 

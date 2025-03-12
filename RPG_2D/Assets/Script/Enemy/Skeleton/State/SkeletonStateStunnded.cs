@@ -31,7 +31,7 @@ public class SkeletonStateStunnded : EnemyState
         base.Exit();
 
         // 스턴 상태가 끝나는 경우, 발동중인 Invoke 함수를 전부 즉시 취소함
-        _enemyBaseController._baseEffectController.Invoke("CancelRedColorBlink", 0);
+        _enemyBaseController._baseEffectController.Invoke("CancelColorChange", 0);
     }
 
     public override void Update()

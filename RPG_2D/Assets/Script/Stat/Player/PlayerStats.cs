@@ -23,8 +23,6 @@ public class PlayerStats : BaseCharacterStats
     public override void TakeDamage(int opponentAttackPoint)
     {
         base.TakeDamage(opponentAttackPoint);
-
-        _playerController.DoGetDamage();
     }
 
     protected override void Die()

@@ -101,4 +101,19 @@ public class EnemyController : BaseCharacterController
     {
         _lastAnimBoolName = lastAnimBoolName;
     }
+
+    public override void MakeCharacterSlow(float slowPercentage, float slowDuration)
+    {
+        _moveSpeed = _moveSpeed * (1 - slowPercentage);
+        _animator.speed = _animator.speed * (1 - slowPercentage);
+
+        Invoke("RollbackDefaultSpeed", slowDuration);
+    }
+
+    protected override void RollbackDefaultSpeed()
+    {
+        base.RollbackDefaultSpeed();
+
+        _moveSpeed = _defaultMoveSpeed;
+    }
 }
