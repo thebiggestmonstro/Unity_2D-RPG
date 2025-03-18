@@ -5,15 +5,13 @@ using UnityEngine;
 
 public class ItemObject : MonoBehaviour
 {
-    private SpriteRenderer _spriteRenderer;
-
     [SerializeField]
     private ItemData _itemData;
 
-    private void Start()
+    private void OnValidate()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRenderer.sprite = _itemData.ItemIcon;
+        GetComponent<SpriteRenderer>().sprite = _itemData.ItemIcon;
+        gameObject.name = "Item Object : "  + _itemData.ItemName;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
