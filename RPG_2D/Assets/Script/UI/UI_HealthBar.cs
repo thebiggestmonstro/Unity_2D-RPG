@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_HealthBar : MonoBehaviour
+public class U_IHealthBar : MonoBehaviour
 {
     private BaseCharacterController _baseCharacterController;
     private BaseCharacterStats _myStats;
