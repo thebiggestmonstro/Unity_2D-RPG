@@ -132,7 +132,7 @@ public class InventoryManager : MonoBehaviour
         {
             foreach (KeyValuePair<ItemData_Equipment, Item_Inventory> item in _equipmentInventoryDictianory)
             {
-                if (item.Key.EquipmentType == _equipmentSlot[i].slotType)
+                if (item.Key.EquipmentType == _equipmentSlot[i]._slotType)
                     _equipmentSlot[i].UpdateSlot(item.Value);
             }
         }

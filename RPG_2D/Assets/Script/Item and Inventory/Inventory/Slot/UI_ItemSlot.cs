@@ -14,9 +14,9 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
 
     public Item_Inventory _item;
 
-    public void UpdateSlot(Item_Inventory _newItem)
+    public void UpdateSlot(Item_Inventory newItem)
     {
-        _item = _newItem;
+        _item = newItem;
 
         _itemImage.color = Color.white;
 

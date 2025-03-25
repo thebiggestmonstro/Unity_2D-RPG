@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class UI_EquipmentSlot : UI_ItemSlot
 {
-    public EquipmentType slotType;
+    public EquipmentType _slotType;
 
     public override void OnPointerDown(PointerEventData eventData)
     {

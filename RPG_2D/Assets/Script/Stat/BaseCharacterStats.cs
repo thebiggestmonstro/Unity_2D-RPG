@@ -60,8 +60,6 @@ public class BaseCharacterStats : MonoBehaviour
     protected virtual void Start()
     {
         _effectController = GetComponent<BaseEffectController>();
-
-        _critPower.SetDefaultValue(150);
     }
 
     protected virtual void Update()

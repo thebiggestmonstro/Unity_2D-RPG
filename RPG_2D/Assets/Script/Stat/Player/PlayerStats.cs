@@ -12,7 +12,6 @@ public class PlayerStats : BaseCharacterStats
         base.Awake();
     }
 
-
     protected override void Start()
     {
         base.Start();
