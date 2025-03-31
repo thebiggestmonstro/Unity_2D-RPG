@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyStats : BaseCharacterStats
 {
     EnemyController _enemyController;
+    private ItemObject_Drop _enemyDropSystem;
 
     [Header("Level Details")]
     [SerializeField]
@@ -26,6 +27,7 @@ public class EnemyStats : BaseCharacterStats
         base.Start();
 
         _enemyController = GetComponent<SkeletonController>();
+        _enemyDropSystem = GetComponent<ItemObject_Drop>();
     }
 
     public override void TakeDamage(int opponentAttackPoint)
@@ -37,6 +39,8 @@ public class EnemyStats : BaseCharacterStats
     {
         base.Die();
         _enemyController.Die();
+
+        _enemyDropSystem.GenerateDrop();
     }
 
     private void ModifyStat(CharacterStats stat)

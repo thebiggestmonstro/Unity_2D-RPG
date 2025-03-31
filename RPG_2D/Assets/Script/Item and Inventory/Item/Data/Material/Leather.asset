@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5917c0aeebb3d324e86059dc8c0eec62, type: 3}
   m_Name: Leather
   m_EditorClassIdentifier: 
+  ItemType: 0
   ItemName: Leather
   ItemIcon: {fileID: -973012730, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  _dropChance: 50

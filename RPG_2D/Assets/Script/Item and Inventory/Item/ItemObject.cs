@@ -6,19 +6,29 @@ public class ItemObject : MonoBehaviour
 {
     [SerializeField]
     private ItemData _itemData;
+    [SerializeField]
+    private Rigidbody2D _rigidbody2D;
 
-    private void OnValidate()
+    private void SetupItemVisuals()
     {
+        if (_itemData == null)
+            return;
+
         GetComponent<SpriteRenderer>().sprite = _itemData.ItemIcon;
-        gameObject.name = "Item Object : " + _itemData.ItemName;
+        gameObject.name = "Item Object - " + _itemData.ItemName;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void SetupItem(ItemData itemData, Vector2 velocity)
+    { 
+        _itemData = itemData;
+        _rigidbody2D.velocity = velocity;
+
+        SetupItemVisuals();
+    }
+
+    public void PickupItem()
     {
-        if (collision.GetComponent<PlayerController>() != null)
-        {
-            InventoryManager._inventoryManagerInstance.AddItem(_itemData);
-            Destroy(gameObject);
-        }
+        InventoryManager._inventoryManagerInstance.AddItem(_itemData);
+        Destroy(gameObject);
     }
 }

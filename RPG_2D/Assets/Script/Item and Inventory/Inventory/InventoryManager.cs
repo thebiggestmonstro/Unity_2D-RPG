@@ -192,4 +192,40 @@ public class InventoryManager : MonoBehaviour
             itemToRemove.RemoveModifiers();
         }
     }
+
+    public bool CraftEquipment(ItemData_Equipment itemToCraft, List<Item_Inventory> requireMaterials)
+    {
+        List<Item_Inventory> materialsForCrafting = new List<Item_Inventory>();
+
+        for (int i = 0; i < requireMaterials.Count; i++)
+        {
+            if (_stashInventoryDictianory.TryGetValue(requireMaterials[i]._itemData, out Item_Inventory stashValue))
+            {
+                if (stashValue._stackSize < requireMaterials[i]._stackSize)
+                {
+                    Debug.Log("Not Enough Materials");
+                    return false;
+                }
+                else
+                { 
+                    materialsForCrafting.Add(stashValue);
+                }
+            }
+            else
+            {
+                Debug.Log("Not Enough Materials");
+                return false;
+            }
+        }
+
+        for (int i = 0; i < materialsForCrafting.Count; i++)
+        {
+            RemoveItem(materialsForCrafting[i]._itemData);
+        }
+
+        AddItem(itemToCraft);
+        Debug.Log("Crated Item : " + itemToCraft.ItemName);
+
+        return true;
+    }
 }
