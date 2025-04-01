@@ -50,7 +50,7 @@ public class BaseCharacterStats : MonoBehaviour
 
     public int _currentHealth;
     public System.Action onHealthChanged;
-    protected bool _isDead = false;
+    public bool _isDead { get; private set; }
 
     protected virtual void Awake()
     {

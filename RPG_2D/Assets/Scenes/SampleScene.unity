@@ -1080,6 +1080,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0c7792999de2224aa9670d88d79b932, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _startEquipments:
+  - {fileID: 11400000, guid: b83b5116ba77c724aab26552ce6956d1, type: 2}
+  - {fileID: 11400000, guid: 6739b8793c1eb174fbb3a3e820b0c4da, type: 2}
+  - {fileID: 11400000, guid: 780e49ee8e17ad0409a4765aac0d564c, type: 2}
   _defaultInventory: []
   _stashInventory: []
   _equipmentInventory: []
@@ -3033,6 +3037,7 @@ GameObject:
   - component: {fileID: 718177689}
   - component: {fileID: 718177687}
   - component: {fileID: 718177686}
+  - component: {fileID: 718177690}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -3249,10 +3254,28 @@ MonoBehaviour:
       m_Action: Make Crystal
       m_Flags: 0
     m_Flags: 0
+  _itemRemoveAction:
+    m_Name: Item Remove
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: f78567de-18b8-4309-ad1a-eff67fb05c2a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 4e337f6b-0df3-426a-bcb0-3125708501e4
+      m_Path: <Keyboard>/leftCtrl
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Item Remove
+      m_Flags: 0
+    m_Flags: 0
   _moveSpeed: 12
   _jumpForce: 12
   _isJumpPressed: 0
   _isAttackClicked: 0
+  _isRemovedItem: 0
   _dashSpeed: 25
   _dashDuration: 0.4
   _attackMovement:
@@ -3410,6 +3433,22 @@ MonoBehaviour:
   _alimentDuration: 4
   _thunderLightningPrefab: {fileID: 1954381478372934556, guid: ea06e9a1cc45d8e41b62f3ca5437a071, type: 3}
   _currentHealth: 0
+--- !u!114 &718177690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718177683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a82a0101a576d42b4224c877878910, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _droppableItemPrefab: {fileID: 5711222328153672197, guid: 2740a96df2e4bb049aba12f03f1f0b2e, type: 3}
+  _amountOfDropItems: 2
+  _droppableItemList: []
+  _chanceToLooseItems: 100
 --- !u!1 &758147517
 GameObject:
   m_ObjectHideFlags: 0

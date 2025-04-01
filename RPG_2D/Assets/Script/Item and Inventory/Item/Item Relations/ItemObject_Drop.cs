@@ -13,7 +13,7 @@ public class ItemObject_Drop : MonoBehaviour
     private ItemData[] _droppableItemList;
     private List<ItemData> _dropList = new List<ItemData>();
 
-    public void DropItem(ItemData dropItem)
+    public virtual void DropItem(ItemData dropItem)
     {
         GameObject newDropItem = Instantiate(_droppableItemPrefab, transform.position, Quaternion.identity);
         Vector2 randomVelocity = new Vector2(Random.Range(-5, 5), Random.Range(15, 20));
@@ -21,7 +21,7 @@ public class ItemObject_Drop : MonoBehaviour
         newDropItem.GetComponent<ItemObject>().SetupItem(dropItem, randomVelocity);
     }
 
-    public void GenerateDrop()
+    public virtual void GenerateDrop()
     {
         for (int i = 0; i < _droppableItemList.Length; i++)
         {

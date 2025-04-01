@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerStats : BaseCharacterStats
 {
     PlayerController _playerController;
+    ItemObject_DropFromPlayer _ItemDropSystem;
 
     protected override void Awake()
     {
@@ -17,6 +18,7 @@ public class PlayerStats : BaseCharacterStats
         base.Start();
 
         _playerController = GetComponent<PlayerController>();
+        _ItemDropSystem = GetComponent<ItemObject_DropFromPlayer>();
     }
 
     public override void TakeDamage(int opponentAttackPoint)
@@ -28,5 +30,6 @@ public class PlayerStats : BaseCharacterStats
     {
         base.Die();
         _playerController.Die();
+        _ItemDropSystem.GenerateDrop();
     }
 }

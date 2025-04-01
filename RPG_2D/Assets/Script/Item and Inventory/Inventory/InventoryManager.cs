@@ -7,6 +7,8 @@ public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager _inventoryManagerInstance;
 
+    public List<ItemData> _startEquipments;
+
     public List<Item_Inventory> _defaultInventory;
     public Dictionary<ItemData, Item_Inventory> _defaultInventoryDictianory;
 
@@ -50,15 +52,21 @@ public class InventoryManager : MonoBehaviour
         _inventoryItemSlot = _inventorySlotParent.GetComponentsInChildren<UI_ItemSlot>();
         _stashItemSlot = _stashSlotParent.GetComponentsInChildren<UI_ItemSlot>();
         _equipmentSlot = _equpmentSlotParent.GetComponentsInChildren<UI_EquipmentSlot>();
+
+        AddStartingItem();
+    }
+
+    private void AddStartingItem()
+    {
+        for (int i = 0; i < _startEquipments.Count; i++)
+        {
+            AddItem(_startEquipments[i]);
+        }
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            ItemData newItem = _defaultInventory[_defaultInventory.Count - 1]._itemData;
-            RemoveItem(newItem);
-        }
+        
     }
 
     public void AddItem(ItemData newItemData)
@@ -126,17 +134,8 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    private void UpdateSlotUI()
+    public void UpdateSlotUI()
     {
-        for (int i = 0; i < _equipmentSlot.Length; i++)
-        {
-            foreach (KeyValuePair<ItemData_Equipment, Item_Inventory> item in _equipmentInventoryDictianory)
-            {
-                if (item.Key.EquipmentType == _equipmentSlot[i]._slotType)
-                    _equipmentSlot[i].UpdateSlot(item.Value);
-            }
-        }
-
         for (int i = 0; i < _inventoryItemSlot.Length; i++)
         {
             _inventoryItemSlot[i].CleanUpSlot();
@@ -147,6 +146,19 @@ public class InventoryManager : MonoBehaviour
             _stashItemSlot[i].CleanUpSlot();
         }
 
+        for (int i = 0; i < _equipmentSlot.Length; i++)
+        {
+            _equipmentSlot[i].CleanUpSlot();
+        }
+
+        for (int i = 0; i < _equipmentSlot.Length; i++)
+        {
+            foreach (KeyValuePair<ItemData_Equipment, Item_Inventory> item in _equipmentInventoryDictianory)
+            {
+                if (item.Key.EquipmentType == _equipmentSlot[i]._slotType)
+                    _equipmentSlot[i].UpdateSlot(item.Value);
+            }
+        }
 
         for (int i = 0; i < _defaultInventory.Count; i++)
         {
@@ -227,5 +239,22 @@ public class InventoryManager : MonoBehaviour
         Debug.Log("Crated Item : " + itemToCraft.ItemName);
 
         return true;
+    }
+
+    public List<Item_Inventory> GetEquipmentList() => _equipmentInventory;
+
+    public List<Item_Inventory> GetStashList() => _stashInventory;
+
+    public ItemData_Equipment GetEquipment(EquipmentType type)
+    {
+        ItemData_Equipment euippedItem = null;
+
+        foreach (KeyValuePair<ItemData_Equipment, Item_Inventory> item in _equipmentInventoryDictianory)
+        {
+            if (item.Key.EquipmentType == type)
+                euippedItem = item.Key;
+        }
+
+        return euippedItem;
     }
 }

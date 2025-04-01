@@ -46,6 +46,8 @@ public class PlayerController : BaseCharacterController
     InputAction _castBlackHoleAction;
     [SerializeField]
     InputAction _makeCrystalAction;
+    [SerializeField]
+    InputAction _itemRemoveAction;
 
     // Player Move Info
     public float _moveSpeed = 12f;
@@ -56,6 +58,7 @@ public class PlayerController : BaseCharacterController
     private float _defaultJumpForce;
     public float _horizontalValue { get; private set; }
     public float _verticalValue { get; private set; }
+    public bool _isRemovedItem;
 
     // Dash Info
     public float _dashSpeed;
@@ -112,6 +115,10 @@ public class PlayerController : BaseCharacterController
         _makeCrystalAction.performed += DoMakeCrystal;
         _makeCrystalAction.canceled += DoStopMakeCrystal;
         _makeCrystalAction.Enable();
+
+        _itemRemoveAction.performed += DoRemoveItem;
+        _itemRemoveAction.canceled += DoStopRemoveItem;
+        _itemRemoveAction.Enable();
     }
 
     private void OnDisable()
@@ -146,6 +153,10 @@ public class PlayerController : BaseCharacterController
         _makeCrystalAction.performed -= DoMakeCrystal;
         _makeCrystalAction.canceled -= DoStopMakeCrystal;
         _makeCrystalAction.Disable();
+
+        _itemRemoveAction.performed -= DoRemoveItem;
+        _itemRemoveAction.canceled -= DoStopRemoveItem;
+        _itemRemoveAction.Enable();
     }
 
     protected override void Awake()
@@ -287,6 +298,16 @@ public class PlayerController : BaseCharacterController
     void DoStopMakeCrystal(InputAction.CallbackContext value)
     {
         _isMakingCrystal = value.ReadValueAsButton();
+    }
+
+    void DoRemoveItem(InputAction.CallbackContext value)
+    {
+        _isRemovedItem = value.ReadValueAsButton();
+    }
+
+    void DoStopRemoveItem(InputAction.CallbackContext value)
+    {
+        _isRemovedItem = value.ReadValueAsButton();
     }
 
     public void AssignNewSword(GameObject newSword)
