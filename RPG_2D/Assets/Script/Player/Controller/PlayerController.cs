@@ -48,6 +48,8 @@ public class PlayerController : BaseCharacterController
     InputAction _makeCrystalAction;
     [SerializeField]
     InputAction _itemRemoveAction;
+    [SerializeField]
+    InputAction _drinkPotionAction;
 
     // Player Move Info
     public float _moveSpeed = 12f;
@@ -59,6 +61,7 @@ public class PlayerController : BaseCharacterController
     public float _horizontalValue { get; private set; }
     public float _verticalValue { get; private set; }
     public bool _isRemovedItem;
+    public bool _isDrinkingPotion;
 
     // Dash Info
     public float _dashSpeed;
@@ -119,6 +122,10 @@ public class PlayerController : BaseCharacterController
         _itemRemoveAction.performed += DoRemoveItem;
         _itemRemoveAction.canceled += DoStopRemoveItem;
         _itemRemoveAction.Enable();
+
+        _drinkPotionAction.performed += DoDrinkPotion;
+        _drinkPotionAction.canceled += DoStopDrinkPotion;
+        _drinkPotionAction.Enable();
     }
 
     private void OnDisable()
@@ -156,7 +163,11 @@ public class PlayerController : BaseCharacterController
 
         _itemRemoveAction.performed -= DoRemoveItem;
         _itemRemoveAction.canceled -= DoStopRemoveItem;
-        _itemRemoveAction.Enable();
+        _itemRemoveAction.Disable();
+
+        _drinkPotionAction.performed -= DoDrinkPotion;
+        _drinkPotionAction.canceled -= DoStopDrinkPotion;
+        _drinkPotionAction.Disable();
     }
 
     protected override void Awake()
@@ -308,6 +319,19 @@ public class PlayerController : BaseCharacterController
     void DoStopRemoveItem(InputAction.CallbackContext value)
     {
         _isRemovedItem = value.ReadValueAsButton();
+    }
+
+    void DoDrinkPotion(InputAction.CallbackContext value)
+    { 
+        _isDrinkingPotion = value.ReadValueAsButton();
+
+        if (_isDrinkingPotion)
+            InventoryManager._inventoryManagerInstance.UsePotion();
+    }
+
+    void DoStopDrinkPotion(InputAction.CallbackContext value)
+    {
+        _isDrinkingPotion = value.ReadValueAsButton();
     }
 
     public void AssignNewSword(GameObject newSword)

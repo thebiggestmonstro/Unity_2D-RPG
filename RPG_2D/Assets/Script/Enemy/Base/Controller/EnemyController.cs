@@ -97,6 +97,8 @@ public class EnemyController : BaseCharacterController
         DoFreezeEnemy(false);
     }
 
+    public virtual void FreezeEnemy(float freezeDuration) => StartCoroutine(FreezeEnemyTimer(freezeDuration));
+
     public virtual void AssginLastAnimName(string lastAnimBoolName)
     {
         _lastAnimBoolName = lastAnimBoolName;

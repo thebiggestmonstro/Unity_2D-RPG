@@ -20,10 +20,13 @@ public class PlayerAnimationTrigger : MonoBehaviour
             if(hit.GetComponent<EnemyController>() != null)
             {
                 EnemyStats target = hit.GetComponent<EnemyStats>();
-                _controller._characterStats.GiveDamage(target);
 
-                if(InventoryManager._inventoryManagerInstance.GetEquipment(EquipmentType.Weapon))
-                    InventoryManager._inventoryManagerInstance.GetEquipment(EquipmentType.Weapon).ExecuteItemEffect();
+                if(target)
+                    _controller._characterStats.GiveDamage(target);
+
+                ItemData_Equipment currentEquipedWeapon = InventoryManager._inventoryManagerInstance.GetEquipment(EquipmentType.Weapon);
+                if (currentEquipedWeapon)
+                    currentEquipedWeapon.ExecuteItemEffect(target.transform);
             }
         }
     }

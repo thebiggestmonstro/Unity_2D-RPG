@@ -92,7 +92,6 @@ public class BaseCharacterStats : MonoBehaviour
             totalDamage = CalculateCriticalDamage(totalDamage);
 
         totalDamage = CheckTargetArmor(targetStats, totalDamage);
-
         targetStats.TakeDamage(totalDamage);
     }
 
@@ -330,5 +329,30 @@ public class BaseCharacterStats : MonoBehaviour
     protected virtual void Die() 
     {
         _isDead = true;
+    }
+
+    public virtual void HealHealth(int amount)
+    {
+        _currentHealth += amount;
+
+        if(_currentHealth > GetMaxHealthValue())
+            _currentHealth = GetMaxHealthValue();
+
+        if(onHealthChanged != null)
+            onHealthChanged();
+    }
+
+    public virtual void IncreaseStats(int modifier, float increaseDuration, CharacterStats statToModify)
+    {
+        StartCoroutine(ModifyStatTemp(modifier, increaseDuration, statToModify));
+    }
+
+    IEnumerator ModifyStatTemp(int modifier, float increaseDuration, CharacterStats statToModify)
+    { 
+        statToModify.AddModifier(modifier);
+
+        yield return new WaitForSeconds(increaseDuration);
+
+        statToModify.RemoveModifier(modifier);
     }
 }

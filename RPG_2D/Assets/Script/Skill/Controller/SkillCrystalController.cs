@@ -80,7 +80,13 @@ public class SkillCrystalController : MonoBehaviour
         foreach (Collider2D hit in colliders)
         {
             if (hit.GetComponent<EnemyController>() != null)
+            {
                 _playerController._characterStats.GiveMagicalDamage(hit.GetComponent<BaseCharacterStats>());
+
+                ItemData_Equipment equipedAmulet = InventoryManager._inventoryManagerInstance.GetEquipment(EquipmentType.Amulet);
+                if (equipedAmulet)
+                    equipedAmulet.ExecuteItemEffect(hit.transform);
+            }
         }
     }
 

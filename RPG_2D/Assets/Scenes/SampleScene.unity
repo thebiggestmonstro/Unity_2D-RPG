@@ -1083,7 +1083,13 @@ MonoBehaviour:
   _startEquipments:
   - {fileID: 11400000, guid: b83b5116ba77c724aab26552ce6956d1, type: 2}
   - {fileID: 11400000, guid: 6739b8793c1eb174fbb3a3e820b0c4da, type: 2}
-  - {fileID: 11400000, guid: 780e49ee8e17ad0409a4765aac0d564c, type: 2}
+  - {fileID: 11400000, guid: 40935ad758b839c4ba2d042842a8967b, type: 2}
+  - {fileID: 11400000, guid: b4fac403dd62ce94b96b2b982c1a72c8, type: 2}
+  - {fileID: 11400000, guid: 7d942347311774f498e9922a9916bb04, type: 2}
+  - {fileID: 11400000, guid: 4b5e1937215707f4fa03892d4665b900, type: 2}
+  - {fileID: 11400000, guid: 300c4565fef667643aa205fa0013a96c, type: 2}
+  - {fileID: 11400000, guid: efc403a7c5969464ab6fb0db7a88f258, type: 2}
+  - {fileID: 11400000, guid: 14290899b53dabc418fa4129e766ded2, type: 2}
   _defaultInventory: []
   _stashInventory: []
   _equipmentInventory: []
@@ -3271,11 +3277,29 @@ MonoBehaviour:
       m_Action: Item Remove
       m_Flags: 0
     m_Flags: 0
+  _drinkPotionAction:
+    m_Name: Drink Potion
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: bd86b45a-0ab6-4a1c-b14f-1cc32334ba79
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 3d0665c1-90c6-4277-ba6f-ae059ddf3c9d
+      m_Path: <Keyboard>/1
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Drink Potion
+      m_Flags: 0
+    m_Flags: 0
   _moveSpeed: 12
   _jumpForce: 12
   _isJumpPressed: 0
   _isAttackClicked: 0
   _isRemovedItem: 0
+  _isDrinkingPotion: 0
   _dashSpeed: 25
   _dashDuration: 0.4
   _attackMovement:
@@ -3425,7 +3449,7 @@ MonoBehaviour:
     _baseValue: 0
     _statModifierList: 
   _lightningDamage:
-    _baseValue: 1
+    _baseValue: 0
     _statModifierList: 
   _isIgnited: 0
   _isFreezed: 0

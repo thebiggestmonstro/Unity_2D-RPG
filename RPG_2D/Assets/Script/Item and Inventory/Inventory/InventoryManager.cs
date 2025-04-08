@@ -30,6 +30,12 @@ public class InventoryManager : MonoBehaviour
     private UI_ItemSlot[] _stashItemSlot;
     private UI_EquipmentSlot[] _equipmentSlot;
 
+    [Header("Item Cooldown")]
+    private float _postionUsageCooldown;
+    private float _lastTimeUsedPotion;
+    private float _armorEffectUsageCooldown;
+    private float _lastTimeUsedArmorEffect;
+
     private void Awake()
     {
         if (_inventoryManagerInstance == null)
@@ -256,5 +262,38 @@ public class InventoryManager : MonoBehaviour
         }
 
         return euippedItem;
+    }
+
+    public void UsePotion()
+    {
+        ItemData_Equipment currentPotion = GetEquipment(EquipmentType.Flask);
+        if (currentPotion == null)
+            return;
+
+        if (Time.time > _lastTimeUsedPotion + _postionUsageCooldown)
+        {
+            _postionUsageCooldown = currentPotion._itemCooldown;
+            currentPotion.ExecuteItemEffect(null);
+            _lastTimeUsedPotion = Time.time;
+        }
+        else
+            Debug.Log("Using Potion is on Cooldown");
+    }
+
+    public bool CanUseArmorEffect()
+    {
+        ItemData_Equipment equippedArmor = GetEquipment(EquipmentType.Armor);
+        if (equippedArmor == null)
+            return false;
+
+        if (Time.time > _lastTimeUsedArmorEffect + _armorEffectUsageCooldown)
+        {
+            _armorEffectUsageCooldown = equippedArmor._itemCooldown;
+            _lastTimeUsedArmorEffect = Time.time;
+            return true;
+        }
+
+        Debug.Log("Armor on cooldown");
+        return false;
     }
 }

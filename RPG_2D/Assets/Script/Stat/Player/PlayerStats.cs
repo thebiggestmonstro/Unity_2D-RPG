@@ -32,4 +32,21 @@ public class PlayerStats : BaseCharacterStats
         _playerController.Die();
         _ItemDropSystem.GenerateDrop();
     }
+
+    protected override void DecreaseHealth(int damage)
+    {
+        base.DecreaseHealth(damage);
+
+        PlayerStats playerStats = PlayerManager._playerManagerInstance._playerController.GetComponent<PlayerStats>();
+
+        if (playerStats._currentHealth > playerStats.GetMaxHealthValue() * 0.1f)
+            return;
+
+        if (InventoryManager._inventoryManagerInstance.CanUseArmorEffect() == false)
+            return;
+
+        ItemData_Equipment equippedArmor = InventoryManager._inventoryManagerInstance.GetEquipment(EquipmentType.Armor);
+        if (equippedArmor)
+            equippedArmor.ExecuteItemEffect(_playerController.transform);
+    }
 }

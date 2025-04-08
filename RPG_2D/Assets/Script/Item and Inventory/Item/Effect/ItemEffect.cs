@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Item Data", menuName = "Data/Item Effect")]
-public class Item_Effection : ScriptableObject
+public class ItemEffect : ScriptableObject
 {
-    public virtual void ExecuteEffect()
+    public virtual void ExecuteEffect(Transform enemyPosition)
     {
         Debug.Log("Effect Executed");
     }

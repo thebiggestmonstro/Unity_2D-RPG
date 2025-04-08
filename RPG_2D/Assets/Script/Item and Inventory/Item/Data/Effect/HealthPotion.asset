@@ -9,6 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcff9a8eeb6252c4380c56021bf0ecd8, type: 3}
-  m_Name: Freezer
+  m_Script: {fileID: 11500000, guid: 5e70e3f797b21ba488a37ebc2af454a7, type: 3}
+  m_Name: HealthPotion
   m_EditorClassIdentifier: 
+  _healPercent: 0.5
