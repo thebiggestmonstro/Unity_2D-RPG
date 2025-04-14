@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using UnityEngine;
 
@@ -25,10 +26,13 @@ public class InventoryManager : MonoBehaviour
     private Transform _stashSlotParent;
     [SerializeField] 
     private Transform _equpmentSlotParent;
+    [SerializeField]
+    private Transform _statSlotParent;
 
     private UI_ItemSlot[] _inventoryItemSlot;
     private UI_ItemSlot[] _stashItemSlot;
     private UI_EquipmentSlot[] _equipmentSlot;
+    private UI_StatSlot[] _statSlot;
 
     [Header("Item Cooldown")]
     private float _postionUsageCooldown;
@@ -58,6 +62,7 @@ public class InventoryManager : MonoBehaviour
         _inventoryItemSlot = _inventorySlotParent.GetComponentsInChildren<UI_ItemSlot>();
         _stashItemSlot = _stashSlotParent.GetComponentsInChildren<UI_ItemSlot>();
         _equipmentSlot = _equpmentSlotParent.GetComponentsInChildren<UI_EquipmentSlot>();
+        _statSlot = _statSlotParent.GetComponentsInChildren<UI_StatSlot>();
 
         AddStartingItem();
     }
@@ -166,6 +171,11 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
+        for (int i = 0; i < _statSlot.Length; i++)
+        {
+            _statSlot[i].UpdateStatValueUI();
+        }
+
         for (int i = 0; i < _defaultInventory.Count; i++)
         {
             _inventoryItemSlot[i].UpdateSlot(_defaultInventory[i]);
@@ -174,7 +184,7 @@ public class InventoryManager : MonoBehaviour
         for (int i = 0; i < _stashInventory.Count; i++)
         {
             _stashItemSlot[i].UpdateSlot(_stashInventory[i]);
-        }
+        } 
     }
 
     public void EquipItem(ItemData itemData)

@@ -53,6 +53,9 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
+        if (_item == null)
+            return;
+
         if (_playerContorller._isRemovedItem == true)
         {
             InventoryManager._inventoryManagerInstance.RemoveItem(_item._itemData);

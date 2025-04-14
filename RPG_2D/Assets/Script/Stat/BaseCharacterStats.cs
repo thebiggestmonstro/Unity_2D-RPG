@@ -4,6 +4,24 @@ using System.Security.Cryptography;
 using TMPro.EditorUtilities;
 using UnityEngine;
 
+public enum StatType
+{
+    _strength,
+    _agility,
+    _intelligence,
+    _vitality,
+    _maxHealth,
+    _armor,
+    _evasion,
+    _magicResistance,
+    _attackPoint,
+    _critChance,
+    _critPower,
+    _fireDamage,
+    _iceDamage,
+    _lightningDamage,
+}
+
 public class BaseCharacterStats : MonoBehaviour
 {
     private BaseEffectController _effectController;
@@ -354,5 +372,39 @@ public class BaseCharacterStats : MonoBehaviour
         yield return new WaitForSeconds(increaseDuration);
 
         statToModify.RemoveModifier(modifier);
+    }
+
+    public CharacterStats GetStatByStatType(StatType typeofStat)
+    {
+        if (typeofStat == StatType._strength)
+            return _strength;
+        else if (typeofStat == StatType._agility)
+            return _agility;
+         else if (typeofStat == StatType._intelligence)
+            return _intelligence;
+         else if (typeofStat == StatType._vitality)
+            return _vitality;
+         else if (typeofStat == StatType._maxHealth)
+            return _maxHealth;
+         else if (typeofStat == StatType._armor)
+            return _armor;
+         else if (typeofStat == StatType._evasion)
+            return _evasion;
+         else if (typeofStat == StatType._magicResistance)
+            return _magicResistance;
+         else if (typeofStat == StatType._attackPoint)
+            return _attackPoint;
+         else if (typeofStat == StatType._critChance)
+            return _critChance;         
+        else if (typeofStat == StatType._critPower)
+            return _critPower;         
+        else if (typeofStat == StatType._fireDamage)
+            return _fireDamage;         
+        else if (typeofStat == StatType._iceDamage)
+            return _iceDamage;
+        else if (typeofStat == StatType._lightningDamage)
+            return _lightningDamage;
+        
+       return null;
     }
 }
