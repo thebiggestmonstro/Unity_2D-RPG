@@ -14,8 +14,8 @@ public class ItemObject : MonoBehaviour
         if (_itemData == null)
             return;
 
-        GetComponent<SpriteRenderer>().sprite = _itemData.ItemIcon;
-        gameObject.name = "Item Object - " + _itemData.ItemName;
+        GetComponent<SpriteRenderer>().sprite = _itemData._itemIcon;
+        gameObject.name = "Item Object - " + _itemData._itemName;
     }
 
     public void SetupItem(ItemData itemData, Vector2 velocity)
@@ -28,6 +28,12 @@ public class ItemObject : MonoBehaviour
 
     public void PickupItem()
     {
+        if (InventoryManager._inventoryManagerInstance.CanAddItem() == false && _itemData.ItemType == ItemType.Equipment)
+        {
+            _rigidbody2D.velocity = new Vector2(0, 7);
+            return;
+        }
+
         InventoryManager._inventoryManagerInstance.AddItem(_itemData);
         Destroy(gameObject);
     }

@@ -10,27 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0058bfbed62771c40b1a9acd25bda8ef, type: 3}
-  m_Name: Vampiric Sword
+  m_Name: Iced Armor
   m_EditorClassIdentifier: 
   ItemType: 1
-  ItemName: Vampiric Sword
-  ItemIcon: {fileID: -1944902997, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  _itemName: Iced Armor
+  _itemIcon: {fileID: 288293509, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
   _dropChance: 0
-  EquipmentType: 0
+  EquipmentType: 1
   _itemEffects:
-  - {fileID: 11400000, guid: e1abe0b6134f3e243bdcb8c3ec221688, type: 2}
+  - {fileID: 11400000, guid: 20294e7057f28be43a5ea9159bde2b22, type: 2}
+  _itemCooldown: 0
   _strength: 0
   _agility: 0
   _intelligence: 0
   _vitality: 0
-  _attackPoint: 10
+  _attackPoint: 0
   _critChance: 0
   _critPower: 0
   _health: 0
-  _armor: 0
+  _armor: 15
   _evasion: 0
   _magicResistance: 0
   _fireDamage: 0
   _iceDamage: 0
   _lightningDamage: 0
-  _craftMaterials: []
+  _craftMaterials:
+  - _itemData: {fileID: 11400000, guid: 663448f3463938446889b0e85fdb2b84, type: 2}
+    _stackSize: 1
+  - _itemData: {fileID: 11400000, guid: 9980150136bb58f4bba274a1a58cad8b, type: 2}
+    _stackSize: 1

@@ -71,7 +71,8 @@ public class InventoryManager : MonoBehaviour
     {
         for (int i = 0; i < _startEquipments.Count; i++)
         {
-            AddItem(_startEquipments[i]);
+            if (_startEquipments[i])
+                AddItem(_startEquipments[i]);
         }
     }
 
@@ -82,7 +83,7 @@ public class InventoryManager : MonoBehaviour
 
     public void AddItem(ItemData newItemData)
     {
-        if (newItemData.ItemType == ItemType.Equipment)
+        if (newItemData.ItemType == ItemType.Equipment && CanAddItem())
             AddToDefaultInventory(newItemData);
         else if (newItemData.ItemType == ItemType.Material)
             AddToStashInventory(newItemData);
@@ -252,7 +253,7 @@ public class InventoryManager : MonoBehaviour
         }
 
         AddItem(itemToCraft);
-        Debug.Log("Crated Item : " + itemToCraft.ItemName);
+        Debug.Log("Created Item : " + itemToCraft._itemName);
 
         return true;
     }
@@ -305,5 +306,13 @@ public class InventoryManager : MonoBehaviour
 
         Debug.Log("Armor on cooldown");
         return false;
+    }
+
+    public bool CanAddItem()
+    {
+        if (_defaultInventory.Count >= _inventoryItemSlot.Length)
+            return false;
+        
+        return true;
     }
 }

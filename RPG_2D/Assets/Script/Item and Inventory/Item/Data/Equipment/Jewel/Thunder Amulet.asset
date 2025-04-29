@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0058bfbed62771c40b1a9acd25bda8ef, type: 3}
-  m_Name: Thunder Staff
+  m_Name: Thunder Amulet
   m_EditorClassIdentifier: 
   ItemType: 1
-  ItemName: Thunder Staff
-  ItemIcon: {fileID: -1502993185, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  _itemName: Thunder Amulet
+  _itemIcon: {fileID: -245851270, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
   _dropChance: 0
-  EquipmentType: 0
+  EquipmentType: 2
   _itemEffects:
   - {fileID: 11400000, guid: fed56eb2e420ea240beed82d2d527534, type: 2}
+  _itemCooldown: 0
   _strength: 0
   _agility: 0
-  _intelligence: 10
+  _intelligence: 0
   _vitality: 0
   _attackPoint: 0
   _critChance: 0
@@ -32,5 +33,9 @@ MonoBehaviour:
   _magicResistance: 0
   _fireDamage: 0
   _iceDamage: 0
-  _lightningDamage: 15
-  _craftMaterials: []
+  _lightningDamage: 10
+  _craftMaterials:
+  - _itemData: {fileID: 11400000, guid: cecbc88070e245f438ac71ef3be44412, type: 2}
+    _stackSize: 1
+  - _itemData: {fileID: 11400000, guid: ebb1df8b59bb2314296e306021f5b983, type: 2}
+    _stackSize: 1

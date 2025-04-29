@@ -10,8 +10,13 @@ using UnityEngine.InputSystem.XR;
 
 public class PlayerController : BaseCharacterController
 {
+    public static PlayerController _playerControllerInstance;
+
     // Animtion StateMachine
     public PlayerStateMachine _stateMachine { get; private set; }
+
+    // UI Manager
+    UIManager _uiManager;
 
     #region States
     public PlayerStateIdle _idleState { get; private set; }
@@ -50,6 +55,15 @@ public class PlayerController : BaseCharacterController
     InputAction _itemRemoveAction;
     [SerializeField]
     InputAction _drinkPotionAction;
+    [SerializeField]
+    InputAction _characterUIAction;
+    [SerializeField]
+    InputAction _skillTreeUIAction;
+    [SerializeField]
+    InputAction _craftUIAction; 
+    [SerializeField]
+    InputAction _optionsUIAction;
+
 
     // Player Move Info
     public float _moveSpeed = 12f;
@@ -126,6 +140,18 @@ public class PlayerController : BaseCharacterController
         _drinkPotionAction.performed += DoDrinkPotion;
         _drinkPotionAction.canceled += DoStopDrinkPotion;
         _drinkPotionAction.Enable();
+
+        _characterUIAction.performed += DoOpenCharacterUI;
+        _characterUIAction.Enable();
+
+        _skillTreeUIAction.performed += DoOpenSkillTreeUI;
+        _skillTreeUIAction.Enable();
+
+        _craftUIAction.performed += DoOpenCraftUI;
+        _craftUIAction.Enable();
+
+        _optionsUIAction.performed += DoOpenOptionUI;
+        _optionsUIAction.Enable();
     }
 
     private void OnDisable()
@@ -168,11 +194,28 @@ public class PlayerController : BaseCharacterController
         _drinkPotionAction.performed -= DoDrinkPotion;
         _drinkPotionAction.canceled -= DoStopDrinkPotion;
         _drinkPotionAction.Disable();
+
+        _characterUIAction.performed -= DoOpenCharacterUI;
+        _characterUIAction.Disable();
+
+        _skillTreeUIAction.performed -= DoOpenSkillTreeUI;
+        _skillTreeUIAction.Disable();
+
+        _craftUIAction.performed -= DoOpenCraftUI;
+        _craftUIAction.Disable();
+
+        _optionsUIAction.performed -= DoOpenOptionUI;
+        _optionsUIAction.Disable();
     }
 
     protected override void Awake()
     {
         base.Awake();
+
+        if (_playerControllerInstance != null)
+            Destroy(_playerControllerInstance.gameObject);
+
+        _playerControllerInstance = this;
 
         _stateMachine = new PlayerStateMachine();
 
@@ -196,6 +239,7 @@ public class PlayerController : BaseCharacterController
         base.Start();
 
         _skillManager = SkillManager._skillManagerInstance;
+        _uiManager = UIManager._uiManagerInstance;
 
         _stateMachine.Init(_idleState);
 
@@ -369,5 +413,25 @@ public class PlayerController : BaseCharacterController
         _animator.speed = _animator.speed * (1 - slowPercentage);
 
         Invoke("RollbackDefaultSpeed", slowDuration);
+    }
+
+    void DoOpenCharacterUI(InputAction.CallbackContext value)
+    {
+        _uiManager.SwitchCharacterUI();
+    }
+
+    void DoOpenSkillTreeUI(InputAction.CallbackContext value)
+    {
+        _uiManager.SwitchSkillTreeUI();
+    }
+
+    void DoOpenCraftUI(InputAction.CallbackContext value)
+    {
+        _uiManager.SwitchCraftUI();
+    }
+
+    void DoOpenOptionUI(InputAction.CallbackContext value)
+    {
+        _uiManager.SwitchOptionUI();
     }
 }

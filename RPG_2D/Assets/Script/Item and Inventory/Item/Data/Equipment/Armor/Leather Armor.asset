@@ -10,28 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0058bfbed62771c40b1a9acd25bda8ef, type: 3}
-  m_Name: Steel Sword
+  m_Name: Leather Armor
   m_EditorClassIdentifier: 
   ItemType: 1
-  ItemName: Steel Sword
-  ItemIcon: {fileID: 1526008332, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
-  EquipmentType: 0
+  _itemName: Leather Armor
+  _itemIcon: {fileID: 1667790894, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  _dropChance: 0
+  EquipmentType: 1
+  _itemEffects: []
+  _itemCooldown: 0
   _strength: 0
   _agility: 0
   _intelligence: 0
   _vitality: 0
-  _attackPoint: 20
+  _attackPoint: 0
   _critChance: 0
   _critPower: 0
   _health: 0
-  _armor: 0
+  _armor: 5
   _evasion: 0
   _magicResistance: 0
   _fireDamage: 0
   _iceDamage: 0
   _lightningDamage: 0
   _craftMaterials:
-  - _itemData: {fileID: 11400000, guid: 39ece25c245bf1146a0c27a4e881f2e0, type: 2}
-    _stackSize: 2
-  - _itemData: {fileID: 11400000, guid: faa4288b9fea3fd48b9749a3b2357325, type: 2}
-    _stackSize: 1
+  - _itemData: {fileID: 11400000, guid: df06501e04f31f2419c8a616d7bd45ac, type: 2}
+    _stackSize: 3

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public enum ItemType
@@ -12,9 +13,16 @@ public enum ItemType
 public class ItemData : ScriptableObject
 {
     public ItemType ItemType;
-    public string ItemName;
-    public Sprite ItemIcon;
+    public string _itemName;
+    public Sprite _itemIcon;
 
     [Range(0, 100)]
     public float _dropChance;
+
+    protected StringBuilder _stringBuilder = new StringBuilder();
+
+    public virtual string GetDescription()
+    {
+        return "";
+    }
 }

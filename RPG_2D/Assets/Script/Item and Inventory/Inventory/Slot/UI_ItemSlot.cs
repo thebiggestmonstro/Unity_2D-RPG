@@ -5,20 +5,22 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
+public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
     protected PlayerController _playerContorller;
 
     [SerializeField] 
-    private Image _itemImage;
+    protected Image _itemImage;
     [SerializeField] 
-    private TextMeshProUGUI _itemText;
+    protected TextMeshProUGUI _itemText;
 
     public Item_Inventory _item;
+    protected UIManager _uiManager;
 
-    void Start()
+    protected virtual void Start()
     {
         _playerContorller = FindObjectOfType<PlayerController>();
+        _uiManager = GetComponentInParent<UIManager>();
     }
 
     public void UpdateSlot(Item_Inventory newItem)
@@ -29,7 +31,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
 
         if (_item != null)
         {
-            _itemImage.sprite = _item._itemData.ItemIcon;
+            _itemImage.sprite = _item._itemData._itemIcon;
 
             if (_item._stackSize > 1)
             {
@@ -64,5 +66,23 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
 
         if (_item._itemData.ItemType == ItemType.Equipment)
             InventoryManager._inventoryManagerInstance.EquipItem(_item._itemData);
+
+        _uiManager._itemToolTip.HideToolTip();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (_item == null)
+            return;
+
+        _uiManager._itemToolTip.ShowToolTip(_item._itemData as ItemData_Equipment);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (_item == null)
+            return;
+
+        _uiManager._itemToolTip.HideToolTip();
     }
 }

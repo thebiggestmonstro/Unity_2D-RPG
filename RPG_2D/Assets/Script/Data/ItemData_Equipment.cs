@@ -44,6 +44,8 @@ public class ItemData_Equipment : ItemData
     [Header("Craft Requiermets")]
     public List<Item_Inventory> _craftMaterials;
 
+    private int _descriptionLength;
+
     public void AddModifiers()
     {
         PlayerStats playerStats = PlayerManager._playerManagerInstance._playerController.GetComponent<PlayerStats>();
@@ -97,6 +99,55 @@ public class ItemData_Equipment : ItemData
         foreach (ItemEffect itemEffect in _itemEffects)
         {
             itemEffect.ExecuteEffect(enemyPosition);
+        }
+    }
+
+    public override string GetDescription()
+    {
+        _stringBuilder.Length = 0;
+        _descriptionLength = 0;
+
+        SetItemDescription(_strength, "Strength");
+        SetItemDescription(_agility, "Agility");
+        SetItemDescription(_intelligence, "Intelligence");
+        SetItemDescription(_vitality, "Vitality");
+
+        SetItemDescription(_attackPoint, "AttackPoint");
+        SetItemDescription(_critChance, "CritChance");
+        SetItemDescription(_critPower, "CritPower");
+
+        SetItemDescription(_health, "Health");
+        SetItemDescription(_armor, "Armor");
+        SetItemDescription(_evasion, "Evasion");
+        SetItemDescription(_magicResistance, "MagicResistance");
+
+        SetItemDescription(_fireDamage, "FireDamage");
+        SetItemDescription(_iceDamage, "IceDamage");
+        SetItemDescription(_lightningDamage, "LightningDamage");
+
+        if (_descriptionLength < 5)
+        {
+            for (int i = 0; i < 5 - _descriptionLength; i++)
+            {
+                _stringBuilder.AppendLine();
+                _stringBuilder.Append("");
+            }
+        }
+
+        return _stringBuilder.ToString();
+    }
+
+    private void SetItemDescription(int value, string name)
+    {
+        if (value != 0)
+        {
+            if (_stringBuilder.Length > 0)
+                _stringBuilder.AppendLine();
+
+            if (value > 0)
+                _stringBuilder.Append(name + ": " + value);
+
+            _descriptionLength++;
         }
     }
 }

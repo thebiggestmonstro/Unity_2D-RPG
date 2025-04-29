@@ -16,6 +16,8 @@ public class UI_EquipmentSlot : UI_ItemSlot
         InventoryManager._inventoryManagerInstance.UnequipItem(_item._itemData as ItemData_Equipment);
         InventoryManager._inventoryManagerInstance.AddItem(_item._itemData as ItemData_Equipment);
 
+        _uiManager._itemToolTip.HideToolTip();
+
         CleanUpSlot();
     }
 }

@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Frozen Flame Sword
   m_EditorClassIdentifier: 
   ItemType: 1
-  ItemName: Frozen Flame Sword
-  ItemIcon: {fileID: 1398721256, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  _itemName: Frozen Flame Sword
+  _itemIcon: {fileID: 1398721256, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
   _dropChance: 0
   EquipmentType: 0
   _itemEffects:
   - {fileID: 11400000, guid: 1c7d767691e12c5419f33fe60e5ac93a, type: 2}
+  _itemCooldown: 0
   _strength: 0
   _agility: 0
   _intelligence: 5
@@ -33,4 +34,10 @@ MonoBehaviour:
   _fireDamage: 10
   _iceDamage: 10
   _lightningDamage: 0
-  _craftMaterials: []
+  _craftMaterials:
+  - _itemData: {fileID: 11400000, guid: 9980150136bb58f4bba274a1a58cad8b, type: 2}
+    _stackSize: 1
+  - _itemData: {fileID: 11400000, guid: 437afaeeb22af7c4489875a43b805d9f, type: 2}
+    _stackSize: 1
+  - _itemData: {fileID: 11400000, guid: 44190236f2def7a4bb9e7224f07d2108, type: 2}
+    _stackSize: 1

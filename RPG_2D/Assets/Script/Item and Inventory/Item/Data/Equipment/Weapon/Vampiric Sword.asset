@@ -10,12 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0058bfbed62771c40b1a9acd25bda8ef, type: 3}
-  m_Name: Wooden Sword
+  m_Name: Vampiric Sword
   m_EditorClassIdentifier: 
   ItemType: 1
-  ItemName: Wooden Sword
-  ItemIcon: {fileID: 1025091068, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  _itemName: Vampiric Sword
+  _itemIcon: {fileID: -1944902997, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  _dropChance: 0
   EquipmentType: 0
+  _itemEffects:
+  - {fileID: 11400000, guid: e1abe0b6134f3e243bdcb8c3ec221688, type: 2}
+  _itemCooldown: 0
   _strength: 0
   _agility: 0
   _intelligence: 0
@@ -31,5 +35,7 @@ MonoBehaviour:
   _iceDamage: 0
   _lightningDamage: 0
   _craftMaterials:
-  - _itemData: {fileID: 11400000, guid: faa4288b9fea3fd48b9749a3b2357325, type: 2}
-    _stackSize: 3
+  - _itemData: {fileID: 11400000, guid: 44190236f2def7a4bb9e7224f07d2108, type: 2}
+    _stackSize: 1
+  - _itemData: {fileID: 11400000, guid: c2359bd21a2a69e4eb8ce7ee114311d9, type: 2}
+    _stackSize: 1

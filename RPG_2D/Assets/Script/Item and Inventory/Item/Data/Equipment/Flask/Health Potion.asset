@@ -10,13 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0058bfbed62771c40b1a9acd25bda8ef, type: 3}
-  m_Name: Leather Armor
+  m_Name: Health Potion
   m_EditorClassIdentifier: 
   ItemType: 1
-  ItemName: Leather Armor
-  ItemIcon: {fileID: 1667790894, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  _itemName: Health Potion
+  _itemIcon: {fileID: -410334530, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
   _dropChance: 0
-  EquipmentType: 1
+  EquipmentType: 3
+  _itemEffects:
+  - {fileID: 11400000, guid: 8a2e9eaae320e73498cb891dfe131cba, type: 2}
+  _itemCooldown: 3
   _strength: 0
   _agility: 0
   _intelligence: 0
@@ -25,12 +28,14 @@ MonoBehaviour:
   _critChance: 0
   _critPower: 0
   _health: 0
-  _armor: 5
+  _armor: 0
   _evasion: 0
   _magicResistance: 0
   _fireDamage: 0
   _iceDamage: 0
   _lightningDamage: 0
   _craftMaterials:
-  - _itemData: {fileID: 11400000, guid: df06501e04f31f2419c8a616d7bd45ac, type: 2}
-    _stackSize: 3
+  - _itemData: {fileID: 11400000, guid: 8db3180602e5da641b6f50d20138a246, type: 2}
+    _stackSize: 1
+  - _itemData: {fileID: 11400000, guid: 052dec3478205ba44bcd5cecdc40771a, type: 2}
+    _stackSize: 1
