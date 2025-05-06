@@ -76,11 +76,6 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        
-    }
-
     public void AddItem(ItemData newItemData)
     {
         if (newItemData.ItemType == ItemType.Equipment && CanAddItem())

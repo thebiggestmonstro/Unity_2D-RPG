@@ -15,7 +15,6 @@ public class UI_CraftList : MonoBehaviour, IPointerDownHandler
 
     void Start()
     {
-        // 처음 제작창에서는 CratftListButtons의 첫번째 CraftList만 보이도록 설정 
         transform.parent.GetChild(0).GetComponent<UI_CraftList>().SetupCraftList();
         SetupDefaultCraftWindow();
     }
