@@ -20,6 +20,7 @@ MonoBehaviour:
   _itemEffects:
   - {fileID: 11400000, guid: fed56eb2e420ea240beed82d2d527534, type: 2}
   _itemCooldown: 0
+  _itemEffectDescription: Improve your Lightning Stat.
   _strength: 0
   _agility: 0
   _intelligence: 0

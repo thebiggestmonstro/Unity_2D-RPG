@@ -20,6 +20,10 @@ MonoBehaviour:
   _itemEffects:
   - {fileID: 11400000, guid: 1c7d767691e12c5419f33fe60e5ac93a, type: 2}
   _itemCooldown: 0
+  _itemEffectDescription: 'Improve your Ice and Fire Stat.
+
+    And also gain Attack
+    Point.'
   _strength: 0
   _agility: 0
   _intelligence: 5

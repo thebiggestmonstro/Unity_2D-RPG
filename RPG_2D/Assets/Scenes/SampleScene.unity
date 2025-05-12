@@ -668,6 +668,7 @@ MonoBehaviour:
   _isSkillUnlocked: 0
   _slotsToUnlock: []
   _slotsToLock: []
+  _skillUnlockCost: 0
   _skillName: Dodge
   _skillDescription: You getting 10% of a evasion.
   _lockedSkillColor: {r: 0.4811321, g: 0.4602528, b: 0.4602528, a: 1}
@@ -1145,6 +1146,7 @@ MonoBehaviour:
   _slotsToUnlock:
   - {fileID: 1917590901}
   _slotsToLock: []
+  _skillUnlockCost: 0
   _skillName: Parry - Restore
   _skillDescription: You restore a bit of health with succsesful parry.
   _lockedSkillColor: {r: 0.4811321, g: 0.4602528, b: 0.4602528, a: 1}
@@ -2840,6 +2842,7 @@ MonoBehaviour:
   _slotsToUnlock:
   - {fileID: 104085511}
   _slotsToLock: []
+  _skillUnlockCost: 0
   _skillName: Parry - Mirage
   _skillDescription: You create a clone with succsesful parry.
   _lockedSkillColor: {r: 0.4811321, g: 0.4602528, b: 0.4602528, a: 1}
@@ -3454,6 +3457,7 @@ MonoBehaviour:
   - {fileID: 1449772030}
   - {fileID: 2001213462}
   _slotsToLock: []
+  _skillUnlockCost: 0
   _skillName: 'Time Stop - Vulnerability '
   _skillDescription: Enemy hit by sword , takes 10% more damage.
   _lockedSkillColor: {r: 0.4811321, g: 0.4602528, b: 0.4602528, a: 1}
@@ -3493,7 +3497,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 230, y: -180}
+  m_AnchoredPosition: {x: 230, y: -255}
   m_SizeDelta: {x: 160, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &243425557
@@ -4459,6 +4463,7 @@ MonoBehaviour:
   - {fileID: 1145441782}
   _slotsToLock:
   - {fileID: 1418734052}
+  _skillUnlockCost: 0
   _skillName: Crsytal - Mirage Blink
   _skillDescription: 'You leave your mirage instead of you when you blink.
 
@@ -5110,6 +5115,7 @@ MonoBehaviour:
   _slotsToUnlock:
   - {fileID: 1063619962}
   _slotsToLock: []
+  _skillUnlockCost: 0
   _skillName: Crystal - Multiple Destruction
   _skillDescription: You can create up to 3 crystal at a time.
   _lockedSkillColor: {r: 0.4811321, g: 0.4602528, b: 0.4602528, a: 1}
@@ -7608,6 +7614,7 @@ MonoBehaviour:
   - {fileID: 738657319}
   _slotsToLock:
   - {fileID: 774427519}
+  _skillUnlockCost: 0
   _skillName: Mirage - Festival
   _skillDescription: 'Your  mirage has 30% of your attack.
 
@@ -7865,7 +7872,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -15, y: 10}
+  m_AnchoredPosition: {x: -15, y: 140}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &567456894
@@ -7955,7 +7962,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -96.68428, y: 0, z: -150.76208, w: -72.10356}
+  m_margin: {x: -96.68428, y: 0, z: -150.76208, w: -292.91412}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -8270,6 +8277,7 @@ MonoBehaviour:
   _isSkillUnlocked: 0
   _slotsToUnlock: []
   _slotsToLock: []
+  _skillUnlockCost: 0
   _skillName: Mirage - Time
   _skillDescription: 'Your mirage can attack targets.
 
@@ -9744,6 +9752,7 @@ MonoBehaviour:
   _slotsToUnlock:
   - {fileID: 613723602}
   _slotsToLock: []
+  _skillUnlockCost: 0
   _skillName: Mirage - Attack
   _skillDescription: 'Your mirage has 80% of your damage.
 
@@ -10241,6 +10250,7 @@ MonoBehaviour:
   - {fileID: 738657319}
   _slotsToLock:
   - {fileID: 564475860}
+  _skillUnlockCost: 0
   _skillName: Mirage - Crystal
   _skillDescription: "You create crystal instead of mirage. \nWith all it's qualites.\n[Only
     one upgrade can be choosen]"
@@ -10815,8 +10825,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 450, y: -30}
-  m_SizeDelta: {x: 750, y: 500}
+  m_AnchoredPosition: {x: 450, y: 47.284}
+  m_SizeDelta: {x: 750, y: 654.567}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &835189352
 MonoBehaviour:
@@ -12386,6 +12396,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cooldown: 1
+  _dashUnlocked: 0
+  _dashUnlockButton: {fileID: 1322064699}
+  _cloneOnDashUnlocked: 0
+  _cloneOnDashUnlockButton: {fileID: 1755073916}
+  _cloneOnArrivalUnlocked: 0
+  _cloneOnArrivalUnlockButton: {fileID: 2049536203}
 --- !u!4 &938091700
 Transform:
   m_ObjectHideFlags: 0
@@ -12428,12 +12444,12 @@ MonoBehaviour:
   _cooldown: 0
   _clonePrefab: {fileID: 2750646712227197543, guid: e7bf25823f9e348469768b6c8ea2da1e, type: 3}
   _cloneDuration: 1.5
-  _canAttack: 1
-  _canCreateCloneOnDashStart: 1
-  _canCreateCloneOnDashOver: 1
-  _canCreateCloneOnCounterAttack: 1
+  _canAttack: 0
+  _canCreateCloneOnDashStart: 0
+  _canCreateCloneOnDashOver: 0
+  _canCreateCloneOnCounterAttack: 0
   _CreateDelay: 0.4
-  _canDuplicateClone: 1
+  _canDuplicateClone: 0
   _chanceToDuplicate: 35
   _canCreateCrystalInsteadOfClone: 0
 --- !u!114 &938091703
@@ -12504,8 +12520,8 @@ MonoBehaviour:
   _crsytalPrefab: {fileID: 2427295283396586195, guid: dfad305bd758d4c4b8aa7de4bfcd494f, type: 3}
   _crystalExistTime: 1.5
   _createCloneInsteadOfCrystal: 0
-  _canExplode: 1
-  _canMoveToEnemy: 1
+  _canExplode: 0
+  _canMoveToEnemy: 0
   _moveSpeed: 5
   _canMakeMultiCrystal: 0
   _amountToAddCrystal: 3
@@ -13379,6 +13395,7 @@ MonoBehaviour:
   _slotsToUnlock:
   - {fileID: 1418734052}
   _slotsToLock: []
+  _skillUnlockCost: 0
   _skillName: Crystal - Controlled Destruction
   _skillDescription: 'Crystal moves towards the enemy.
 
@@ -14110,6 +14127,7 @@ MonoBehaviour:
   _slotsToLock:
   - {fileID: 1606430871}
   - {fileID: 1923769673}
+  _skillUnlockCost: 0
   _skillName: Sword Throw - Pierce
   _skillDescription: 'Sword can peirce targets.
 
@@ -14741,6 +14759,7 @@ MonoBehaviour:
   _isSkillUnlocked: 0
   _slotsToUnlock: []
   _slotsToLock: []
+  _skillUnlockCost: 0
   _skillName: Crystal
   _skillDescription: 'You create magic crystal that does magic damage.
 
@@ -16670,8 +16689,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -310, y: -30}
-  m_SizeDelta: {x: 620, y: 560}
+  m_AnchoredPosition: {x: -310, y: 32.284}
+  m_SizeDelta: {x: 620, y: 684.57}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1239385327
 MonoBehaviour:
@@ -17169,6 +17188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerController: {fileID: 718177685}
+  _currencyForSkillUnlock: 10
 --- !u!4 &1286907573
 Transform:
   m_ObjectHideFlags: 0
@@ -17505,6 +17525,7 @@ MonoBehaviour:
   _isSkillUnlocked: 0
   _slotsToUnlock: []
   _slotsToLock: []
+  _skillUnlockCost: 1
   _skillName: Dash
   _skillDescription: 'You can dash to avoid attacks.
 
@@ -19709,6 +19730,7 @@ MonoBehaviour:
   - {fileID: 1145441782}
   _slotsToLock:
   - {fileID: 290257160}
+  _skillUnlockCost: 0
   _skillName: Cystal - Explosion
   _skillDescription: 'Crystal can explode.
 
@@ -20099,10 +20121,10 @@ RectTransform:
   - {fileID: 892477387}
   m_Father: {fileID: 26548009}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1350, y: -50}
-  m_SizeDelta: {x: 300, y: 80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1440668556
 MonoBehaviour:
@@ -20396,6 +20418,7 @@ MonoBehaviour:
   _isSkillUnlocked: 0
   _slotsToUnlock: []
   _slotsToLock: []
+  _skillUnlockCost: 0
   _skillName: Sword Throw
   _skillDescription: Throws sword into the enemy.
   _lockedSkillColor: {r: 0.4811321, g: 0.4602528, b: 0.4602528, a: 1}
@@ -21000,6 +21023,7 @@ MonoBehaviour:
   _slotsToUnlock:
   - {fileID: 613723602}
   _slotsToLock: []
+  _skillUnlockCost: 0
   _skillName: Blackhole
   _skillDescription: You trap enemies in a blackhole which allows you to do tons
     of damage.
@@ -33977,7 +34001,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -80, y: 105}
+  m_AnchoredPosition: {x: -80, y: 235}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1560187708
@@ -34622,7 +34646,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -270, y: 110}
+  m_AnchoredPosition: {x: -270, y: 240}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1581677742
@@ -34774,7 +34798,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1591510052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35108,6 +35132,7 @@ MonoBehaviour:
   _slotsToLock:
   - {fileID: 1923769673}
   - {fileID: 1127698761}
+  _skillUnlockCost: 0
   _skillName: Sword Throw - Spin
   _skillDescription: 'Sword will spin like a chain saw.
 
@@ -37603,6 +37628,7 @@ MonoBehaviour:
   _slotsToUnlock:
   - {fileID: 1322064699}
   _slotsToLock: []
+  _skillUnlockCost: 2
   _skillName: Dash - "Here I am"
   _skillDescription: You leave mirage when you dash.
   _lockedSkillColor: {r: 0.4811321, g: 0.4602528, b: 0.4602528, a: 1}
@@ -39334,10 +39360,10 @@ RectTransform:
   - {fileID: 1752266106}
   m_Father: {fileID: 26548009}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 450, y: -50}
-  m_SizeDelta: {x: 300, y: 80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1903021671
 MonoBehaviour:
@@ -39622,6 +39648,7 @@ MonoBehaviour:
   _slotsToUnlock:
   - {fileID: 47299179}
   _slotsToLock: []
+  _skillUnlockCost: 0
   _skillName: Dodge - Mirage
   _skillDescription: You can create mirage on dodge.
   _lockedSkillColor: {r: 0.4811321, g: 0.4602528, b: 0.4602528, a: 1}
@@ -39761,6 +39788,7 @@ MonoBehaviour:
   _isSkillUnlocked: 0
   _slotsToUnlock: []
   _slotsToLock: []
+  _skillUnlockCost: 0
   _skillName: Parry
   _skillDescription: You can parry attack to avoid damage.
   _lockedSkillColor: {r: 0.4811321, g: 0.4602528, b: 0.4602528, a: 1}
@@ -39985,6 +40013,7 @@ MonoBehaviour:
   _slotsToLock:
   - {fileID: 1606430871}
   - {fileID: 1127698761}
+  _skillUnlockCost: 0
   _skillName: Sword Throw - Bounce
   _skillDescription: 'Sword can boucne beetwen targets.
 
@@ -40848,6 +40877,7 @@ MonoBehaviour:
   _slotsToUnlock:
   - {fileID: 1449772030}
   _slotsToLock: []
+  _skillUnlockCost: 0
   _skillName: Time Stop
   _skillDescription: When enemy hit by sword, make its time stops.
   _lockedSkillColor: {r: 0.4811321, g: 0.4602528, b: 0.4602528, a: 1}
@@ -40885,10 +40915,10 @@ RectTransform:
   - {fileID: 139711504}
   m_Father: {fileID: 26548009}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1050, y: -50}
-  m_SizeDelta: {x: 300, y: 80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2019310371
 MonoBehaviour:
@@ -41407,7 +41437,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -120, y: -180}
+  m_AnchoredPosition: {x: -120, y: -255}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2045853105
@@ -41666,6 +41696,7 @@ MonoBehaviour:
   _slotsToUnlock:
   - {fileID: 1755073916}
   _slotsToLock: []
+  _skillUnlockCost: 3
   _skillName: Dash - "Actually here I am"
   _skillDescription: You create mirage at your arrival.
   _lockedSkillColor: {r: 0.4811321, g: 0.4602528, b: 0.4602528, a: 1}
@@ -42439,10 +42470,10 @@ RectTransform:
   - {fileID: 1572190128}
   m_Father: {fileID: 26548009}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 750, y: -50}
-  m_SizeDelta: {x: 300, y: 80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2115253530
 MonoBehaviour:

@@ -20,6 +20,7 @@ MonoBehaviour:
   _itemEffects:
   - {fileID: 11400000, guid: e1abe0b6134f3e243bdcb8c3ec221688, type: 2}
   _itemCooldown: 0
+  _itemEffectDescription: Steal Health from your enemy when you hit.
   _strength: 0
   _agility: 0
   _intelligence: 0

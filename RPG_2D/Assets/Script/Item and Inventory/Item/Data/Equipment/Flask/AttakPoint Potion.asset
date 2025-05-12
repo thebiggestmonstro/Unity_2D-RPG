@@ -20,6 +20,7 @@ MonoBehaviour:
   _itemEffects:
   - {fileID: 11400000, guid: 60ac6e835bc97d24cad1c64e0626e4ae, type: 2}
   _itemCooldown: 0
+  _itemEffectDescription: Increase Attack Point.
   _strength: 0
   _agility: 0
   _intelligence: 0

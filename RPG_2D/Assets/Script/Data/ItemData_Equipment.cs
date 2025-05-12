@@ -16,8 +16,12 @@ public enum EquipmentType
 public class ItemData_Equipment : ItemData
 {
     public EquipmentType EquipmentType;
+
+    [Header("Unique Effect")]
     public ItemEffect[] _itemEffects;
     public float _itemCooldown;
+    [TextArea]
+    public string _itemEffectDescription;
 
     [Header("Major stats")]
     public int _strength;
@@ -124,6 +128,12 @@ public class ItemData_Equipment : ItemData
         SetItemDescription(_fireDamage, "FireDamage");
         SetItemDescription(_iceDamage, "IceDamage");
         SetItemDescription(_lightningDamage, "LightningDamage");
+
+        if (_itemEffectDescription.Length > 0)
+        {
+            _stringBuilder.AppendLine();
+            _stringBuilder.Append(_itemEffectDescription);
+        }
 
         if (_descriptionLength < 5)
         {

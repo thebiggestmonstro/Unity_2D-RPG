@@ -291,6 +291,9 @@ public class PlayerController : BaseCharacterController
         if (DoDetectIsFacingWall())
             return;
 
+        if (_skillManager._skillDash._dashUnlocked == false)
+            return;
+
         if (value.ReadValueAsButton() && SkillManager._skillManagerInstance._skillDash.DoUseSkill())
         {
             _dashDir = _moveAction.ReadValue<Vector2>().x;

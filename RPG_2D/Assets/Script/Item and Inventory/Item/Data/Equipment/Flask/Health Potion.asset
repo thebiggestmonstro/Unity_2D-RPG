@@ -20,6 +20,7 @@ MonoBehaviour:
   _itemEffects:
   - {fileID: 11400000, guid: 8a2e9eaae320e73498cb891dfe131cba, type: 2}
   _itemCooldown: 3
+  _itemEffectDescription: Heal your Health.
   _strength: 0
   _agility: 0
   _intelligence: 0

@@ -15,11 +15,6 @@ public class SkillCloning : SkillTemplate
     private bool _canAttack;
 
     [SerializeField]
-    private bool _canCreateCloneOnDashStart;
-    [SerializeField]
-    private bool _canCreateCloneOnDashOver;
-
-    [SerializeField]
     private bool _canCreateCloneOnCounterAttack;
     [SerializeField]
     private float _CreateDelay;
@@ -54,18 +49,6 @@ public class SkillCloning : SkillTemplate
             _chanceToDuplicate,
             _playerController
         );
-    }
-
-    public void CreateCloneOnDashStart()
-    {
-        if (_canCreateCloneOnDashOver)
-            DoCreateClone(_playerController.transform, Vector3.zero);
-    }
-
-    public void CreateCloneOnDashOver()
-    {
-        if (_canCreateCloneOnDashOver)
-            DoCreateClone(_playerController.transform, Vector3.zero);
     }
 
     public void CreateCloneOnCounterAttack(Transform enemyTrasform)

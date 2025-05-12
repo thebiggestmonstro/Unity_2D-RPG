@@ -13,6 +13,8 @@ public class UI_SkillTreeSlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private UI_SkillTreeSlot[] _slotsToUnlock;
     [SerializeField]
     private UI_SkillTreeSlot[] _slotsToLock;
+    [SerializeField]
+    private int _skillUnlockCost;
 
     private Image _skillImage;
 
@@ -30,6 +32,11 @@ public class UI_SkillTreeSlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
         gameObject.name = "UI_SkillTreeSlot : " + _skillName;
     }
 
+    private void Awake()
+    {
+        GetComponent<Button>().onClick.AddListener(() => UnlcokSkillSlot());
+    }
+
     private void Start()
     {
         _uiManager = GetComponentInParent<UIManager>();
@@ -37,13 +44,14 @@ public class UI_SkillTreeSlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
         _skillImage = GetComponent<Image>();
         _skillImage.color = _lockedSkillColor;
 
-        GetComponent<Button>().onClick.AddListener(() => UnlcokSkillSlot());
-
         _uiManager._skillToolTip.HideToolTip();
     }
 
     public void UnlcokSkillSlot()
     {
+        if (PlayerManager._playerManagerInstance.CanUnlockSkill(_skillUnlockCost) == false)
+            return;
+
         for (int i = 0; i < _slotsToUnlock.Length; i++)
         {
             if (_slotsToUnlock[i]._isSkillUnlocked == false)

@@ -20,6 +20,7 @@ MonoBehaviour:
   _itemEffects:
   - {fileID: 11400000, guid: 20294e7057f28be43a5ea9159bde2b22, type: 2}
   _itemCooldown: 0
+  _itemEffectDescription: Freeze Enemy who attacks you.
   _strength: 0
   _agility: 0
   _intelligence: 0
