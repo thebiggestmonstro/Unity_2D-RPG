@@ -1127,7 +1127,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 573, y: -64.999985}
+  m_AnchoredPosition: {x: 573, y: -65}
   m_SizeDelta: {x: 80, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &104085511
@@ -12376,6 +12376,7 @@ GameObject:
   - component: {fileID: 938091703}
   - component: {fileID: 938091704}
   - component: {fileID: 938091705}
+  - component: {fileID: 938091706}
   m_Layer: 0
   m_Name: SkillManager
   m_TagString: Untagged
@@ -12445,8 +12446,6 @@ MonoBehaviour:
   _clonePrefab: {fileID: 2750646712227197543, guid: e7bf25823f9e348469768b6c8ea2da1e, type: 3}
   _cloneDuration: 1.5
   _canAttack: 0
-  _canCreateCloneOnDashStart: 0
-  _canCreateCloneOnDashOver: 0
   _canCreateCloneOnCounterAttack: 0
   _CreateDelay: 0.4
   _canDuplicateClone: 0
@@ -12531,6 +12530,26 @@ MonoBehaviour:
   - {fileID: 2427295283396586195, guid: dfad305bd758d4c4b8aa7de4bfcd494f, type: 3}
   - {fileID: 2427295283396586195, guid: dfad305bd758d4c4b8aa7de4bfcd494f, type: 3}
   - {fileID: 2427295283396586195, guid: dfad305bd758d4c4b8aa7de4bfcd494f, type: 3}
+--- !u!114 &938091706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 938091698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6bee4993eeabde40a126f1c9b4fc897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cooldown: 0
+  _parryUnlockButton: {fileID: 1917590901}
+  _parryUnlocked: 0
+  _restoreUnlockButton: {fileID: 104085511}
+  _restoreHealthPerentage: 0.25
+  _restoreUnlocked: 0
+  _parryWithCloneUnlockButton: {fileID: 195683448}
+  _parryWithCloneUnlocked: 0
 --- !u!1 &954220885
 GameObject:
   m_ObjectHideFlags: 0
@@ -39770,7 +39789,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 573, y: 69.999985}
+  m_AnchoredPosition: {x: 573, y: 70}
   m_SizeDelta: {x: 80, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1917590901

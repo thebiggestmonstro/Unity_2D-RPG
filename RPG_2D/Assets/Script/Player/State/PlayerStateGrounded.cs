@@ -30,7 +30,7 @@ public class PlayerStateGrounded : PlayerState
         if (_isThrowingSword && HasNoSword())
             _stateMachine.ChangeState(_controller._aimSwordState);
 
-        if (_isCounterAttacking)
+        if (_isCounterAttacking && _controller._skillManager._skillParry._parryUnlocked)
             _stateMachine.ChangeState(_controller._counterAttackState);
 
         if (_isAttacking)

@@ -15,8 +15,6 @@ public class SkillCloning : SkillTemplate
     private bool _canAttack;
 
     [SerializeField]
-    private bool _canCreateCloneOnCounterAttack;
-    [SerializeField]
     private float _CreateDelay;
 
     [Header("Clone Duplication")]
@@ -51,13 +49,12 @@ public class SkillCloning : SkillTemplate
         );
     }
 
-    public void CreateCloneOnCounterAttack(Transform enemyTrasform)
+    public void CreateCloneWithDelay(Transform enemyTrasform)
     {
-        if (_canCreateCloneOnCounterAttack)
-            StartCoroutine(CreateCloneWithDelay(enemyTrasform, new Vector3(2 * _playerController._facingDir, 0, 0)));
+        StartCoroutine(CreateCloneWithCoroutine(enemyTrasform, new Vector3(2 * _playerController._facingDir, 0, 0)));
     }
 
-    private IEnumerator CreateCloneWithDelay(Transform enemyTrasform, Vector3 offset)
+    private IEnumerator CreateCloneWithCoroutine(Transform enemyTrasform, Vector3 offset)
     {
         yield return new WaitForSeconds(_CreateDelay);
         DoCreateClone(enemyTrasform, offset);

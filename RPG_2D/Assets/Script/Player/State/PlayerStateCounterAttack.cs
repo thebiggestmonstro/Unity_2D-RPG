@@ -43,10 +43,12 @@ public class PlayerStateCounterAttack : PlayerState
                     _stateTimer = 10.0f;
                     _controller._animator.SetBool("SuccesfulCounterAttack", true);
 
+                    _controller._skillManager._skillParry.UseSkill(); 
+
                     if (_checkCloneCreated)
                     {
                         _checkCloneCreated = false;
-                        _controller._skillManager._skillCloning.CreateCloneOnCounterAttack(hit.transform);
+                        _controller._skillManager._skillParry.MakeCloneOnParry(hit.transform);
                     }
                 }
             }
