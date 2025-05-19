@@ -167,11 +167,6 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < _statSlot.Length; i++)
-        {
-            _statSlot[i].UpdateStatValueUI();
-        }
-
         for (int i = 0; i < _defaultInventory.Count; i++)
         {
             _inventoryItemSlot[i].UpdateSlot(_defaultInventory[i]);
@@ -180,7 +175,17 @@ public class InventoryManager : MonoBehaviour
         for (int i = 0; i < _stashInventory.Count; i++)
         {
             _stashItemSlot[i].UpdateSlot(_stashInventory[i]);
-        } 
+        }
+
+        UpdateStatsUI();
+    }
+
+    public void UpdateStatsUI()
+    {
+        for (int i = 0; i < _statSlot.Length; i++) 
+        {
+            _statSlot[i].UpdateStatValueUI();
+        }
     }
 
     public void EquipItem(ItemData itemData)

@@ -349,7 +349,7 @@ public class PlayerController : BaseCharacterController
     {
         _isMakingCrystal = value.ReadValueAsButton();
 
-        if (_isMakingCrystal)
+        if (_isMakingCrystal && SkillManager._skillManagerInstance._skillCrystal._crystalUnlocked)
             _skillManager._skillCrystal.DoUseSkill();
     }
 

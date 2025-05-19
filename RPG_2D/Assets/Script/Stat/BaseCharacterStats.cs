@@ -122,7 +122,7 @@ public class BaseCharacterStats : MonoBehaviour
 
         if (Random.Range(0, 100) < totalEvasion)
         {
-            Debug.Log("Target Evaded Attack...");
+            targetStats.EvadeSuccess();
             return true;
         }
 
@@ -406,5 +406,10 @@ public class BaseCharacterStats : MonoBehaviour
             return _lightningDamage;
         
        return null;
+    }
+
+    public virtual void EvadeSuccess()
+    { 
+    
     }
 }

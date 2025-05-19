@@ -49,4 +49,9 @@ public class PlayerStats : BaseCharacterStats
         if (equippedArmor)
             equippedArmor.ExecuteItemEffect(_playerController.transform);
     }
+
+    public override void EvadeSuccess()
+    {
+        _playerController._skillManager._skillDodge.CreateMirageOnDodge();
+    }
 }

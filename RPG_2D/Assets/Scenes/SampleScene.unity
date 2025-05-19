@@ -12377,6 +12377,7 @@ GameObject:
   - component: {fileID: 938091704}
   - component: {fileID: 938091705}
   - component: {fileID: 938091706}
+  - component: {fileID: 938091707}
   m_Layer: 0
   m_Name: SkillManager
   m_TagString: Untagged
@@ -12446,7 +12447,6 @@ MonoBehaviour:
   _clonePrefab: {fileID: 2750646712227197543, guid: e7bf25823f9e348469768b6c8ea2da1e, type: 3}
   _cloneDuration: 1.5
   _canAttack: 0
-  _canCreateCloneOnCounterAttack: 0
   _CreateDelay: 0.4
   _canDuplicateClone: 0
   _chanceToDuplicate: 35
@@ -12518,10 +12518,15 @@ MonoBehaviour:
   _cooldown: 0
   _crsytalPrefab: {fileID: 2427295283396586195, guid: dfad305bd758d4c4b8aa7de4bfcd494f, type: 3}
   _crystalExistTime: 1.5
+  _unlockCrystalButton: {fileID: 1145441782}
+  _unlockCloneInsteadButton: {fileID: 290257160}
   _createCloneInsteadOfCrystal: 0
+  _unlockExplosiveButton: {fileID: 1418734052}
   _canExplode: 0
+  _unlockMovingCrystalButton: {fileID: 1063619962}
   _canMoveToEnemy: 0
   _moveSpeed: 5
+  _unlockMultiStackButton: {fileID: 387769334}
   _canMakeMultiCrystal: 0
   _amountToAddCrystal: 3
   _multiStackCooldown: 4
@@ -12550,6 +12555,24 @@ MonoBehaviour:
   _restoreUnlocked: 0
   _parryWithCloneUnlockButton: {fileID: 195683448}
   _parryWithCloneUnlocked: 0
+--- !u!114 &938091707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 938091698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6ff581bbc72584699cf3059e400920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cooldown: 3
+  _unlockDodgeButton: {fileID: 47299179}
+  _percentageOfEvasion: 100
+  _isDodgeUnlocked: 0
+  _unlockMirageDodgeButton: {fileID: 1914889372}
+  _isDodgeMirageUnlocked: 0
 --- !u!1 &954220885
 GameObject:
   m_ObjectHideFlags: 0
@@ -17207,7 +17230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerController: {fileID: 718177685}
-  _currencyForSkillUnlock: 10
+  _currencyForSkillUnlock: 100
 --- !u!4 &1286907573
 Transform:
   m_ObjectHideFlags: 0
