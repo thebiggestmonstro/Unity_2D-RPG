@@ -69,6 +69,7 @@ public class BaseCharacterStats : MonoBehaviour
     public int _currentHealth;
     public System.Action onHealthChanged;
     public bool _isDead { get; private set; }
+    private bool _isVulnerable;
 
     protected virtual void Awake()
     {
@@ -113,7 +114,7 @@ public class BaseCharacterStats : MonoBehaviour
         targetStats.TakeDamage(totalDamage);
     }
 
-    private bool CheckTargetCanEvadeAttack(BaseCharacterStats targetStats)
+    protected bool CheckTargetCanEvadeAttack(BaseCharacterStats targetStats)
     {
         int totalEvasion = targetStats._evasion.GetValue() + targetStats._agility.GetValue();
 
@@ -129,7 +130,7 @@ public class BaseCharacterStats : MonoBehaviour
         return false;
     }
 
-    private int CheckTargetArmor(BaseCharacterStats targetStats, int totalDamage)
+    protected int CheckTargetArmor(BaseCharacterStats targetStats, int totalDamage)
     {
         if (targetStats._isFreezed)
             totalDamage -= Mathf.RoundToInt(targetStats._armor.GetValue() * 0.8f);
@@ -140,7 +141,7 @@ public class BaseCharacterStats : MonoBehaviour
         return totalDamage;
     }
 
-    private bool CheckCanGiveCriticalDamage()
+    protected bool CheckCanGiveCriticalDamage()
     {
         int totalCritChance = _critChance.GetValue() + _agility.GetValue();
 
@@ -150,7 +151,7 @@ public class BaseCharacterStats : MonoBehaviour
         return false;
     }
 
-    private int CalculateCriticalDamage(int damage)
+    protected int CalculateCriticalDamage(int damage)
     {
         float totalCriticalPower = (_critPower.GetValue() + _strength.GetValue()) * 0.1f;
         float critDamage = damage * totalCriticalPower;
@@ -338,6 +339,9 @@ public class BaseCharacterStats : MonoBehaviour
 
     protected virtual void DecreaseHealth(int damage)
     {
+        if (_isVulnerable)
+            damage = Mathf.RoundToInt(damage * 1.1f);
+
         _currentHealth -= damage;
 
         if (onHealthChanged != null)
@@ -411,5 +415,16 @@ public class BaseCharacterStats : MonoBehaviour
     public virtual void EvadeSuccess()
     { 
     
+    }
+
+    public void MakeVulnerablity(float duration) => StartCoroutine(VulnerableCorutine(duration));
+
+    private IEnumerator VulnerableCorutine(float duration)
+    {
+        _isVulnerable = true;
+
+        yield return new WaitForSeconds(duration);
+
+        _isVulnerable = false;
     }
 }

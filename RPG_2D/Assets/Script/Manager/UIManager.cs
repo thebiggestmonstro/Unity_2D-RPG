@@ -20,13 +20,14 @@ public class UIManager : MonoBehaviour
     public UI_ItemToolTip _itemToolTip;
     public UI_StatToolTip _statToolTip;
     public UI_SkillToolTip _skillToolTip;
-    
+
     private void Awake()
     {
         if (_uiManagerInstance != null)
             Destroy(_uiManagerInstance.gameObject);
 
         _uiManagerInstance = this;
+        SwitchMenu(_skillTreeUI);
     }
 
     private void Start()

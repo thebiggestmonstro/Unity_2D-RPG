@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SkillBlackHole : SkillTemplate
 {
+    [SerializeField] 
+    private UI_SkillTreeSlot _blackHoleUnlockButton;
+    public bool _blackholeUnlocked;
     [SerializeField]
     private GameObject _blackHolePrefab;
     [SerializeField]
@@ -25,11 +29,19 @@ public class SkillBlackHole : SkillTemplate
     protected override void Start()
     {
         base.Start();
+
+        _blackHoleUnlockButton.GetComponent<Button>().onClick.AddListener(UnlockBlackhole);
     }
 
     protected override void Update()
     {
         base.Update();
+    }
+
+    private void UnlockBlackhole()
+    {
+        if (_blackHoleUnlockButton._isSkillUnlocked)
+            _blackholeUnlocked = true;
     }
 
     public virtual bool DoDefineCanUseSkill()

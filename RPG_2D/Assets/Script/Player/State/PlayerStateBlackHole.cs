@@ -47,10 +47,7 @@ public class PlayerStateBlackHole : PlayerState
             if (_skillUsed == false)
             {
                 if (_controller._skillManager._skillBlackHole.DoDefineCanUseSkill())
-                {
-                    _controller._skillManager._skillBlackHole.DoUseSkill();
                     _skillUsed = true;
-                }
             }
         }
 

@@ -24,10 +24,10 @@ public class PlayerStateGrounded : PlayerState
     {
         base.Update();
 
-        if (_isCastingBlackHole)
+        if (_isCastingBlackHole && _controller._skillManager._skillBlackHole._blackholeUnlocked)
             _stateMachine.ChangeState(_controller._blackHoleState);
 
-        if (_isThrowingSword && HasNoSword())
+        if (_isThrowingSword && HasNoSword() && _controller._skillManager._skillThrowingSword._swordUnlocked)
             _stateMachine.ChangeState(_controller._aimSwordState);
 
         if (_isCounterAttacking && _controller._skillManager._skillParry._parryUnlocked)

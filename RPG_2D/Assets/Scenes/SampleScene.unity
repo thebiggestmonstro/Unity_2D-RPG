@@ -3333,7 +3333,7 @@ GameObject:
   - component: {fileID: 235722215}
   - component: {fileID: 235722218}
   m_Layer: 5
-  m_Name: 'UI_SkillTreeSlot : Time Stop - Vulnerability '
+  m_Name: 'UI_SkillTreeSlot : Sword Throw - Vulnerability'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3458,7 +3458,7 @@ MonoBehaviour:
   - {fileID: 2001213462}
   _slotsToLock: []
   _skillUnlockCost: 0
-  _skillName: 'Time Stop - Vulnerability '
+  _skillName: Sword Throw - Vulnerability
   _skillDescription: Enemy hit by sword , takes 10% more damage.
   _lockedSkillColor: {r: 0.4811321, g: 0.4602528, b: 0.4602528, a: 1}
 --- !u!1 &243425555
@@ -7572,7 +7572,7 @@ GameObject:
   - component: {fileID: 564475861}
   - component: {fileID: 564475860}
   m_Layer: 5
-  m_Name: 'UI_SkillTreeSlot : Mirage - Festival'
+  m_Name: 'UI_SkillTreeSlot : Clone - Festival'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7615,11 +7615,11 @@ MonoBehaviour:
   _slotsToLock:
   - {fileID: 774427519}
   _skillUnlockCost: 0
-  _skillName: Mirage - Festival
-  _skillDescription: 'Your  mirage has 30% of your attack.
+  _skillName: Clone - Festival
+  _skillDescription: 'Your  Clone has 30% of your attack.
 
-    Your mirgae can spawn
-    another mirage.
+    Your Clone can spawn
+    another clone.
 
     [Only one upgrade can be choosen]'
   _lockedSkillColor: {r: 0.4811321, g: 0.4602528, b: 0.4602528, a: 1}
@@ -8237,7 +8237,7 @@ GameObject:
   - component: {fileID: 613723603}
   - component: {fileID: 613723602}
   m_Layer: 5
-  m_Name: 'UI_SkillTreeSlot : Mirage - Time'
+  m_Name: 'UI_SkillTreeSlot : Clone - Time'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8278,11 +8278,11 @@ MonoBehaviour:
   _slotsToUnlock: []
   _slotsToLock: []
   _skillUnlockCost: 0
-  _skillName: Mirage - Time
-  _skillDescription: 'Your mirage can attack targets.
+  _skillName: Clone - Time
+  _skillDescription: 'Your clone can attack targets.
 
-    Your mirage has 30% of
-    your damage.'
+    Your clone has 30% of your
+    damage.'
   _lockedSkillColor: {r: 0.4811321, g: 0.4602528, b: 0.4602528, a: 1}
 --- !u!114 &613723603
 MonoBehaviour:
@@ -9711,7 +9711,7 @@ GameObject:
   - component: {fileID: 738657320}
   - component: {fileID: 738657319}
   m_Layer: 5
-  m_Name: 'UI_SkillTreeSlot : Mirage - Attack'
+  m_Name: 'UI_SkillTreeSlot : Clone - Aggresive'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9753,10 +9753,10 @@ MonoBehaviour:
   - {fileID: 613723602}
   _slotsToLock: []
   _skillUnlockCost: 0
-  _skillName: Mirage - Attack
-  _skillDescription: 'Your mirage has 80% of your damage.
+  _skillName: Clone - Aggresive
+  _skillDescription: 'Your clone has 80% of your damage.
 
-    Your mirage can apply
+    Your clone can apply
     on hit effects.'
   _lockedSkillColor: {r: 0.4811321, g: 0.4602528, b: 0.4602528, a: 1}
 --- !u!114 &738657320
@@ -10208,7 +10208,7 @@ GameObject:
   - component: {fileID: 774427520}
   - component: {fileID: 774427519}
   m_Layer: 5
-  m_Name: 'UI_SkillTreeSlot : Mirage - Crystal'
+  m_Name: 'UI_SkillTreeSlot : Clone - Crystal'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10251,8 +10251,8 @@ MonoBehaviour:
   _slotsToLock:
   - {fileID: 564475860}
   _skillUnlockCost: 0
-  _skillName: Mirage - Crystal
-  _skillDescription: "You create crystal instead of mirage. \nWith all it's qualites.\n[Only
+  _skillName: Clone - Crystal
+  _skillDescription: "You create crystal instead of clone. \nWith all it's qualites.\n[Only
     one upgrade can be choosen]"
   _lockedSkillColor: {r: 0.4811321, g: 0.4602528, b: 0.4602528, a: 1}
 --- !u!114 &774427520
@@ -12446,10 +12446,18 @@ MonoBehaviour:
   _cooldown: 0
   _clonePrefab: {fileID: 2750646712227197543, guid: e7bf25823f9e348469768b6c8ea2da1e, type: 3}
   _cloneDuration: 1.5
-  _canAttack: 0
   _CreateDelay: 0.4
+  _cloneBaseAttackPoint: 0
+  _cloneAttackUnlockButton: {fileID: 613723602}
+  _cloneAttackPoint: 0.3
+  _canAttack: 0
+  _aggresiveCloneUnlockButton: {fileID: 738657319}
+  _aggresiveCloneAttackPoint: 0.8
+  _cloneDuplicateUnlockButton: {fileID: 564475860}
+  _multiCloneAttackPoint: 0.3
   _canDuplicateClone: 0
-  _chanceToDuplicate: 35
+  _chanceToDuplicate: 99
+  _crystalInsteadUnlockButton: {fileID: 774427519}
   _canCreateCrystalInsteadOfClone: 0
 --- !u!114 &938091703
 MonoBehaviour:
@@ -12465,6 +12473,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cooldown: 0
   _swordType: 0
+  _swordUnlockButton: {fileID: 1449772030}
   _swordPrefab: {fileID: 6861290250484057520, guid: 9b046b69513ae264ba882a41516aa23c, type: 3}
   _launchForce: {x: 35, y: 25}
   _swordGravity: 0.5
@@ -12474,15 +12483,20 @@ MonoBehaviour:
   _spaceBetweenDots: 0.07
   _dotPrefab: {fileID: 7269989036971402604, guid: 4769913d2661188479637473ed4599ef, type: 3}
   _dotsParent: {fileID: 2066376872}
+  _bounceUnlockButton: {fileID: 1923769673}
   _bounceAmount: 4
   _bounceGravity: 1
   _bounceSpeed: 20
+  _pierceUnlockButton: {fileID: 1127698761}
   _pierceAmount: 2
   _pierceGravity: 1
+  _spinUnlockButton: {fileID: 1606430871}
   _maxTravelDistance: 7
   _spinDuration: 2
   _spinGravity: 1
   _hitCooldown: 0.35
+  _timeStopUnlockButton: {fileID: 2001213462}
+  _vulnerableUnlockButton: {fileID: 235722218}
 --- !u!114 &938091704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12496,6 +12510,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cooldown: 0
+  _blackHoleUnlockButton: {fileID: 1482333049}
+  _blackholeUnlocked: 0
   _blackHolePrefab: {fileID: 1609644207839534815, guid: 83d00adc9f318fe41ab32a55d435bcbb, type: 3}
   _maxSize: 15
   _growSpeed: 3
@@ -20163,10 +20179,10 @@ RectTransform:
   - {fileID: 892477387}
   m_Father: {fileID: 26548009}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1350, y: -50}
+  m_SizeDelta: {x: 300, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1440668556
 MonoBehaviour:
@@ -21024,7 +21040,7 @@ GameObject:
   - component: {fileID: 1482333050}
   - component: {fileID: 1482333049}
   m_Layer: 5
-  m_Name: 'UI_SkillTreeSlot : Blackhole'
+  m_Name: 'UI_SkillTreeSlot : Clone - Blackhole'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21066,7 +21082,7 @@ MonoBehaviour:
   - {fileID: 613723602}
   _slotsToLock: []
   _skillUnlockCost: 0
-  _skillName: Blackhole
+  _skillName: Clone - Blackhole
   _skillDescription: You trap enemies in a blackhole which allows you to do tons
     of damage.
   _lockedSkillColor: {r: 0.4811321, g: 0.4602528, b: 0.4602528, a: 1}
@@ -34840,7 +34856,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1591510052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39402,10 +39418,10 @@ RectTransform:
   - {fileID: 1752266106}
   m_Father: {fileID: 26548009}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 450, y: -50}
+  m_SizeDelta: {x: 300, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1903021671
 MonoBehaviour:
@@ -40796,7 +40812,7 @@ GameObject:
   - component: {fileID: 2001213459}
   - component: {fileID: 2001213462}
   m_Layer: 5
-  m_Name: 'UI_SkillTreeSlot : Time Stop'
+  m_Name: 'UI_SkillTreeSlot : Sword Throw - Time Stop'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40920,7 +40936,7 @@ MonoBehaviour:
   - {fileID: 1449772030}
   _slotsToLock: []
   _skillUnlockCost: 0
-  _skillName: Time Stop
+  _skillName: Sword Throw - Time Stop
   _skillDescription: When enemy hit by sword, make its time stops.
   _lockedSkillColor: {r: 0.4811321, g: 0.4602528, b: 0.4602528, a: 1}
 --- !u!1 &2019310369
@@ -40957,10 +40973,10 @@ RectTransform:
   - {fileID: 139711504}
   m_Father: {fileID: 26548009}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1050, y: -50}
+  m_SizeDelta: {x: 300, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2019310371
 MonoBehaviour:
@@ -42512,10 +42528,10 @@ RectTransform:
   - {fileID: 1572190128}
   m_Father: {fileID: 26548009}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 750, y: -50}
+  m_SizeDelta: {x: 300, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2115253530
 MonoBehaviour:

@@ -48,6 +48,22 @@ public class SkillThrowingSwordController : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void SetUpSword(Vector2 dir, float gravityScale, PlayerController player, float freezeTimeDuration, float returnSpeed)
+    {
+        _playerController = player;
+
+        _rigidBody2D.velocity = dir;
+        _rigidBody2D.gravityScale = gravityScale;
+
+        _freezeTimeDuration = freezeTimeDuration;
+        _returnSpeed = returnSpeed;
+
+        if (_pierceAmount <= 0)
+            _animator.SetBool("Rotation", true);
+
+        Invoke("DestroySword", 7.0f);
+    }
+
     public void SetupBounceSword(bool isBouncing, int bounceAmount, float bounceSpeed)
     {
         _isBouncing = isBouncing;
@@ -67,24 +83,6 @@ public class SkillThrowingSwordController : MonoBehaviour
         _maxTravelDistance = maxTravelDistance;
         _spinDuration = maxDuration;
         _hitCooldown = hitCooldown;
-    }
-
-    public void SetUpSword(Vector2 dir, float gravityScale, PlayerController player, float freezeTimeDuration, float returnSpeed)
-    {
-        _playerController = player;
-
-        _rigidBody2D.velocity = dir;
-        _rigidBody2D.gravityScale = gravityScale;
-
-        _freezeTimeDuration = freezeTimeDuration;
-        _returnSpeed = returnSpeed;
-
-        if (_pierceAmount <= 0)
-            _animator.SetBool("Rotation", true);
-
-        _spinDirection = Mathf.Clamp(_rigidBody2D.velocity.x, -1, 1);
-
-        Invoke("DestroySword", 7.0f);
     }
 
     public void ReturnSword()
@@ -124,12 +122,6 @@ public class SkillThrowingSwordController : MonoBehaviour
             {
                 _spinTimer -= Time.deltaTime;
 
-                transform.position = Vector2.MoveTowards(
-                    transform.position, 
-                    new Vector2(transform.position.x + _spinDirection, transform.position.y), 
-                    1.5f * Time.deltaTime
-                );
-
                 if (_spinTimer < 0)
                 {
                     _isReturning = true;
@@ -165,11 +157,7 @@ public class SkillThrowingSwordController : MonoBehaviour
     {
         if (_isBouncing && _enemyTargets.Count > 0)
         {
-            transform.position = Vector2.MoveTowards(
-                transform.position,
-                _enemyTargets[_targetIndex].position,
-                _bounceSpeed * Time.deltaTime
-            );
+            transform.position = Vector2.MoveTowards(transform.position, _enemyTargets[_targetIndex].position, _bounceSpeed * Time.deltaTime);
 
             if (Vector2.Distance(transform.position, _enemyTargets[_targetIndex].position) < 0.1f)
             {
@@ -208,8 +196,15 @@ public class SkillThrowingSwordController : MonoBehaviour
 
     private void SwordSkillEffect(EnemyController enemy)
     {
-        _playerController._characterStats.GiveDamage(enemy.GetComponent<BaseCharacterStats>());
-        enemy.FreezeEnemy(_freezeTimeDuration);
+        EnemyStats targetStat = enemy.GetComponent<EnemyStats>();
+
+        _playerController._characterStats.GiveDamage(targetStat);
+
+        if (_playerController._skillManager._skillThrowingSword._timeStopUnlocked)
+            enemy.FreezeEnemy(_freezeTimeDuration);
+
+        if (_playerController._skillManager._skillThrowingSword._vulnerableUnlocked)
+            targetStat.MakeVulnerablity(_freezeTimeDuration);
 
         ItemData_Equipment equipedAmulet = InventoryManager._inventoryManagerInstance.GetEquipment(EquipmentType.Amulet);
         if (equipedAmulet)
