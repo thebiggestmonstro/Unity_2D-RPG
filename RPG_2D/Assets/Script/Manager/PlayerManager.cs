@@ -25,4 +25,6 @@ public class PlayerManager : MonoBehaviour
         _currencyForSkillUnlock -= cost;
         return true;
     }
+
+    public int GetCurrency() => _currencyForSkillUnlock;
 }

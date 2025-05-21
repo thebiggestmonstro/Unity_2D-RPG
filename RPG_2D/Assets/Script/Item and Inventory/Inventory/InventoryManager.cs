@@ -35,7 +35,7 @@ public class InventoryManager : MonoBehaviour
     private UI_StatSlot[] _statSlot;
 
     [Header("Item Cooldown")]
-    private float _postionUsageCooldown;
+    public float _potionUsageCooldown;
     private float _lastTimeUsedPotion;
     private float _armorEffectUsageCooldown;
     private float _lastTimeUsedArmorEffect;
@@ -281,9 +281,9 @@ public class InventoryManager : MonoBehaviour
         if (currentPotion == null)
             return;
 
-        if (Time.time > _lastTimeUsedPotion + _postionUsageCooldown)
+        if (Time.time > _lastTimeUsedPotion + _potionUsageCooldown)
         {
-            _postionUsageCooldown = currentPotion._itemCooldown;
+            _potionUsageCooldown = currentPotion._itemCooldown;
             currentPotion.ExecuteItemEffect(null);
             _lastTimeUsedPotion = Time.time;
         }

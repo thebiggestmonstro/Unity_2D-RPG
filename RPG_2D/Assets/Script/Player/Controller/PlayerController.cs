@@ -82,6 +82,7 @@ public class PlayerController : BaseCharacterController
     private float _defaultDashSpeed;
     public float _dashDuration;
     public float _dashDir { get; private set; }
+    public bool _isDashCliekd;
 
     // Attack Info
     [Header("Attack Details")]
@@ -111,6 +112,7 @@ public class PlayerController : BaseCharacterController
         _jumpAction.Enable();
 
         _dashAction.performed += DoDash;
+        _dashAction.canceled += DoStopDash;
         _dashAction.Enable();
 
         _attackAction.performed += DoAttack;
@@ -165,6 +167,7 @@ public class PlayerController : BaseCharacterController
         _jumpAction.Disable();
 
         _dashAction.performed -= DoDash;
+        _dashAction.canceled -= DoStopDash;
         _dashAction.Disable();
 
         _attackAction.performed -= DoAttack;
@@ -296,6 +299,8 @@ public class PlayerController : BaseCharacterController
 
         if (value.ReadValueAsButton() && SkillManager._skillManagerInstance._skillDash.DoUseSkill())
         {
+            _isDashCliekd = value.ReadValueAsButton();
+
             _dashDir = _moveAction.ReadValue<Vector2>().x;
 
             if (_dashDir == 0)
@@ -303,6 +308,11 @@ public class PlayerController : BaseCharacterController
 
             _stateMachine.ChangeState(_dashState);
         }
+    }
+
+    void DoStopDash(InputAction.CallbackContext value)
+    {
+        _isDashCliekd = value.ReadValueAsButton();
     }
 
     void DoAttack(InputAction.CallbackContext value)

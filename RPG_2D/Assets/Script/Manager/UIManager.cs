@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour
     private GameObject _craftUI;
     [SerializeField]
     private GameObject _optionsUI;
+    [SerializeField] 
+    private GameObject _inGameUI;
     public UI_CraftWindow _craftWindow;
 
     public UI_ItemToolTip _itemToolTip;
@@ -32,7 +34,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        SwitchMenu(null);
+        SwitchMenu(_inGameUI);
     }
 
     public void SwitchCharacterUI()
@@ -79,9 +81,21 @@ public class UIManager : MonoBehaviour
         if (menu && menu.activeSelf)
         {
             menu.SetActive(false);
+            ChecknGameUI();
             return;
         }
             
         SwitchMenu(menu);
+    }
+
+    private void ChecknGameUI()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            if (transform.GetChild(i).gameObject.activeSelf)
+                return;
+        }
+
+        SwitchMenu(_inGameUI);
     }
 }
