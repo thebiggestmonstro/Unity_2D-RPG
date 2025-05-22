@@ -3,19 +3,27 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class UI_SkillToolTip : MonoBehaviour
+public class UI_SkillToolTip : UI_ToolTip
 {
     [SerializeField] 
     private TextMeshProUGUI _skillText;
     [SerializeField] 
     private TextMeshProUGUI _skillName;
     [SerializeField] 
+    private TextMeshProUGUI _skillUnlockCost;
+
+    [SerializeField] 
     private float _defaultFontSize;
 
-    public void ShowToolTip(string skillDescription, string skillName)
+    public void ShowToolTip(string skillDescription, string skillName, int skillUnlockCost)
     {
         _skillName.text = skillName;
         _skillText.text = skillDescription;
+        _skillUnlockCost.text = "Cost: " + skillUnlockCost;
+
+        AdjustPosition();
+
+        AdjustFontSize(_skillName);
 
         gameObject.SetActive(true);
     }

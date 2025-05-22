@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class UI_ItemToolTip : MonoBehaviour
+public class UI_ItemToolTip : UI_ToolTip
 {
     [SerializeField]
     private TextMeshProUGUI _itemNameText;
@@ -12,10 +12,8 @@ public class UI_ItemToolTip : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _itemDescriptionText;
 
-    private void Start()
-    {
-        gameObject.SetActive(false);
-    }
+    [SerializeField] 
+    private int _defaultFontSize = 32;
 
     public void ShowToolTip(ItemData_Equipment item)
     {
@@ -26,13 +24,15 @@ public class UI_ItemToolTip : MonoBehaviour
         _itemTypeText.text = item.EquipmentType.ToString();
         _itemDescriptionText.text = item.GetDescription();
 
-        //if (_itemNameText.text.Length > 13)
-        //    _itemNameText.fontSize *= 0.7f;
-        //else
-        //    _itemNameText.fontSize = 35;
+        AdjustFontSize(_itemNameText);
+        AdjustPosition();
 
         gameObject.SetActive(true);
     }
 
-    public void HideToolTip() => gameObject.SetActive(false);
+    public void HideToolTip()
+    {
+        gameObject.SetActive(false);
+        _itemNameText.fontSize = _defaultFontSize;
+    }
 }
