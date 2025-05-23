@@ -16546,7 +16546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerController: {fileID: 718177685}
-  _currencyForSkillUnlock: 100
+  _currencyForSkillUnlock: 0
 --- !u!4 &1286907573
 Transform:
   m_ObjectHideFlags: 0
@@ -38328,6 +38328,52 @@ RectTransform:
   m_AnchoredPosition: {x: 0.6499939, y: 0}
   m_SizeDelta: {x: -14.37, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1876926297
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1876926299}
+  - component: {fileID: 1876926298}
+  m_Layer: 0
+  m_Name: GameSystemManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1876926298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1876926297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe03ad1fab223fb4e8d932e328df60a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fileName: RPG_2D
+  _encryptData: 0
+--- !u!4 &1876926299
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1876926297}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1885546666
 GameObject:
   m_ObjectHideFlags: 0
@@ -47939,6 +47985,7 @@ SceneRoots:
   - {fileID: 1616794999}
   - {fileID: 1809108171}
   - {fileID: 1146614330}
+  - {fileID: 1876926299}
   - {fileID: 1286907573}
   - {fileID: 938091700}
   - {fileID: 259100909}

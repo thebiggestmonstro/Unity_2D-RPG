@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : MonoBehaviour, ISaveManager
 {
     public static PlayerManager _playerManagerInstance;
     public PlayerController _playerController;
@@ -27,4 +27,14 @@ public class PlayerManager : MonoBehaviour
     }
 
     public int GetCurrency() => _currencyForSkillUnlock;
+
+    public void LoadData(GameData gameData)
+    {
+        this._currencyForSkillUnlock = gameData._currentCurrency;
+    }
+
+    public void SaveData(ref GameData gameData)
+    {
+        gameData._currentCurrency = this._currencyForSkillUnlock;
+    }
 }
