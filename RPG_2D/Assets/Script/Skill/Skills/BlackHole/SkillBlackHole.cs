@@ -76,4 +76,11 @@ public class SkillBlackHole : SkillTemplate
     {
         return _maxSize / 2;
     }
+
+    protected override void CheckUnlock()
+    {
+        base.CheckUnlock();
+
+        UnlockBlackhole();
+    }
 }

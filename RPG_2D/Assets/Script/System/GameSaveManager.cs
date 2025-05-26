@@ -22,11 +22,8 @@ public class GameSaveManager : MonoBehaviour
             Destroy(_gameSaveManagerinstance.gameObject);
         else
             _gameSaveManagerinstance = this;
-    }
 
-    private void Start()
-    {
-        _dataHandler =  new FileDataHandler(Application.persistentDataPath, _fileName, _encryptData);
+        _dataHandler = new FileDataHandler(Application.persistentDataPath, _fileName, _encryptData);
         _saveManagers = FindAllSaveManagers();
 
         LoadGame();

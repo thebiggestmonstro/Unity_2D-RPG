@@ -222,4 +222,14 @@ public class SkillThrowingSword : SkillTemplate
 
         return position;
     }
+
+    protected override void CheckUnlock()
+    {
+        UnlockSword();
+        UnlockBounceSword();
+        UnlockSpinSword();
+        UnlockPierceSword();
+        UnlockTimeStop();
+        UnlockVulnurable();
+    }
 }

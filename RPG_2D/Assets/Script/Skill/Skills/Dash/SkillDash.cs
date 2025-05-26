@@ -63,4 +63,11 @@ public class SkillDash : SkillTemplate
         if (_cloneOnArrivalUnlocked)
             SkillManager._skillManagerInstance._skillCloning.DoCreateClone(_playerController.transform, Vector3.zero);
     }
+
+    protected override void CheckUnlock()
+    {
+        UnlockDash();
+        UnlockCloneOnDash();
+        UnlockCloneOnArrival();
+    }
 }

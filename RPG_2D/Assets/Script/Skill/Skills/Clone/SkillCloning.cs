@@ -121,4 +121,12 @@ public class SkillCloning : SkillTemplate
         yield return new WaitForSeconds(_CreateDelay);
         DoCreateClone(enemyTrasform, offset);
     }
+
+    protected override void CheckUnlock()
+    {
+        UnlockCloneAttack();
+        UnlockAggresiveClone();
+        UnlockMultiClone();
+        UnlockCrystalInstead();
+    }
 }

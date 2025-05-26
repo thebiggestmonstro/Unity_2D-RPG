@@ -63,4 +63,11 @@ public class SkillParry : SkillTemplate
         if (_parryWithCloneUnlocked)
             SkillManager._skillManagerInstance._skillCloning.CreateCloneWithDelay(_respawnTransform);
     }
+
+    protected override void CheckUnlock()
+    {
+        UnlockParry();
+        UnlockParryRestore();
+        UnlockParryWithClone();
+    }
 }

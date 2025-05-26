@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UI_SkillTreeSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class UI_SkillTreeSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISaveManager
 {
     private UIManager _uiManager;
     public bool _isSkillUnlocked;
@@ -27,6 +27,7 @@ public class UI_SkillTreeSlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [SerializeField]
     private Color _lockedSkillColor;
 
+
     private void OnValidate()
     {
         gameObject.name = "UI_SkillTreeSlot : " + _skillName;
@@ -45,6 +46,9 @@ public class UI_SkillTreeSlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
         _skillImage.color = _lockedSkillColor;
 
         _uiManager._skillToolTip.HideToolTip();
+
+        if (_isSkillUnlocked)
+            _skillImage.color = Color.white;
     }
 
     public void UnlcokSkillSlot()
@@ -76,5 +80,24 @@ public class UI_SkillTreeSlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public void OnPointerExit(PointerEventData eventData)
     {
         _uiManager._skillToolTip.HideToolTip();
+    }
+
+    public void LoadData(GameData data)
+    {
+        if (data._skillTreeData.TryGetValue(_skillName, out bool value))
+        {
+            _isSkillUnlocked = value;
+        }
+    }
+
+    public void SaveData(ref GameData _data)
+    {
+        if (_data._skillTreeData.TryGetValue(_skillName, out bool value))
+        {
+            _data._skillTreeData.Remove(_skillName);
+            _data._skillTreeData.Add(_skillName, _isSkillUnlocked);
+        }
+        else
+            _data._skillTreeData.Add(_skillName, _isSkillUnlocked);
     }
 }

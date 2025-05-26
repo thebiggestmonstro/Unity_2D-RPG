@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using UnityEditor;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : MonoBehaviour, ISaveManager
 {
     public static InventoryManager _inventoryManagerInstance;
 
@@ -40,6 +41,10 @@ public class InventoryManager : MonoBehaviour
     private float _armorEffectUsageCooldown;
     private float _lastTimeUsedArmorEffect;
 
+    [Header("Data base")]
+    public List<Item_Inventory> _loadedItems;
+    public List<ItemData_Equipment> _loadedEquipments;
+
     private void Awake()
     {
         if (_inventoryManagerInstance == null)
@@ -69,6 +74,24 @@ public class InventoryManager : MonoBehaviour
 
     private void AddStartingItem()
     {
+        foreach (ItemData_Equipment item in _loadedEquipments)
+        {
+            EquipItem(item);
+        }
+
+        if (_loadedItems.Count > 0)
+        {
+            foreach (Item_Inventory item in _loadedItems)
+            {
+                for (int i = 0; i < item._stackSize; i++)
+                {
+                    AddItem(item._itemData);
+                }
+            }
+
+            return;
+        }
+
         for (int i = 0; i < _startEquipments.Count; i++)
         {
             if (_startEquipments[i])
@@ -314,5 +337,69 @@ public class InventoryManager : MonoBehaviour
             return false;
         
         return true;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data._inventoryData.Clear();
+        data._equipmentId.Clear();
+
+        foreach (KeyValuePair<ItemData, Item_Inventory> pair in _defaultInventoryDictianory)
+        {
+            data._inventoryData.Add(pair.Key._itemId, pair.Value._stackSize);
+        }
+
+        foreach (KeyValuePair<ItemData, Item_Inventory> pair in _stashInventoryDictianory)
+        {
+            data._inventoryData.Add(pair.Key._itemId, pair.Value._stackSize);
+        }
+
+        foreach (KeyValuePair<ItemData_Equipment, Item_Inventory> pair in _equipmentInventoryDictianory)
+        {
+            data._equipmentId.Add(pair.Key._itemId);
+        }
+    }
+
+    public void LoadData(GameData data)
+    {
+        foreach (KeyValuePair<string, int> pair in data._inventoryData)
+        {
+            foreach (var item in GetItemDataBase())
+            {
+                if (item != null && item._itemId == pair.Key)
+                {
+                    Item_Inventory itemToLoad = new Item_Inventory(item);
+                    itemToLoad._stackSize = pair.Value;
+
+                    _loadedItems.Add(itemToLoad);
+                }
+            }
+        }
+
+        foreach (string loadedItemId in data._equipmentId)
+        {
+            foreach (var item in GetItemDataBase())
+            {
+                if (item != null && loadedItemId == item._itemId)
+                {
+                    _loadedEquipments.Add(item as ItemData_Equipment);
+                }
+            }
+        }
+    }
+
+    private List<ItemData> GetItemDataBase()
+    {
+        List<ItemData> itemDataBase = new List<ItemData>();
+        string[] assetNames = AssetDatabase.FindAssets("", new[] { "Assets/Data/Items" });
+
+        foreach (string SOName in assetNames)
+        {
+            var SOpath = AssetDatabase.GUIDToAssetPath(SOName);
+            var itemData = AssetDatabase.LoadAssetAtPath<ItemData>(SOpath);
+            itemDataBase.Add(itemData);
+        }
+
+        return itemDataBase;
     }
 }

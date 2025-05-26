@@ -48,4 +48,10 @@ public class SkillDodge : SkillTemplate
         if (_isDodgeMirageUnlocked)
             SkillManager._skillManagerInstance._skillCloning.DoCreateClone(_playerController.transform, new Vector3(2 * _playerController._facingDir, 0));
     }
+
+    protected override void CheckUnlock()
+    {
+        UnlockDodge();
+        UnlockMirageDodge();
+    }
 }

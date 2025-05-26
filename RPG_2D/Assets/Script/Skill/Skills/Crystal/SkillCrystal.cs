@@ -184,4 +184,13 @@ public class SkillCrystal : SkillTemplate
         _cooldownTimer = _multiStackCooldown;
         RefillCrystal();
     }
+
+    protected override void CheckUnlock()
+    {
+        UnlockCrystal();
+        UnlockCrystalMirage();
+        UnlockExplosiveCrystal();
+        UnlockMovingCrystal();
+        UnlockMultiStack();
+    }
 }

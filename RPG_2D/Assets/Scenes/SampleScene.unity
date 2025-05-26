@@ -3969,6 +3969,8 @@ MonoBehaviour:
   _equpmentSlotParent: {fileID: 356699532}
   _statSlotParent: {fileID: 993010082}
   _potionUsageCooldown: 0
+  _loadedItems: []
+  _loadedEquipments: []
 --- !u!4 &259100909
 Transform:
   m_ObjectHideFlags: 0
@@ -6213,7 +6215,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -16546,7 +16548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerController: {fileID: 718177685}
-  _currencyForSkillUnlock: 0
+  _currencyForSkillUnlock: 100
 --- !u!4 &1286907573
 Transform:
   m_ObjectHideFlags: 0

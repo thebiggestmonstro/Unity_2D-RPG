@@ -13,6 +13,13 @@ public class SkillTemplate : MonoBehaviour
     protected virtual void Start()
     {
         _playerController = PlayerManager._playerManagerInstance._playerController;
+
+        CheckUnlock();
+    }
+
+    protected virtual void CheckUnlock()
+    {
+
     }
 
     protected virtual void Update()
