@@ -7,6 +7,15 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager _uiManagerInstance;
 
+    [Header("End screen")]
+    [SerializeField] 
+    private UI_FadeScreen _fadeScreen;
+    [SerializeField] 
+    private GameObject _endText;
+    [SerializeField] 
+    private GameObject _restartButton;
+    [Space]
+
     [SerializeField]
     private GameObject _characterUI;
     [SerializeField]
@@ -30,11 +39,15 @@ public class UIManager : MonoBehaviour
 
         _uiManagerInstance = this;
         SwitchMenu(_skillTreeUI);
+        _fadeScreen.gameObject.SetActive(true);
     }
 
     private void Start()
     {
         SwitchMenu(_inGameUI);
+
+        _itemToolTip.gameObject.SetActive(false);
+        _statToolTip.gameObject.SetActive(false);
     }
 
     public void SwitchCharacterUI()
@@ -60,20 +73,17 @@ public class UIManager : MonoBehaviour
     public void SwitchMenu(GameObject menu)
     {
         for (int i = 0; i < transform.childCount; i++)
-        { 
-            transform.GetChild(i).gameObject.SetActive(false);
+        {
+            bool fadeScreen = transform.GetChild(i).GetComponent<UI_FadeScreen>() != null;
+
+            if (fadeScreen == false)
+                transform.GetChild(i).gameObject.SetActive(false);
         }
 
         if (menu != null)
         {
             menu.SetActive(true);
-            if (menu.GetComponentInChildren<UI_ItemToolTip>() && menu.GetComponentInChildren<UI_StatToolTip>())
-            { 
-                _itemToolTip = menu.GetComponentInChildren<UI_ItemToolTip>();
-                _statToolTip = menu.GetComponentInChildren<UI_StatToolTip>();
-            }
         }
-            
     }
 
     public void SwitchMenuWithKey(GameObject menu)
@@ -81,21 +91,35 @@ public class UIManager : MonoBehaviour
         if (menu && menu.activeSelf)
         {
             menu.SetActive(false);
-            ChecknGameUI();
+            CheckInGameUI();
             return;
         }
             
         SwitchMenu(menu);
     }
 
-    private void ChecknGameUI()
+    private void CheckInGameUI()
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            if (transform.GetChild(i).gameObject.activeSelf)
+            if (transform.GetChild(i).gameObject.activeSelf && transform.GetChild(i).GetComponent<UI_FadeScreen>() == null)
                 return;
         }
 
         SwitchMenu(_inGameUI);
+    }
+
+    public void SwitchEndScreen()
+    {
+        _fadeScreen.FadeOut();
+        StartCoroutine(EndScreenCorutione());
+    }
+
+    IEnumerator EndScreenCorutione()
+    {
+        yield return new WaitForSeconds(1);
+        _endText.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        _restartButton.SetActive(true);
     }
 }
