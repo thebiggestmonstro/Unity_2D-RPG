@@ -20,11 +20,11 @@ public class GameSaveManager : MonoBehaviour
     {
         if (_gameSaveManagerinstance != null)
             Destroy(_gameSaveManagerinstance.gameObject);
-        else
-            _gameSaveManagerinstance = this;
+            
+        _gameSaveManagerinstance = this;
 
+        _saveManagers = new List<ISaveManager>();
         _dataHandler = new FileDataHandler(Application.persistentDataPath, _fileName, _encryptData);
-        
     }
 
     private void Start()
@@ -52,6 +52,13 @@ public class GameSaveManager : MonoBehaviour
         {
             saveManager.LoadData(_gameData);
         }
+    }
+
+    public void OnLevelWasLoaded()
+    {
+        _saveManagers.Clear();
+        _saveManagers = FindAllSaveManagers();
+        LoadGame();
     }
 
     private void OnApplicationQuit()

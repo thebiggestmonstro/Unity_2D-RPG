@@ -27,7 +27,6 @@ public class UI_SkillTreeSlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [SerializeField]
     private Color _lockedSkillColor;
 
-
     private void OnValidate()
     {
         gameObject.name = "UI_SkillTreeSlot : " + _skillName;

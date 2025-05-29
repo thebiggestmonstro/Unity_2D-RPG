@@ -14,19 +14,20 @@ public class GameManager : MonoBehaviour, ISaveManager
     {
         if (_gameManagerinstance != null)
             Destroy(_gameManagerinstance.gameObject);
-        else
-            _gameManagerinstance = this;
-    }
 
-    private void Start()
-    {
+        _gameManagerinstance = this;
+
         _checkpoints = FindObjectsOfType<Interact_CheckPoint>();
     }
+
     public void RestartScene()
     {
         GameSaveManager._gameSaveManagerinstance.SaveGame();
+
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
+
+        GameSaveManager._gameSaveManagerinstance.OnLevelWasLoaded();
     }
 
     public void SaveData(ref GameData data)
