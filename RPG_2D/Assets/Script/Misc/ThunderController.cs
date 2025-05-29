@@ -13,7 +13,7 @@ public class ThunderController : MonoBehaviour
     private Animator _animator;
     private bool _isTriggered;
 
-    private void Start()
+    private void Awake()
     {
         _animator = GetComponentInChildren<Animator>();
     }

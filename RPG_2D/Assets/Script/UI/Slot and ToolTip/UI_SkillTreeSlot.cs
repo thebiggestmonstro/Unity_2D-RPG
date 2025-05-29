@@ -36,13 +36,12 @@ public class UI_SkillTreeSlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private void Awake()
     {
         GetComponent<Button>().onClick.AddListener(() => UnlcokSkillSlot());
+        _uiManager = GetComponentInParent<UIManager>();
+        _skillImage = GetComponent<Image>();
     }
 
     private void Start()
     {
-        _uiManager = GetComponentInParent<UIManager>();
-
-        _skillImage = GetComponent<Image>();
         _skillImage.color = _lockedSkillColor;
 
         _uiManager._skillToolTip.HideToolTip();

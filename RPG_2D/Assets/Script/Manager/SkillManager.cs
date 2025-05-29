@@ -21,10 +21,7 @@ public class SkillManager : MonoBehaviour
             Destroy(_skillManagerInstance.gameObject);
 
         _skillManagerInstance = this;
-    }
 
-    private void Start()
-    {
         _skillDash = GetComponent<SkillDash>();
         _skillCloning = GetComponent<SkillCloning>();
         _skillThrowingSword = GetComponent<SkillThrowingSword>();
@@ -32,5 +29,10 @@ public class SkillManager : MonoBehaviour
         _skillCrystal = GetComponent<SkillCrystal>();
         _skillParry = GetComponent<SkillParry>();
         _skillDodge = GetComponent<SkillDodge>();
+    }
+
+    private void Start()
+    {
+
     }
 }

@@ -13,8 +13,8 @@ public class PlayerManager : MonoBehaviour, ISaveManager
     {
         if (_playerManagerInstance != null)
             Destroy(_playerManagerInstance.gameObject);
-        
-        _playerManagerInstance = this;
+        else
+            _playerManagerInstance = this;
     }
 
     public bool CanUnlockSkill(int cost)

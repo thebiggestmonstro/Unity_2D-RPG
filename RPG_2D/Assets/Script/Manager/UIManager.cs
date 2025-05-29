@@ -122,4 +122,6 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         _restartButton.SetActive(true);
     }
+
+    public void RestartGameButton() => GameManager._gameManagerinstance.RestartScene();
 }

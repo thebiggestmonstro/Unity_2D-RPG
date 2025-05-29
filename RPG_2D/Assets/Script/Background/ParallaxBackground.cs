@@ -11,10 +11,13 @@ public class ParallaxBackground : MonoBehaviour
     private GameObject _camera;
     private float _spriteLength;
 
-    void Start()
+    void Awake()
     {
         _camera = GameObject.Find("Main Camera");
+    }
 
+    private void Start()
+    {
         _spriteLength = GetComponent<SpriteRenderer>().bounds.size.x;
         _xPosition = gameObject.transform.position.x;
     }

@@ -251,6 +251,7 @@ public class PlayerController : BaseCharacterController
         _defaultDashSpeed = _dashSpeed;
     }
 
+
     protected override void Update()
     {
         base.Update();

@@ -24,8 +24,12 @@ public class GameSaveManager : MonoBehaviour
             _gameSaveManagerinstance = this;
 
         _dataHandler = new FileDataHandler(Application.persistentDataPath, _fileName, _encryptData);
-        _saveManagers = FindAllSaveManagers();
+        
+    }
 
+    private void Start()
+    {
+        _saveManagers = FindAllSaveManagers();
         LoadGame();
     }
 

@@ -38,11 +38,6 @@ public class BaseCharacterController : MonoBehaviour
     public System.Action onFlipped;
 
     protected virtual void Awake()
-    { 
-    
-    }
-    
-    protected virtual void Start()
     {
         _animator = GetComponentInChildren<Animator>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -50,6 +45,11 @@ public class BaseCharacterController : MonoBehaviour
         _baseEffectController = GetComponent<BaseEffectController>();
         _characterStats = GetComponent<BaseCharacterStats>();
         _capsuleCollider = GetComponent<CapsuleCollider2D>();
+    }
+    
+    protected virtual void Start()
+    {
+        
     }
 
     protected virtual void Update()

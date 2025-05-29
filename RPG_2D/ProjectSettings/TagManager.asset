@@ -50,6 +50,9 @@ TagManager:
   - name: Item
     uniqueID: 1439247575
     locked: 0
+  - name: CheckPoint
+    uniqueID: 1452934223
+    locked: 0
   - name: Enemy
     uniqueID: 816834101
     locked: 0
