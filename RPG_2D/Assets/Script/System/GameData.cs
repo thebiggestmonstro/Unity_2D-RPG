@@ -15,7 +15,7 @@ public class GameData
 
     public GameData()
     {
-        this._currentCurrency = 0;
+        this._currentCurrency = 100;
         _skillTreeData = new SerializableDictionary<string, bool>();
         _inventoryData = new SerializableDictionary<string, int>();
         _equipmentId = new List<string>();
