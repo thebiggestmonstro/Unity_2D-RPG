@@ -25,7 +25,13 @@ public class PlayerStateGrounded : PlayerState
         base.Update();
 
         if (_isCastingBlackHole && _controller._skillManager._skillBlackHole._blackholeUnlocked)
+        {
+            if (_controller._skillManager._skillBlackHole._cooldownTimer > 0)
+                return;
+
             _stateMachine.ChangeState(_controller._blackHoleState);
+        }
+            
 
         if (_isThrowingSword && HasNoSword() && _controller._skillManager._skillThrowingSword._swordUnlocked)
             _stateMachine.ChangeState(_controller._aimSwordState);

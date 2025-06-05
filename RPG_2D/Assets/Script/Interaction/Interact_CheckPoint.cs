@@ -29,6 +29,9 @@ public class Interact_CheckPoint : MonoBehaviour
 
     public void ActivateCheckpoint()
     {
+        if (_isActivating == false)
+            AudioManager._audioManagerInstance.PlaySFX(5, transform);
+
         _isActivating = true;
         _animator.SetBool("Active", true);
     }

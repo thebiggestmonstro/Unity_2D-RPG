@@ -10,19 +10,20 @@ public class PlayerStateMove : PlayerStateGrounded
 
     }
 
-    // State에 돌입
     public override void Enter()
     {
         base.Enter();
+
+        AudioManager._audioManagerInstance.PlaySFX(14, null);
     }
 
-    // State에서 탈출
     public override void Exit()
     {
         base.Exit();
+
+        AudioManager._audioManagerInstance.StopSFX(14);
     }
 
-    // State에서 매 프레임마다 진행
     public override void Update()
     {
         base.Update();

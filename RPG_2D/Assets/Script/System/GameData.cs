@@ -13,6 +13,8 @@ public class GameData
     public SerializableDictionary<string, bool> _checkpoints;
     public string _closestCheckpointId;
 
+    public SerializableDictionary<string, float> _volumeSettings;
+
     public GameData()
     {
         this._currentCurrency = 100;
@@ -22,5 +24,7 @@ public class GameData
 
         _closestCheckpointId = string.Empty;
         _checkpoints = new SerializableDictionary<string, bool>();
+
+        _volumeSettings = new SerializableDictionary<string, float>();
     }
 }

@@ -6,7 +6,7 @@ public class SkillTemplate : MonoBehaviour
 {
     [SerializeField]
     public float _cooldown;
-    protected float _cooldownTimer;
+    public float _cooldownTimer;
 
     protected PlayerController _playerController;
 

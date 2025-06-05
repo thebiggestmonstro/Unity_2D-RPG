@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class UIManager : MonoBehaviour, ISaveManager
 {
     public static UIManager _uiManagerInstance;
 
@@ -31,6 +31,9 @@ public class UIManager : MonoBehaviour
     public UI_ItemToolTip _itemToolTip;
     public UI_StatToolTip _statToolTip;
     public UI_SkillToolTip _skillToolTip;
+
+    [SerializeField]
+    private UI_VolumeSlider[] _volumeSettings;
 
     private void Awake()
     {
@@ -124,4 +127,26 @@ public class UIManager : MonoBehaviour
     }
 
     public void RestartGameButton() => GameManager._gameManagerinstance.RestartScene();
+
+    public void LoadData(GameData data)
+    {
+        foreach (KeyValuePair<string, float> pair in data._volumeSettings)
+        {
+            foreach (UI_VolumeSlider eachSlider in _volumeSettings)
+            {
+                if (eachSlider._parameter == pair.Key)
+                    eachSlider.LoadSlider(pair.Value);
+            }
+        }
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data._volumeSettings.Clear();
+
+        foreach (UI_VolumeSlider eachSlider in _volumeSettings)
+        {
+            data._volumeSettings.Add(eachSlider._parameter, eachSlider._slider.value);
+        }
+    }
 }
