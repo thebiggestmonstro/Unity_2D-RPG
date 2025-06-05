@@ -85,6 +85,7 @@ public class UIManager : MonoBehaviour, ISaveManager
 
         if (menu != null)
         {
+            AudioManager._audioManagerInstance.PlaySFX(7, null);
             menu.SetActive(true);
         }
     }
