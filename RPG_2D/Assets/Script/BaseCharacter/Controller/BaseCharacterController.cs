@@ -20,7 +20,7 @@ public class BaseCharacterController : MonoBehaviour
 
     [Header("Knockback Info")]
     [SerializeField]
-    protected Vector2 _knockbackDirection;
+    protected Vector2 _knockbackPower;
     protected bool _isKnocked;
     [SerializeField]
     float _knockbackDuration;
@@ -36,6 +36,8 @@ public class BaseCharacterController : MonoBehaviour
     protected bool _facingRight = true;
 
     public System.Action onFlipped;
+
+    public int _knockbackDir { get; private set; }
 
     protected virtual void Awake()
     {
@@ -59,7 +61,6 @@ public class BaseCharacterController : MonoBehaviour
 
     public virtual void SetVelocity(float xVelocity, float yVelcoity)
     {
-        // 피격당해 넉백되고 있는 동안 이동을 막음
         if (_isKnocked)
             return;
 
@@ -69,7 +70,6 @@ public class BaseCharacterController : MonoBehaviour
 
     public virtual void SetZeroVelocity()
     {
-        // 피격당해 넉백당하고 있는 동안에는 이동을 고정시키는 것도 막음
         if (_isKnocked)
             return;
 
@@ -103,11 +103,19 @@ public class BaseCharacterController : MonoBehaviour
     {
         _isKnocked = true;
 
-        _rigidbody2D.velocity = new Vector2(_knockbackDirection.x * -_facingDir, _knockbackDirection.y);
+        _rigidbody2D.velocity = new Vector2(_knockbackPower.x * _knockbackDir, _knockbackPower.y);
 
         yield return new WaitForSeconds(_knockbackDuration);
 
         _isKnocked = false;
+    }
+
+    public virtual void SetupKnockbackDir(Transform damageDirection)
+    {
+        if (damageDirection.position.x > transform.position.x)
+            _knockbackDir = -1;
+        else if (damageDirection.position.x < transform.position.x)
+            _knockbackDir = 1;
     }
 
     protected virtual void OnDrawGizmos()

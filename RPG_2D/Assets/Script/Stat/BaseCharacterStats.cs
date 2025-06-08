@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using TMPro.EditorUtilities;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public enum StatType
 {
@@ -104,6 +105,8 @@ public class BaseCharacterStats : MonoBehaviour
     {
         if (CheckTargetCanEvadeAttack(targetStats))
             return;
+
+        targetStats.GetComponent<BaseCharacterController>().SetupKnockbackDir(transform);
 
         int totalDamage = _attackPoint.GetValue() + _strength.GetValue();
 

@@ -41,12 +41,12 @@ public class UIManager : MonoBehaviour, ISaveManager
             Destroy(_uiManagerInstance.gameObject);
 
         _uiManagerInstance = this;
-        SwitchMenu(_skillTreeUI);
         _fadeScreen.gameObject.SetActive(true);
     }
 
     private void Start()
     {
+        SwitchMenu(_skillTreeUI);
         SwitchMenu(_inGameUI);
 
         _itemToolTip.gameObject.SetActive(false);

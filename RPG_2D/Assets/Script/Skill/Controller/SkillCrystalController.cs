@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class SkillCrystalController : MonoBehaviour
 {
@@ -81,6 +82,8 @@ public class SkillCrystalController : MonoBehaviour
         {
             if (hit.GetComponent<EnemyController>() != null)
             {
+                hit.GetComponent<BaseCharacterController>().SetupKnockbackDir(transform);
+
                 _playerController._characterStats.GiveMagicalDamage(hit.GetComponent<BaseCharacterStats>());
 
                 ItemData_Equipment equipedAmulet = InventoryManager._inventoryManagerInstance.GetEquipment(EquipmentType.Amulet);

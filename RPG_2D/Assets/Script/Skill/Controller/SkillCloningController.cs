@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class SkillCloningController : MonoBehaviour
 {
@@ -71,6 +72,8 @@ public class SkillCloningController : MonoBehaviour
         {
             if (hit.GetComponent<EnemyController>() != null)
             {
+                hit.GetComponent<BaseCharacterController>().SetupKnockbackDir(transform);
+
                 PlayerStats playerStats = _playerController.GetComponent<PlayerStats>();
                 EnemyStats enemyStats = hit.GetComponent<EnemyStats>();
 
