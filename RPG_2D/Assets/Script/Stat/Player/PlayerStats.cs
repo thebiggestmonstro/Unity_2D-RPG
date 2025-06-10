@@ -37,16 +37,14 @@ public class PlayerStats : BaseCharacterStats
     {
         base.DecreaseHealth(damage);
 
-        PlayerStats playerStats = PlayerManager._playerManagerInstance._playerController.GetComponent<PlayerStats>();
-
-        if (playerStats._currentHealth > playerStats.GetMaxHealthValue() * 0.1f)
+        if (_isDead)
             return;
 
-        if (InventoryManager._inventoryManagerInstance.CanUseArmorEffect() == false)
-            return;
+        if (damage > GetMaxHealthValue() * .3f)
+            _playerController.SetupKnockbackPower(new Vector2(10, 6));
 
         ItemData_Equipment equippedArmor = InventoryManager._inventoryManagerInstance.GetEquipment(EquipmentType.Armor);
-        if (equippedArmor)
+        if (equippedArmor && InventoryManager._inventoryManagerInstance.CanUseArmorEffect())
             equippedArmor.ExecuteItemEffect(_playerController.transform);
     }
 

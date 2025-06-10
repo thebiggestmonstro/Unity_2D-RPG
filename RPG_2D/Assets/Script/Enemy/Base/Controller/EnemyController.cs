@@ -13,6 +13,8 @@ public class EnemyController : BaseCharacterController
     [Header("Attack Info")]
     public float _attackDistance;
     public float _attackCooldown;
+    public float _minAttackCooldown;
+    public float _maxAttackCooldown;
     [HideInInspector]
     public float _lastTimeAttacked;
 

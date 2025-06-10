@@ -10,7 +10,6 @@ public class PlayerStateWallSlide : PlayerState
 
     }
 
-    // State에 돌입
     public override void Enter()
     {
         base.Enter();
@@ -18,16 +17,17 @@ public class PlayerStateWallSlide : PlayerState
         
     }
 
-    // State에서 탈출
     public override void Exit()
     {
         base.Exit();
     }
 
-    // State에서 매 프레임마다 진행
     public override void Update()
     {
         base.Update();
+
+        if (_controller.DoDetectIsFacingWall() == false)
+            return;
 
         if (_isJumping)
         {

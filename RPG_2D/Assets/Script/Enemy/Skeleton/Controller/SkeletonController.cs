@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SkeletonController : EnemyController
 {
-    // Skeleton States
     public SkeletonStateIdle _idleState { get; private set; }
     public SkeletonStateMove _moveState { get; private set; }
     public SkeletonStateEngage _engageState { get; private set; }
@@ -12,7 +11,6 @@ public class SkeletonController : EnemyController
     public SkeletonStateStunnded _stunnedState { get; private set; }
     public SkeletonStateDead _deadState { get; private set; }
 
-    // Awake에서는 Skeleton이 가질 State들을 설정함
     protected override void Awake()
     {
         base.Awake();

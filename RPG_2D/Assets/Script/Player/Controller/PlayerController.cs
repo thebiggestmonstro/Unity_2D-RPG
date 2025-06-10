@@ -259,6 +259,8 @@ public class PlayerController : BaseCharacterController
         _stateMachine._currentState.Update();
     }
 
+    #region InputCallback
+
     public IEnumerator DoSomething(float seconds)
     {
         _doingSomething = true;
@@ -392,6 +394,28 @@ public class PlayerController : BaseCharacterController
         _isDrinkingPotion = value.ReadValueAsButton();
     }
 
+    void DoOpenCharacterUI(InputAction.CallbackContext value)
+    {
+        _uiManager.SwitchCharacterUI();
+    }
+
+    void DoOpenSkillTreeUI(InputAction.CallbackContext value)
+    {
+        _uiManager.SwitchSkillTreeUI();
+    }
+
+    void DoOpenCraftUI(InputAction.CallbackContext value)
+    {
+        _uiManager.SwitchCraftUI();
+    }
+
+    void DoOpenOptionUI(InputAction.CallbackContext value)
+    {
+        _uiManager.SwitchOptionUI();
+    }
+
+    #endregion
+
     public void AssignNewSword(GameObject newSword)
     {
         _sword = newSword;
@@ -429,23 +453,9 @@ public class PlayerController : BaseCharacterController
         Invoke("RollbackDefaultSpeed", slowDuration);
     }
 
-    void DoOpenCharacterUI(InputAction.CallbackContext value)
+    
+    protected override void SetupZeroKnockbackPower()
     {
-        _uiManager.SwitchCharacterUI();
-    }
-
-    void DoOpenSkillTreeUI(InputAction.CallbackContext value)
-    {
-        _uiManager.SwitchSkillTreeUI();
-    }
-
-    void DoOpenCraftUI(InputAction.CallbackContext value)
-    {
-        _uiManager.SwitchCraftUI();
-    }
-
-    void DoOpenOptionUI(InputAction.CallbackContext value)
-    {
-        _uiManager.SwitchOptionUI();
+        _knockbackPower = new Vector2(0, 0);
     }
 }

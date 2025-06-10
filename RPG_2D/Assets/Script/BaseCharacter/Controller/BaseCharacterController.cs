@@ -108,6 +108,8 @@ public class BaseCharacterController : MonoBehaviour
         yield return new WaitForSeconds(_knockbackDuration);
 
         _isKnocked = false;
+
+        SetupZeroKnockbackPower();
     }
 
     public virtual void SetupKnockbackDir(Transform damageDirection)
@@ -117,6 +119,13 @@ public class BaseCharacterController : MonoBehaviour
         else if (damageDirection.position.x < transform.position.x)
             _knockbackDir = 1;
     }
+
+    protected virtual void SetupZeroKnockbackPower()
+    {
+
+    }
+
+    public void SetupKnockbackPower(Vector2 knockbackpower) => _knockbackPower = knockbackpower;
 
     protected virtual void OnDrawGizmos()
     {
