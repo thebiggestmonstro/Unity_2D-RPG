@@ -254,6 +254,9 @@ public class PlayerController : BaseCharacterController
 
     protected override void Update()
     {
+        if (Time.timeScale == 0)
+            return;
+
         base.Update();
 
         _stateMachine._currentState.Update();

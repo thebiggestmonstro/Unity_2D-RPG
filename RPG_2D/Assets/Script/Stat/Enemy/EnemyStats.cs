@@ -41,6 +41,8 @@ public class EnemyStats : BaseCharacterStats
         _enemyController.Die();
 
         _enemyDropSystem.GenerateDrop();
+
+        Destroy(gameObject, 5f);
     }
 
     private void ModifyStat(CharacterStats stat)

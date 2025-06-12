@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour, ISaveManager
@@ -87,6 +88,14 @@ public class UIManager : MonoBehaviour, ISaveManager
         {
             AudioManager._audioManagerInstance.PlaySFX(7, null);
             menu.SetActive(true);
+        }
+
+        if (GameManager._gameManagerinstance != null)
+        {
+            if (menu == _inGameUI)
+                GameManager._gameManagerinstance.PauseGame(false);
+            else
+                GameManager._gameManagerinstance.PauseGame(true);
         }
     }
 

@@ -10,7 +10,6 @@ public class PlayerStateDash : PlayerState
 
     }
 
-    // State에 돌입
     public override void Enter()
     {
         base.Enter();
@@ -18,9 +17,10 @@ public class PlayerStateDash : PlayerState
         _controller._skillManager._skillDash.CreateCloneOnDashStart();
 
         _stateTimer = _controller._dashDuration;
+
+        _controller._characterStats.MakeInvincible(true);
     }
 
-    // State에서 탈출
     public override void Exit()
     {
         base.Exit();
@@ -28,9 +28,10 @@ public class PlayerStateDash : PlayerState
         _controller._skillManager._skillDash.CreateCloneOnDashOver();
 
         _controller.SetVelocity(0, _rigidbody2D.velocity.y);
+
+        _controller._characterStats.MakeInvincible(false);
     }
 
-    // State에서 매 프레임마다 진행
     public override void Update()
     {
         base.Update();

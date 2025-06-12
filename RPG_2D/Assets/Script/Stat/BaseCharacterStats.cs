@@ -71,6 +71,7 @@ public class BaseCharacterStats : MonoBehaviour
     public System.Action onHealthChanged;
     public bool _isDead { get; private set; }
     private bool _isVulnerable;
+    public bool _isInvincible { get; private set; }
 
     protected virtual void Awake()
     {
@@ -165,6 +166,9 @@ public class BaseCharacterStats : MonoBehaviour
 
     public virtual void TakeDamage(int opponentAttackPoint)
     {
+        if (_isInvincible)
+            return;
+
         DecreaseHealth(opponentAttackPoint);
 
         GetComponent<BaseCharacterController>().DoGetDamage();
@@ -173,6 +177,8 @@ public class BaseCharacterStats : MonoBehaviour
         if (_currentHealth <= 0 && !_isDead)
             Die();
     }
+
+    public void MakeInvincible(bool invincible) => _isInvincible = invincible;
 
     public virtual void GiveMagicalDamage(BaseCharacterStats targetStats)
     {
@@ -429,5 +435,11 @@ public class BaseCharacterStats : MonoBehaviour
         yield return new WaitForSeconds(duration);
 
         _isVulnerable = false;
+    }
+
+    public void KillCharacter()
+    {
+        if (!_isDead)
+            Die();
     }
 }
