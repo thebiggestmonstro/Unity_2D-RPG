@@ -247,37 +247,33 @@ public class InventoryManager : MonoBehaviour, ISaveManager
 
     public bool CraftEquipment(ItemData_Equipment itemToCraft, List<Item_Inventory> requireMaterials)
     {
-        List<Item_Inventory> materialsForCrafting = new List<Item_Inventory>();
-
-        for (int i = 0; i < requireMaterials.Count; i++)
+        foreach (Item_Inventory requiredItem in requireMaterials)
         {
-            if (_stashInventoryDictianory.TryGetValue(requireMaterials[i]._itemData, out Item_Inventory stashValue))
+            if (_stashInventoryDictianory.TryGetValue(requiredItem._itemData, out Item_Inventory stashItem))
             {
-                if (stashValue._stackSize < requireMaterials[i]._stackSize)
+                if (stashItem._stackSize < requiredItem._stackSize)
                 {
-                    Debug.Log("Not Enough Materials");
+                    Debug.Log("Not enough materials: " + requiredItem._itemData.name);
                     return false;
-                }
-                else
-                { 
-                    materialsForCrafting.Add(stashValue);
                 }
             }
             else
             {
-                Debug.Log("Not Enough Materials");
+                Debug.Log("Materials not found in stash: " + requiredItem._itemData.name);
                 return false;
             }
         }
 
-        for (int i = 0; i < materialsForCrafting.Count; i++)
+        foreach (Item_Inventory requiredMaterial in requireMaterials)
         {
-            RemoveItem(materialsForCrafting[i]._itemData);
+            for (int i = 0; i < requiredMaterial._stackSize; i++)
+            {
+                RemoveItem(requiredMaterial._itemData);
+            }
         }
 
         AddItem(itemToCraft);
-        Debug.Log("Created Item : " + itemToCraft._itemName);
-
+        Debug.Log("Craft is succsesful: " + itemToCraft.name);
         return true;
     }
 
