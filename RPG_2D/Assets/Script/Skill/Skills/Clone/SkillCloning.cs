@@ -103,7 +103,6 @@ public class SkillCloning : SkillTemplate
             _cloneDuration, 
             _canAttack, 
             offset, 
-            FindClosestEnemy(newClone.transform),
             _canDuplicateClone,
             _chanceToDuplicate,
             _playerController,
