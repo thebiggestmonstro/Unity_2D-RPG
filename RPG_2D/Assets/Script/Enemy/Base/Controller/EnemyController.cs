@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyController : BaseCharacterController
 {
+    [SerializeField] 
+    protected LayerMask _layerOfPlayer;
+
     [Header("Move Info")]
     public float _moveSpeed;
     public float _idleTime;
@@ -49,7 +53,19 @@ public class EnemyController : BaseCharacterController
         Gizmos.DrawLine(transform.position, new Vector3(transform.position.x + _attackDistance * _facingDir, transform.position.y));
     }
 
-    public virtual RaycastHit2D DoDetectPlayer() => Physics2D.Raycast(_wallCheck.position, Vector2.right * _facingDir, 50, LayerMask.GetMask("Player"));
+    public virtual RaycastHit2D DoDetectPlayer()
+    {
+        RaycastHit2D playerDetected = Physics2D.Raycast(_wallCheck.position, Vector2.right * _facingDir, 50, _layerOfPlayer);
+        RaycastHit2D wallDetected = Physics2D.Raycast(_wallCheck.position, Vector2.right * _facingDir, 50, _layerOfGround);
+
+        if (wallDetected)
+        {
+            if (wallDetected.distance < playerDetected.distance)
+                return default(RaycastHit2D);
+        }
+
+        return playerDetected;
+    }
 
     public void AnimationTrigger() => _stateMachine._currentState.AnimationFinishTrigger();
 

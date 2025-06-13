@@ -13,6 +13,8 @@ public class BaseCharacterController : MonoBehaviour
     protected Transform _wallCheck;
     [SerializeField]
     protected float _wallCheckDistance;
+    [SerializeField] 
+    protected LayerMask _layerOfGround;
 
     [Header("Attack Collision Info")]
     public Transform _attackCheck;
