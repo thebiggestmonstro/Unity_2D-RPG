@@ -1,7 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
 using UnityEditor;
 using UnityEngine;
 
@@ -42,6 +39,7 @@ public class InventoryManager : MonoBehaviour, ISaveManager
     private float _lastTimeUsedArmorEffect;
 
     [Header("Data base")]
+    public List<ItemData> _itemDataBase;
     public List<Item_Inventory> _loadedItems;
     public List<ItemData_Equipment> _loadedEquipments;
 
@@ -360,7 +358,7 @@ public class InventoryManager : MonoBehaviour, ISaveManager
     {
         foreach (KeyValuePair<string, int> pair in data._inventoryData)
         {
-            foreach (var item in GetItemDataBase())
+            foreach (var item in _itemDataBase)
             {
                 if (item != null && item._itemId == pair.Key)
                 {
@@ -374,7 +372,7 @@ public class InventoryManager : MonoBehaviour, ISaveManager
 
         foreach (string loadedItemId in data._equipmentId)
         {
-            foreach (var item in GetItemDataBase())
+            foreach (var item in _itemDataBase)
             {
                 if (item != null && loadedItemId == item._itemId)
                 {
@@ -383,6 +381,10 @@ public class InventoryManager : MonoBehaviour, ISaveManager
             }
         }
     }
+
+#if UNITY_EDITOR
+    [ContextMenu("Fill up item data base")]
+    private void FillUpItemDataBase() => _itemDataBase = new List<ItemData>(GetItemDataBase());
 
     private List<ItemData> GetItemDataBase()
     {
@@ -398,4 +400,5 @@ public class InventoryManager : MonoBehaviour, ISaveManager
 
         return itemDataBase;
     }
+#endif
 }

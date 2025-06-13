@@ -1,9 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using TMPro.EditorUtilities;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public enum StatType
 {

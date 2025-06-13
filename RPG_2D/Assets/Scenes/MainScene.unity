@@ -4610,6 +4610,36 @@ MonoBehaviour:
   _equpmentSlotParent: {fileID: 356699532}
   _statSlotParent: {fileID: 993010082}
   _potionUsageCooldown: 0
+  _itemDataBase:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 14290899b53dabc418fa4129e766ded2, type: 2}
+  - {fileID: 11400000, guid: bdfe48fd4b59f9e4aa512cbbf1a1000a, type: 2}
+  - {fileID: 11400000, guid: b83b5116ba77c724aab26552ce6956d1, type: 2}
+  - {fileID: 11400000, guid: 663448f3463938446889b0e85fdb2b84, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: efc403a7c5969464ab6fb0db7a88f258, type: 2}
+  - {fileID: 11400000, guid: 300c4565fef667643aa205fa0013a96c, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 7d942347311774f498e9922a9916bb04, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: b4fac403dd62ce94b96b2b982c1a72c8, type: 2}
+  - {fileID: 11400000, guid: 44190236f2def7a4bb9e7224f07d2108, type: 2}
+  - {fileID: 11400000, guid: 40935ad758b839c4ba2d042842a8967b, type: 2}
+  - {fileID: 11400000, guid: 4b5e1937215707f4fa03892d4665b900, type: 2}
+  - {fileID: 11400000, guid: 6739b8793c1eb174fbb3a3e820b0c4da, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 052dec3478205ba44bcd5cecdc40771a, type: 2}
+  - {fileID: 11400000, guid: 8db3180602e5da641b6f50d20138a246, type: 2}
+  - {fileID: 11400000, guid: 437afaeeb22af7c4489875a43b805d9f, type: 2}
+  - {fileID: 11400000, guid: 46612b732ba738149b8c664b46a8d689, type: 2}
+  - {fileID: 11400000, guid: 9980150136bb58f4bba274a1a58cad8b, type: 2}
+  - {fileID: 11400000, guid: 39ece25c245bf1146a0c27a4e881f2e0, type: 2}
+  - {fileID: 11400000, guid: df06501e04f31f2419c8a616d7bd45ac, type: 2}
+  - {fileID: 11400000, guid: c2359bd21a2a69e4eb8ce7ee114311d9, type: 2}
+  - {fileID: 11400000, guid: ebb1df8b59bb2314296e306021f5b983, type: 2}
+  - {fileID: 11400000, guid: cecbc88070e245f438ac71ef3be44412, type: 2}
+  - {fileID: 11400000, guid: faa4288b9fea3fd48b9749a3b2357325, type: 2}
   _loadedItems: []
   _loadedEquipments: []
 --- !u!4 &259100909
@@ -51995,7 +52025,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 177484966}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 0
