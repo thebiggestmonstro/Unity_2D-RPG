@@ -8,6 +8,8 @@ public class SkeletonStateEngage : EnemyState
     Transform _player;
     float _moveDir = 1;
 
+    private bool _flippedOnce;
+
     public SkeletonStateEngage(EnemyController enemyBaseController, EnemyStateMachine enemyStateMachine, string animatorBoolParamName, SkeletonController enemyController) 
         : base(enemyBaseController, enemyStateMachine, animatorBoolParamName)
     {
@@ -22,6 +24,9 @@ public class SkeletonStateEngage : EnemyState
 
         if (_player.GetComponent<PlayerStats>()._isDead)
             _enemyStateMachine.ChangeState(_skeletonController._moveState);
+
+        _stateTimer = _skeletonController._engageTime;
+        _flippedOnce = false;
     }
 
     public override void Exit()
@@ -32,6 +37,8 @@ public class SkeletonStateEngage : EnemyState
     public override void Update()
     {
         base.Update();
+
+        _skeletonController._animator.SetFloat("xVelocity", _skeletonController._rigidbody2D.velocity.x);
 
         if (_skeletonController.DoDetectPlayer())
         {
@@ -45,9 +52,20 @@ public class SkeletonStateEngage : EnemyState
         }
         else
         {
+            if (_flippedOnce == false)
+            {
+                _flippedOnce = true;
+                _skeletonController.Flip();
+            }
+
             if (_stateTimer < 0 || Vector2.Distance(_player.transform.position, _skeletonController.transform.position) > 7)
                 _enemyStateMachine.ChangeState(_skeletonController._idleState);
         }
+
+        float distanceToPlayerX = Mathf.Abs(_player.position.x - _skeletonController.transform.position.x);
+
+        if (distanceToPlayerX < .8f)
+            return;
 
         if (_player.position.x > _skeletonController.transform.position.x)
             _moveDir = 1;

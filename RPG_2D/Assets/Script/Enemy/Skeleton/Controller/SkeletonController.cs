@@ -17,7 +17,7 @@ public class SkeletonController : EnemyController
 
         _idleState = new SkeletonStateIdle(this, _stateMachine, "Idle", this);
         _moveState = new SkeletonStateMove(this, _stateMachine, "Move", this);
-        _engageState = new SkeletonStateEngage(this, _stateMachine, "Move", this);
+        _engageState = new SkeletonStateEngage(this, _stateMachine, "Engage", this);
         _attackState = new SkeletonStateAttack(this, _stateMachine, "Attack", this);
         _stunnedState = new SkeletonStateStunnded(this, _stateMachine, "Stunned", this);
         _deadState = new SkeletonStateDead(this, _stateMachine, "Idle", this);

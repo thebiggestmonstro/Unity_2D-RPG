@@ -56,11 +56,11 @@ public class EnemyController : BaseCharacterController
     public virtual RaycastHit2D DoDetectPlayer()
     {
         RaycastHit2D playerDetected = Physics2D.Raycast(_wallCheck.position, Vector2.right * _facingDir, 50, _layerOfPlayer);
-        RaycastHit2D wallDetected = Physics2D.Raycast(_wallCheck.position, Vector2.right * _facingDir, 50, _layerOfGround);
+    RaycastHit2D wallDetected = Physics2D.Raycast(_wallCheck.position, Vector2.right * _facingDir, 50, _layerOfGround);
 
         if (wallDetected)
         {
-            if (wallDetected.distance < playerDetected.distance)
+            if (wallDetected.distance<playerDetected.distance)
                 return default(RaycastHit2D);
         }
 
