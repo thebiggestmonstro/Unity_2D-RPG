@@ -24,8 +24,8 @@ public class AudioManager : MonoBehaviour
     {
         if (_audioManagerInstance != null)
             Destroy(_audioManagerInstance.gameObject);
-        else
-            _audioManagerInstance = this;
+        
+        _audioManagerInstance = this;
 
         Invoke("AllowSFX", 1f);
     }

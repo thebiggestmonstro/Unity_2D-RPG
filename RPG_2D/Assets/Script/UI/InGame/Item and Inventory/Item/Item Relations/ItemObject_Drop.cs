@@ -23,18 +23,28 @@ public class ItemObject_Drop : MonoBehaviour
 
     public virtual void GenerateDrop()
     {
-        for (int i = 0; i < _droppableItemList.Length; i++)
+        if (_droppableItemList.Length == 0)
         {
-            if (Random.Range(0, 100) <= _droppableItemList[i]._dropChance)
-                _dropList.Add(_droppableItemList[i]);
+            Debug.Log("Item Pool is empty. Enemy cannot drop items.");
+            return;
+        }
+
+        foreach (ItemData item in _droppableItemList)
+        {
+            if (item != null && Random.Range(0, 100) < item._dropChance)
+                _dropList.Add(item);
         }
 
         for (int i = 0; i < _amountOfDropItems; i++)
         {
-            ItemData randomDropItem = _dropList[Random.Range(0, _dropList.Count - 1)];
+            if (_dropList.Count > 0)
+            {
+                int randomIndex = Random.Range(0, _dropList.Count);
+                ItemData itemToDrop = _dropList[randomIndex];
 
-            _dropList.Remove(randomDropItem);
-            DropItem(randomDropItem);
+                DropItem(itemToDrop);
+                _dropList.Remove(itemToDrop);
+            }
         }
     }
 }
