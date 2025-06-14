@@ -28,6 +28,8 @@ public class SkillCrystal : SkillTemplate
     private UI_SkillTreeSlot _unlockExplosiveButton;
     [SerializeField]
     private bool _canExplode;
+    [SerializeField]
+    private float _crystalExplosionCooldown;
 
     [Header("Moving Crystal")]
     [SerializeField] 
@@ -77,7 +79,10 @@ public class SkillCrystal : SkillTemplate
     private void UnlockExplosiveCrystal()
     {
         if (_unlockExplosiveButton._isSkillUnlocked)
+        {
             _canExplode = true;
+            _cooldown = _crystalExplosionCooldown;
+        }   
     }
 
     private void UnlockMovingCrystal()

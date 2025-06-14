@@ -9,8 +9,12 @@ public class GameSaveManager : MonoBehaviour
 
     [SerializeField] 
     private string _fileName;
-    [SerializeField] 
+    [SerializeField]
     private bool _encryptData;
+
+    // Use this value to Deploy as HTML file
+    //[SerializeField] 
+    //private string _filePath = "idbfs/RPG2D456asdj123";
 
     private GameData _gameData;
     private List<ISaveManager> _saveManagers;
@@ -24,6 +28,10 @@ public class GameSaveManager : MonoBehaviour
         _gameSaveManagerinstance = this;
 
         _saveManagers = new List<ISaveManager>();
+
+        // Use this code to Deploy as HTML file
+        // _dataHandler = new FileDataHandler(_filePath, _fileName, _encryptData);
+
         _dataHandler = new FileDataHandler(Application.persistentDataPath, _fileName, _encryptData);
     }
 
@@ -87,6 +95,10 @@ public class GameSaveManager : MonoBehaviour
     public void DeleteSavedData()
     {
         _dataHandler = new FileDataHandler(Application.persistentDataPath, _fileName, _encryptData);
+        
+        // Use this code to Deploy as HTML file
+        // _dataHandler = new FileDataHandler(_filePath, _fileName, _encryptData);
+        
         _dataHandler.Delete();
     }
 
