@@ -66,7 +66,7 @@ public class BaseCharacterController : MonoBehaviour
         if (_isKnocked)
             return;
 
-        _rigidbody2D.velocity = new Vector2(xVelocity, yVelcoity);
+        _rigidbody2D.linearVelocity = new Vector2(xVelocity, yVelcoity);
         DoFlip(xVelocity);
     }
 
@@ -75,7 +75,7 @@ public class BaseCharacterController : MonoBehaviour
         if (_isKnocked)
             return;
 
-        _rigidbody2D.velocity = Vector2.zero;
+        _rigidbody2D.linearVelocity = Vector2.zero;
     }
 
     public virtual void Flip()
@@ -105,7 +105,7 @@ public class BaseCharacterController : MonoBehaviour
     {
         _isKnocked = true;
 
-        _rigidbody2D.velocity = new Vector2(_knockbackPower.x * _knockbackDir, _knockbackPower.y);
+        _rigidbody2D.linearVelocity = new Vector2(_knockbackPower.x * _knockbackDir, _knockbackPower.y);
 
         yield return new WaitForSeconds(_knockbackDuration);
 

@@ -16,21 +16,21 @@ public class SkeletonStateStunnded : EnemyState
     {
         base.Enter();
 
-        // ½ºÅÏ »óÅÂ¿¡ µ¹ÀÔÇÑ °æ¿ì, 0.1ÃÊ °£°ÝÀ¸·Î Áï½Ã ÀÌÆåÆ® ¹ß»ý
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, 0.1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ß»ï¿½
         _enemyBaseController._baseEffectController.InvokeRepeating("RedColorBlink", 0, 0.1f);
 
         _stateTimer = _skeletonController._stunDuration;
 
-        // SetVelocity¸¦ ÇÏ´Â °æ¿ì, ÀûÀÌ ½ºÅÏ »óÅÂ¿¡¼­ ÀÌµ¿ÇÏ°Ô
-        // µÇ¹Ç·Î ´ÙÀ½°ú °°ÀÌ »õ·Î¿î º¤ÅÍ¸¦ ¸¸µé¾î ÀÌµ¿À» »õ·Î¿î º¤ÅÍ ÂÊÀ¸·Î ¼öÇàÇÏ°Ô²û °íÁ¤ÇÔ
-        _rigidbody2D.velocity = new Vector2(_skeletonController._facingDir * _skeletonController._stunDirection.x, _skeletonController._stunDirection.y);
+        // SetVelocityï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ï°ï¿½
+        // ï¿½Ç¹Ç·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°Ô²ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        _rigidbody2D.linearVelocity = new Vector2(_skeletonController._facingDir * _skeletonController._stunDirection.x, _skeletonController._stunDirection.y);
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        // ½ºÅÏ »óÅÂ°¡ ³¡³ª´Â °æ¿ì, ¹ßµ¿ÁßÀÎ Invoke ÇÔ¼ö¸¦ ÀüºÎ Áï½Ã Ãë¼ÒÇÔ
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ßµï¿½ï¿½ï¿½ï¿½ï¿½ Invoke ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
         _enemyBaseController._baseEffectController.Invoke("CancelColorChange", 0);
     }
 

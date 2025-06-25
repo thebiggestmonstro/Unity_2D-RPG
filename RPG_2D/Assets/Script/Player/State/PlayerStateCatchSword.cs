@@ -18,14 +18,14 @@ public class PlayerStateCatchSword : PlayerState
 
         _sword = _controller._sword.transform;
 
-        // ÇÃ·¹ÀÌ¾î°¡ È¸¼öµÇ´Â ´Ü°Ëº¸´Ù ¿À¸¥ÂÊ¿¡ À§Ä¡ÇÏ¸é¼­ ¿À¸¥ÂÊÀ» º¸°í ÀÖ´Â °æ¿ì
+        // ï¿½Ã·ï¿½ï¿½Ì¾î°¡ È¸ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½Ü°Ëºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ê¿ï¿½ ï¿½ï¿½Ä¡ï¿½Ï¸é¼­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½
         if (_controller.transform.position.x > _sword.position.x && _controller._facingDir == 1)
             _controller.Flip();
-        // ÇÃ·¹ÀÌ¾î°¡ È¸¼öµÇ´Â ´Ü°Ëº¸´Ù ¿ÞÂÊ¿¡ À§Ä¡ÇÏ¸é¼­ ¿ÞÁ·À» º¸°í ÀÖ´Â °æ¿ì
+        // ï¿½Ã·ï¿½ï¿½Ì¾î°¡ È¸ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½Ü°Ëºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ê¿ï¿½ ï¿½ï¿½Ä¡ï¿½Ï¸é¼­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½
         else if (_controller.transform.position.x < _sword.position.x && _controller._facingDir == -1)
             _controller.Flip();
 
-        _rigidbody2D.velocity = new Vector2(_controller._swordReturnImpact * -_controller._facingDir, _rigidbody2D.velocity.y);
+        _rigidbody2D.linearVelocity = new Vector2(_controller._swordReturnImpact * -_controller._facingDir, _rigidbody2D.linearVelocity.y);
     }
 
     public override void Exit()

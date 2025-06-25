@@ -28,7 +28,7 @@ public class PlayerStateMove : PlayerStateGrounded
     {
         base.Update();
 
-        _controller.SetVelocity(_xInput * _controller._moveSpeed, _rigidbody2D.velocity.y);
+        _controller.SetVelocity(_xInput * _controller._moveSpeed, _rigidbody2D.linearVelocity.y);
 
         if (_xInput == 0 || _controller.DoDetectIsFacingWall())
             _stateMachine.ChangeState(_controller._idleState);

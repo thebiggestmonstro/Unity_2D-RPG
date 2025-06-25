@@ -14,7 +14,7 @@ public class PlayerStateJump : PlayerState
     {
         base.Enter();
 
-        _controller.SetVelocity(_rigidbody2D.velocity.x, _controller._jumpForce);
+        _controller.SetVelocity(_rigidbody2D.linearVelocity.x, _controller._jumpForce);
     }
 
     public override void Exit()
@@ -26,7 +26,7 @@ public class PlayerStateJump : PlayerState
     {
         base.Update();
 
-        if (_rigidbody2D.velocity.y < 0)
+        if (_rigidbody2D.linearVelocity.y < 0)
             _stateMachine.ChangeState(_controller._inAirState);
     }
 }

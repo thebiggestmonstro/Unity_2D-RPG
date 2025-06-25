@@ -32,7 +32,7 @@ public class PlayerState
         this._animatorBoolParamName = inParamName;
     }
 
-    // State¿¡ µ¹ÀÔ
+    // Stateï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public virtual void Enter()
     {
         _controller._animator.SetBool(_animatorBoolParamName, true);
@@ -40,13 +40,13 @@ public class PlayerState
         _triggerCalled = false;
     }
 
-    // State¿¡¼­ Å»Ãâ
+    // Stateï¿½ï¿½ï¿½ï¿½ Å»ï¿½ï¿½
     public virtual void Exit()
     {
         _controller._animator.SetBool(_animatorBoolParamName, false);
     }
 
-    // State¿¡¼­ ¸Å ÇÁ·¹ÀÓ¸¶´Ù ÁøÇà
+    // Stateï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public virtual void Update()
     {
         _stateTimer -= Time.deltaTime;
@@ -58,7 +58,7 @@ public class PlayerState
         _isCounterAttacking = _controller._isCounterAttackClicked;
         _isThrowingSword = _controller._isThrowSwordClicked;
         _isCastingBlackHole = _controller._isCastingBlackHole;
-        _controller._animator.SetFloat("yVelocity", _rigidbody2D.velocity.y);
+        _controller._animator.SetFloat("yVelocity", _rigidbody2D.linearVelocity.y);
     }
 
     public virtual void AnimationFinishTrigger()

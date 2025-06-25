@@ -24,7 +24,7 @@ public class SkeletonStateMove : SkeletonStateGrounded
     {
         base.Update();
 
-        _skeletonController.SetVelocity(_enemyBaseController._moveSpeed * _skeletonController._facingDir, _rigidbody2D.velocity.y);
+        _skeletonController.SetVelocity(_enemyBaseController._moveSpeed * _skeletonController._facingDir, _rigidbody2D.linearVelocity.y);
 
         if (_skeletonController.DoDetectIsFacingWall() || !_skeletonController.DoDetectIsGrounded())
         {

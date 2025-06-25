@@ -27,7 +27,7 @@ public class PlayerStateDash : PlayerState
 
         _controller._skillManager._skillDash.CreateCloneOnDashOver();
 
-        _controller.SetVelocity(0, _rigidbody2D.velocity.y);
+        _controller.SetVelocity(0, _rigidbody2D.linearVelocity.y);
 
         _controller._characterStats.MakeInvincible(false);
     }

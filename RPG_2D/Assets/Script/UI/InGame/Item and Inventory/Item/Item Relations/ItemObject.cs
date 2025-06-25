@@ -21,7 +21,7 @@ public class ItemObject : MonoBehaviour
     public void SetupItem(ItemData itemData, Vector2 velocity)
     { 
         _itemData = itemData;
-        _rigidbody2D.velocity = velocity;
+        _rigidbody2D.linearVelocity = velocity;
 
         SetupItemVisuals();
     }
@@ -30,7 +30,7 @@ public class ItemObject : MonoBehaviour
     {
         if (InventoryManager._inventoryManagerInstance.CanAddItem() == false && _itemData.ItemType == ItemType.Equipment)
         {
-            _rigidbody2D.velocity = new Vector2(0, 7);
+            _rigidbody2D.linearVelocity = new Vector2(0, 7);
             return;
         }
 

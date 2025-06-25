@@ -38,7 +38,7 @@ public class SkeletonStateEngage : EnemyState
     {
         base.Update();
 
-        _skeletonController._animator.SetFloat("xVelocity", _skeletonController._rigidbody2D.velocity.x);
+        _skeletonController._animator.SetFloat("xVelocity", _skeletonController._rigidbody2D.linearVelocity.x);
 
         if (_skeletonController.DoDetectPlayer())
         {
@@ -72,7 +72,7 @@ public class SkeletonStateEngage : EnemyState
         else if (_player.position.x < _skeletonController.transform.position.x)
             _moveDir = -1;
 
-        _skeletonController.SetVelocity(_skeletonController._moveSpeed * _moveDir, _rigidbody2D.velocity.y);
+        _skeletonController.SetVelocity(_skeletonController._moveSpeed * _moveDir, _rigidbody2D.linearVelocity.y);
     }
 
     private bool DoDefineCanAttack()

@@ -28,6 +28,6 @@ public class SkeletonStateDead : EnemyState
         base.Exit();
 
         if (_stateTimer > 0)
-            _rigidbody2D.velocity = new Vector2(0, 10);
+            _rigidbody2D.linearVelocity = new Vector2(0, 10);
     }
 }

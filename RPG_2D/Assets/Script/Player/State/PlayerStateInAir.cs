@@ -31,6 +31,6 @@ public class PlayerStateInAir : PlayerState
             _stateMachine.ChangeState(_controller._idleState);
 
         if (_xInput != 0)
-            _controller.SetVelocity(_controller._moveSpeed * 0.8f * _xInput, _rigidbody2D.velocity.y);
+            _controller.SetVelocity(_controller._moveSpeed * 0.8f * _xInput, _rigidbody2D.linearVelocity.y);
     }
 }

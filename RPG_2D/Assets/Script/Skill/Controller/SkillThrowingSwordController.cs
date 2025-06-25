@@ -52,7 +52,7 @@ public class SkillThrowingSwordController : MonoBehaviour
     {
         _playerController = player;
 
-        _rigidBody2D.velocity = dir;
+        _rigidBody2D.linearVelocity = dir;
         _rigidBody2D.gravityScale = gravityScale;
 
         _freezeTimeDuration = freezeTimeDuration;
@@ -95,7 +95,7 @@ public class SkillThrowingSwordController : MonoBehaviour
     private void Update()
     {
         if (_canRotate)
-            transform.right = _rigidBody2D.velocity;
+            transform.right = _rigidBody2D.linearVelocity;
 
         if (_isReturning)
         {

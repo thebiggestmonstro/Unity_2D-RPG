@@ -39,9 +39,9 @@ public class PlayerStateWallSlide : PlayerState
             _stateMachine.ChangeState(_controller._idleState);
 
         if (_yInput < 0.0f)
-            _rigidbody2D.velocity = new Vector2(0, _rigidbody2D.velocity.y);
+            _rigidbody2D.linearVelocity = new Vector2(0, _rigidbody2D.linearVelocity.y);
         else
-            _rigidbody2D.velocity = new Vector2(0, _rigidbody2D.velocity.y * 0.7f);
+            _rigidbody2D.linearVelocity = new Vector2(0, _rigidbody2D.linearVelocity.y * 0.7f);
 
         if (_controller.DoDetectIsGrounded())
             _stateMachine.ChangeState(_controller._idleState);
